@@ -78,5 +78,5 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("loadingOverlay").style.display = "none";
       },
     });
-  }, 5000);
+  }, 3000);
 });
