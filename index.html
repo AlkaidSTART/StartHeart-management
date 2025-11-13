@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>星心自闭症支持系统</title>
+  <link rel="stylesheet" href="./CSS/styles.css" />
+  <link rel="stylesheet" href="./CSS/self.css" />
+  <link rel="stylesheet" href="./CSS/base.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./JS/animation.js"></script>
+  <script src="./JS/vintage.js"></script>
+  <style>
+    /* 增加的医生卡片样式 */
+    .member-card {
+      background-color: white;
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--box-shadow);
+      transition: transform 0.3s;
+    }
+
+    .member-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .member-image {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      margin-bottom: 15px;
+    }
+
+    .member-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .member-card:hover .member-image img {
+      transform: scale(1.05);
+    }
+
+    .member-description {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    .member-qualification {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="stars-loader" id="starsLoader"></div>
+  </div>
+  <header>
+    <div class="logo-container">
+      <img src="https://via.placeholder.com/40x40?text=Logo" alt="机构徽标" class="logo" />
+      <h1>星心自闭症支持系统</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#base" class="active">数据总览</a></li>
+        <li><a href="#home">数据里的星光</a></li>
+        <li><a href="#assessment">星光洞察</a></li>
+        <li><a href="#team">星光守护团</a></li>
+        <li><a href="#intervention">星光引路</a></li>
+        <li><a href="#knowledge">星光知识库</a></li>
+        <li><a href="#appointment">星光有约</a></li>
+        <li><a href="#assistant">星语助手</a></li>
+      </ul>
+    </nav>
+    <div class="user-info">
+      <span class="user-name">Berry</span>
+      <div class="user-avatar">
+        <img src="./assets/1.jpg" alt="用户头像" />
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="base" class="module">
+      <div class="box bg-[#F0F8FF]"></div>
+    </section>
+
+
+
+
+
+    <section id="home" class="module">
+      <!-- <div class="module-header">
+        <h2>系统首页</h2>
+      </div> -->
+      <div class="welcome-content">
+        <h3 style="font-size: 24px;text-align: center;margin-bottom: 20px;">八年轨迹：自闭症群体增长趋势观察</h3>
+        <div class="chart-container pb-12 pt-8">
+          <div id="chart1" class="w-[60%] h-[400px] border border-gray-300 mx-auto"></div>
+          <div id="chart2" class="w-[30%] h-[400px] border border-gray-300 mx-auto"></div>
+        </div>
+      </div>
+    </section>
+    <!-- 患者评估模块 -->
+    <section id="assessment" class="module">
+      <div class="module-header">
+        <h2>星光洞察</h2>
+        <div class="search-filters">
+          <select id="assessment-stage">
+            <option value="">按评估阶段筛选</option>
+            <option value="initial">初次评估</option>
+            <option value="progress">进展评估</option>
+            <option value="final">终期评估</option>
+          </select>
+          <select id="intervention-needs">
+            <option value="">按干预需求筛选</option>
+            <option value="communication">社交沟通</option>
+            <option value="behavior">行为干预</option>
+            <option value="sensory">感觉统合</option>
+          </select>
+          <select id="therapist">
+            <option value="">按治疗师筛选</option>
+            <option value="t001">王治疗师</option>
+            <option value="t002">张治疗师</option>
+            <option value="t003">李治疗师</option>
+          </select>
+          <input type="text" placeholder="搜索患者ID..." class="search-input" />
+          <button class="search-btn">搜索</button>
+        </div>
+      </div>
+
+      <div class="data-table">
+        <table>
+          <thead>
+            <tr>
+              <th>匿名ID</th>
+              <th>年龄阶段</th>
+              <th>最后评估日期</th>
+              <th>ABC量表评分趋势</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ASD-2025-001</td>
+              <td>儿童</td>
+              <td>2025-8-15</td>
+              <td>
+                <div class="mini-chart">
+                  <svg width="100" height="30" class="trend-chart">
+                    <polyline points="5,25 20,20 35,22 50,15 65,18 80,10 95,8" fill="none" stroke="#5B8FB9"
+                      stroke-width="2"></polyline>
+                  </svg>
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-view" data-verify="true">查看</button>
+                <button class="btn btn-refer" data-verify="true">转介</button>
+              </td>
+            </tr>
+            <tr>
+              <td>ASD-2025-042</td>
+              <td>青少年</td>
+              <td>2025-10-02</td>
+              <td>
+                <div class="mini-chart">
+                  <svg width="100" height="30" class="trend-chart">
+                    <polyline points="5,20 20,18 35,15 50,12 65,10 80,8 95,5" fill="none" stroke="#5B8FB9"
+                      stroke-width="2"></polyline>
+                  </svg>
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-view" data-verify="true">查看</button>
+                <button class="btn btn-refer" data-verify="true">转介</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 感觉统合评估系统 -->
+    <section id="sensory-assessment" class="module">
+      <div class="module-header">
+        <h2>感觉统合评估</h2>
+      </div>
+      <div class="assessment-tools">
+        <div class="tool-card">
+          <h3>SPM感觉处理量表</h3>
+          <p>标准化评估工具，用于评估感觉处理能力</p>
+          <button class="btn">开始评估</button>
+        </div>
+        <div class="tool-card">
+          <h3>视听觉敏感度测试</h3>
+          <p>评估视觉和听觉敏感度的综合工具</p>
+          <button class="btn">开始评估</button>
+        </div>
+        <div class="tool-card">
+          <h3>本体觉需求分析</h3>
+          <p>评估和分析本体感觉需求</p>
+          <button class="btn">开始评估</button>
+        </div>
+      </div>
+      <div class="visualization-panel">
+        <h3>多维感知能力发展曲线</h3>
+        <div class="chart-container">
+          <!-- 这里将放置D3.js生成的图表 -->
+          <div class="placeholder-chart">图表加载中...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IEP智能生成系统 -->
+    <section id="iep-generator" class="module">
+      <div class="module-header">
+        <h2>IEP智能生成系统</h2>
+      </div>
+      <div class="iep-tools">
+        <div class="plan-generator">
+          <h3>计划生成器</h3>
+          <div class="form-group">
+            <label>选择评估结果：</label>
+            <select>
+              <option>ASD-2023-001 VB-MAPP评估 (2023-10-15)</option>
+              <option>ASD-2023-042 VB-MAPP评估 (2023-11-02)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>计划周期：</label>
+            <select>
+              <option>年度计划</option>
+              <option>季度计划</option>
+              <option>月度计划</option>
+            </select>
+          </div>
+          <button class="btn btn-generate">生成IEP</button>
+        </div>
+        <div class="goal-tracking">
+          <h3>目标达成度追踪</h3>
+          <div class="tracking-dashboard">
+            <div class="gauge-chart">
+              <svg width="150" height="80">
+                <path d="M10,70 A65,65 0 0,1 140,70" fill="none" stroke="#e0e0e0" stroke-width="10"></path>
+                <path d="M10,70 A65,65 0 0,1 95,25" fill="none" stroke="#5B8FB9" stroke-width="10"></path>
+                <text x="75" y="75" text-anchor="middle" font-size="20">
+                  65%
+                </text>
+              </svg>
+              <p>社交沟通</p>
+            </div>
+            <div class="gauge-chart">
+              <svg width="150" height="80">
+                <path d="M10,70 A65,65 0 0,1 140,70" fill="none" stroke="#e0e0e0" stroke-width="10"></path>
+                <path d="M10,70 A65,65 0 0,1 120,30" fill="none" stroke="#5B8FB9" stroke-width="10"></path>
+                <text x="75" y="75" text-anchor="middle" font-size="20">
+                  80%
+                </text>
+              </svg>
+              <p>行为管理</p>
+            </div>
+            <div class="gauge-chart">
+              <svg width="150" height="80">
+                <path d="M10,70 A65,65 0 0,1 140,70" fill="none" stroke="#e0e0e0" stroke-width="10"></path>
+                <path d="M10,70 A65,65 0 0,1 50,35" fill="none" stroke="#5B8FB9" stroke-width="10"></path>
+                <text x="75" y="75" text-anchor="middle" font-size="20">
+                  40%
+                </text>
+              </svg>
+              <p>感觉调节</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 行为分析增强组件 -->
+    <section id="behavior-analysis" class="module">
+      <div class="module-header">
+        <h2>行为分析</h2>
+      </div>
+      <div class="behavior-tools">
+        <div class="abc-analysis">
+          <h3>ABC分析记录表</h3>
+          <div class="form-container">
+            <div class="form-group">
+              <label>患者ID：</label>
+              <input type="text" value="ASD-2023-001" readonly />
+            </div>
+            <div class="form-group">
+              <label>前因 (Antecedent)：</label>
+              <textarea placeholder="在行为发生前的情境、事件或刺激..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>行为 (Behavior)：</label>
+              <textarea placeholder="描述所观察到的行为..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>后果 (Consequence)：</label>
+              <textarea placeholder="行为发生后的结果或反应..."></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn">保存记录</button>
+              <button class="btn">分析模式</button>
+            </div>
+          </div>
+        </div>
+        <div class="pattern-recognition">
+          <h3>行为模式识别</h3>
+          <div class="pattern-chart">
+            <div class="chart-placeholder">
+              <!-- 这里将显示基于ABC数据的模式识别图表 -->
+              <p>加载行为模式图表...</p>
+            </div>
+          </div>
+          <div class="pattern-insights">
+            <h4>主要触发因素</h4>
+            <ul>
+              <li>环境噪音 (35%)</li>
+              <li>任务转换 (28%)</li>
+              <li>社交压力 (22%)</li>
+            </ul>
+            <h4>建议干预策略</h4>
+            <p>
+              基于当前行为模式，推荐使用视觉提示卡辅助任务转换，并提供降噪耳机减少环境刺激。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 治疗团队模块 - 已更新添加图片和详细描述 -->
+    <section id="team" class="module">
+      <div class="module-header">
+        <h2>星光守护团</h2>
+      </div>
+      <div class="team-content">
+        <div class="team-members">
+          <div class="member-card">
+            <div class="member-image">
+              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=王医生" alt="王医生" />
+            </div>
+            <h3>王医生</h3>
+            <p>儿童精神科 / 主任医师</p>
+            <p>专长：自闭症早期干预</p>
+            <p class="member-description">
+              王医生拥有20年儿童精神科临床经验，专注于自闭症早期诊断和干预。曾在国内外多家顶尖医院进修，熟悉ADOS、ADI-R等评估工具。
+            </p>
+            <p class="member-qualification">
+              教育背景：北京医科大学医学博士<br />资质认证：儿童精神科主任医师
+            </p>
+          </div>
+          <div class="member-card">
+            <div class="member-image">
+              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=张治疗师" alt="张治疗师" />
+            </div>
+            <h3>张治疗师</h3>
+            <p>语言治疗 / 高级治疗师</p>
+            <p>专长：社交沟通训练</p>
+            <p class="member-description">
+              张治疗师是认证语言病理学家，擅长非口语自闭症儿童的替代性沟通系统训练和高功能自闭症患者的语用技能培训。拥有丰富的AAC辅助沟通系统应用经验。
+            </p>
+            <p class="member-qualification">
+              教育背景：南京师范大学特殊教育硕士<br />资质认证：言语治疗师(CCC-SLP)
+            </p>
+          </div>
+          <div class="member-card">
+            <div class="member-image">
+              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=李老师" alt="李老师" />
+            </div>
+            <h3>李老师</h3>
+            <p>行为分析师 / BCBA认证</p>
+            <p>专长：ABA行为干预</p>
+            <p class="member-description">
+              李老师是国际认证行为分析师(BCBA)，专注于自闭症儿童的行为干预方案设计与实施。擅长功能性行为评估(FBA)和正向行为支持(PBS)。已帮助超过100个家庭建立个性化行为干预方案。
+            </p>
+            <p class="member-qualification">
+              教育背景：美国佛罗里达大学应用行为分析硕士<br />资质认证：国际认证行为分析师(BCBA)
+            </p>
+          </div>
+          <div class="member-card">
+            <div class="member-image">
+              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=赵老师" alt="赵老师" />
+            </div>
+            <h3>赵老师</h3>
+            <p>感统训练 / 高级治疗师</p>
+            <p>专长：感觉统合训练</p>
+            <p class="member-description">
+              赵老师是资深感觉统合训练专家，擅长针对自闭症儿童的感觉调节策略制定。专注于前庭觉、本体觉和触觉刺激的精准评估与干预，帮助儿童改善感觉调节能力和日常生活功能。
+            </p>
+            <p class="member-qualification">
+              教育背景：中国康复医学会认证感统训练师<br />资质认证：感觉统合高级指导师
+            </p>
+          </div>
+          <div class="member-card">
+            <div class="member-image">
+              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=陈心理师" alt="陈心理师" />
+            </div>
+            <h3>陈心理师</h3>
+            <p>心理咨询 / 注册心理师</p>
+            <p>专长：家庭心理支持</p>
+            <p class="member-description">
+              陈心理师专注于自闭症家庭的心理健康服务，为家长提供压力管理、情绪调节和家庭关系改善等支持。同时为自闭症青少年提供心理咨询，帮助他们应对社交焦虑、情绪管理等挑战。
+            </p>
+            <p class="member-qualification">
+              教育背景：北京师范大学临床心理学硕士<br />资质认证：二级心理咨询师
+            </p>
+          </div>
+          <div class="member-card">
+            <div class="member-image">
+              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=杨老师" alt="杨老师" />
+            </div>
+            <h3>杨老师</h3>
+            <p>特殊教育 / 高级教师</p>
+            <p>专长：学校融合教育</p>
+            <p class="member-description">
+              杨老师拥有15年特殊教育经验，专注于自闭症学生的学校融合支持。擅长IEP个别化教育计划制定，与普通学校合作建立包容性学习环境，帮助自闭症学生顺利融入主流教育。
+            </p>
+            <p class="member-qualification">
+              教育背景：华东师范大学特殊教育学硕士<br />资质认证：特殊教育高级教师
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 干预方案模块 -->
+    <section id="intervention" class="module">
+      <div class="module-header">
+        <h2>星光引路</h2>
+      </div>
+      <div class="intervention-content">
+        <div class="intervention-types">
+          <div class="intervention-card">
+            <h3>ABA行为干预</h3>
+            <p>
+              应用行为分析疗法，帮助改善自闭症儿童的社交、沟通和行为能力。
+            </p>
+            <button class="btn">查看详情</button>
+          </div>
+          <div class="intervention-card">
+            <h3>感觉统合训练</h3>
+            <p>通过感觉刺激和运动训练，帮助改善感觉处理能力和身体协调性。</p>
+            <button class="btn">查看详情</button>
+          </div>
+          <div class="intervention-card">
+            <h3>社交技能培训</h3>
+            <p>针对性训练社交互动、情绪识别和沟通表达能力。</p>
+            <button class="btn">查看详情</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 知识库模块 -->
+    <section id="knowledge" class="module">
+      <div class="module-header">
+        <h2>星光知识库</h2>
+      </div>
+      <div class="knowledge-content" style="width: 100%;">
+        <div class="search-box">
+          <input type="text" placeholder="搜索知识库..." />
+          <button class="btn">搜索</button>
+        </div>
+        <div id="kechart" style="width: 1600px; height: 700px;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 家长预约模块 -->
+    <section id="appointment" class="module">
+      <div class="module-header">
+        <h2>星光有约</h2>
+      </div>
+      <div class="appointment-content">
+        <div class="appointment-form">
+          <div class="form-group">
+            <label>预约服务类型：</label>
+            <select>
+              <option>初诊评估</option>
+              <option>随访复诊</option>
+              <option>家长咨询</option>
+              <option>团体训练</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>期望日期：</label>
+            <input type="date" />
+          </div>
+          <div class="form-group">
+            <label>期望时间段：</label>
+            <select>
+              <option>上午 (9:00-12:00)</option>
+              <option>下午 (14:00-17:00)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>简要说明需求：</label>
+            <textarea placeholder="请简要描述孩子的情况和您的需求..."></textarea>
+          </div>
+          <button class="btn">提交预约</button>
+        </div>
+        <div class="appointment-notice">
+          <h3>预约须知</h3>
+          <ul>
+            <li>请提前3-5个工作日预约</li>
+            <li>首次评估需要准备儿童成长记录和既往医疗资料</li>
+            <li>如需取消预约，请提前24小时通知</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 星语助手模块 -->
+    <section id="assistant" class="module">
+      <div class="module-header">
+        <h2>星语助手</h2>
+      </div>
+      <div class="assistant-content">
+        <div class="chat-container">
+          <div class="chat-messages">
+            <div class="message system">
+              <div class="message-content">
+                <p>
+                  欢迎使用星语助手，我可以为您解答关于自闭症的问题，或帮助记录孩子的行为观察。
+                </p>
+              </div>
+            </div>
+            <div class="message assistant">
+              <div class="message-content">
+                <p>您可以向我询问以下方面的问题：</p>
+                <ul>
+                  <li>自闭症基础知识</li>
+                  <li>干预方法咨询</li>
+                  <li>行为观察记录</li>
+                  <li>家庭支持建议</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="chat-input">
+            <textarea placeholder="请输入您的问题..."></textarea>
+            <button class="btn">发送</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="verification-modal" class="modal">
+    <div class="modal-content">
+      <h3>访问验证</h3>
+      <p>请选择查看此信息的目的：</p>
+      <select id="access-purpose">
+        <option value="">请选择访问目的</option>
+        <option value="assessment">评估需要</option>
+        <option value="treatment">治疗计划制定</option>
+        <option value="progress">进度跟踪</option>
+        <option value="consultation">专家咨询</option>
+      </select>
+      <div class="biometric-verification">
+        <p>需要生物识别验证:</p>
+        <button class="btn btn-biometric">开始验证</button>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-cancel">取消</button>
+        <button class="btn btn-confirm" disabled>确认</button>
+      </div>
+      <div class="privacy-notice">
+        <p>您的访问将被记录在审计日志中，包括时间戳、设备信息和访问内容。</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2023 星心自闭症支持系统 - 版本 1.2.0</p>
+      <p>系统已通过HIPAA/GDPR合规认证</p>
+      <p><span id="session-timer">会话将在 15:00 后自动锁定</span></p>
+    </div>
+  </footer>
+
+  <script src="./JS/scripts.js"></script>
+  <script>
+    // 导航菜单切换功能
+    document.addEventListener("DOMContentLoaded", function () {
+      // 获取所有导航链接
+      const navLinks = document.querySelectorAll("nav a");
+
+      // 获取所有内容模块
+      const allModules = document.querySelectorAll("main > section");
+
+      // 默认显示首页内容
+      showModule("home");
+
+      // 为每个导航链接添加点击事件
+      navLinks.forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // 移除所有导航链接的active类
+          navLinks.forEach((l) => l.classList.remove("active"));
+
+          // 给当前点击的链接添加active类
+          this.classList.add("active");
+
+          // 提取要显示的模块ID
+          const moduleId = this.getAttribute("href").substring(1);
+
+          // 显示相应模块
+          showModule(moduleId);
+        });
+      });
+
+      // 显示特定模块的函数
+      function showModule(moduleId) {
+        // 隐藏所有模块
+        allModules.forEach((module) => {
+          module.style.display = "none";
+        });
+
+        // 显示选中的模块
+        const selectedModule = document.getElementById(moduleId);
+        if (selectedModule) {
+          selectedModule.style.display = "block";
+        } else if (moduleId === "home") {
+          // 如果是首页但没有首页模块，显示第一个模块
+          if (allModules.length > 0) {
+            allModules[0].style.display = "block";
+          }
+        }
+      }
+    });
+  </script>
+  <script src="./JS/animation.js"></script>
+  <script src="./JS/echarts.js"></script>
+</body>
+
+</html>
