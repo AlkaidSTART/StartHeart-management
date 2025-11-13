@@ -2,7 +2,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   // 等待窗口加载完成
   window.addEventListener("load", function () {
-    initializeCharts();
+    // 添加一个小延迟确保所有资源加载完成
+    setTimeout(function () {
+      initializeCharts();
+    }, 100);
   });
 });
 
@@ -96,19 +99,24 @@ function initializeCharts() {
   };
   m2.setOption(option2);
 
-  // 响应窗口大小变化
+  // 初始化知识库树状图
+  const kechartContainer = document.getElementById("kechart");
+  if (!kechartContainer) {
+    console.error("找不到ID为kechart的元素");
+    return;
+  }
 
-  const chartk = echarts.init(document.getElementById("kechart"));
+  const chartk = echarts.init(kechartContainer);
 
-  // 1. 优化后的数据结构（增加层级标识，方便样式区分）
+  // 数据结构
   const treeData = [
     {
       name: "自闭症知识库",
-      depth: 0, // 根节点
+      depth: 0,
       children: [
         {
           name: "基础知识",
-          depth: 1, // 一级分类
+          depth: 1,
           children: [
             { name: "定义与诊断标准", depth: 2 },
             { name: "谱系障碍的类型", depth: 2 },
@@ -137,7 +145,6 @@ function initializeCharts() {
     },
   ];
 
-  // 2. 优化后的配置项
   const optionk = {
     title: {
       text: "自闭症知识库体系",
@@ -171,22 +178,19 @@ function initializeCharts() {
         type: "tree",
         data: treeData,
         layout: "vertical",
-        orient: "LR", // 从左到右布局
-        // layout: "orthogonal", // 改为正交布局
-        // orient: "vertical",
-        symbol: "rect", // 节点形状：矩形
+        orient: "LR",
+        symbol: "rect",
         symbolSize: (value, params) => {
-          // 不同层级节点大小不同
           return params.data.depth === 0
-            ? [200, 60] // 根节点宽高
+            ? [200, 60]
             : params.data.depth === 1
-            ? [160, 50] // 一级节点
-            : [140, 40]; // 二级节点
+            ? [160, 50]
+            : [140, 40];
         },
         symbolOffset: [0, 0],
         label: {
           show: true,
-          position: "inside", // 文字在节点内部
+          position: "inside",
           fontSize: 28,
           verticalAlign: "middle",
           align: "center",
@@ -196,67 +200,54 @@ function initializeCharts() {
           fontWeight: (params) => {
             return params.data.depth <= 1 ? "bold" : "normal";
           },
-          color: "#fff", // 文字白色，与节点背景对比
+          color: "#fff",
           fontFamily: "Arial, sans-serif",
         },
         itemStyle: {
-          // 节点样式（不同层级不同颜色）
           color: (params) => {
-            const colors = [
-              "#3b82f6", // 根节点：蓝色
-              "#10b981", // 一级节点：绿色
-              "#6366f1", // 二级节点：靛蓝色
-            ];
+            const colors = ["#3b82f6", "#10b981", "#6366f1"];
             return colors[params.data.depth];
           },
-          borderRadius: 8, // 圆角
+          borderRadius: 8,
           borderWidth: 0,
-          shadowBlur: 5, // 阴影
+          shadowBlur: 5,
           shadowColor: "rgba(0,0,0,0.1)",
         },
         lineStyle: {
-          // 连接线样式
-          color: "#94a3b8", // 浅灰蓝色
+          color: "#94a3b8",
           width: 1.2,
-          type: "dashed", // 虚线，更柔和
-          curveness: 0.3, // 轻微弯曲，更自然
+          type: "dashed",
+          curveness: 0.3,
         },
         emphasis: {
-          // 悬停效果
           itemStyle: {
             shadowBlur: 10,
-            shadowColor: "rgba(59, 130, 246, 0.3)", // 同色系阴影
-            scale: 1.05, // 轻微放大
+            shadowColor: "rgba(59, 130, 246, 0.3)",
+            scale: 1.05,
           },
         },
         expandAndCollapse: true,
-        animationDuration: 600, // 展开/折叠动画更流畅
+        animationDuration: 600,
         animationEasing: "cubicOut",
-        initialTreeDepth: 1, // 初始展开根节点+一级节点
-        distance: 100, // 同层级节点间距（加大避免拥挤）
-        levelDistance: 120, // 层级间距（加大提升清晰度）
-        // 折叠/展开图标自定义
-        expandAndCollapseIcon: {
-          value: "▶", // 展开图标
-          fontSize: 16,
-          color: "#666",
-        },
-        collapseIcon: {
-          value: "▼", // 折叠图标
-          fontSize: 16,
-          color: "#666",
-        },
+        initialTreeDepth: 1,
+        distance: 100,
+        levelDistance: 120,
       },
     ],
   };
 
   chartk.setOption(optionk);
 
-  // 3. 点击事件（保留交互性）
+  // 添加点击事件处理
   chartk.on("click", function (params) {
-    if (params.componentType === "tree") {
+    // 添加调试日志
+    console.log("节点被点击:", params);
+
+    if (params.componentType === "series" && params.seriesType === "tree") {
       const nodeName = params.data.name;
       const nodeDepth = params.data.depth;
+
+      console.log("节点信息:", { nodeName, nodeDepth });
 
       // 一级节点：切换展开/折叠
       if (nodeDepth === 1) {
@@ -269,12 +260,27 @@ function initializeCharts() {
 
       // 二级节点：跳转示例
       if (nodeDepth === 2) {
-        console.log("查看详情：", nodeName);
-        window.open(
-          "https://www.baidu.com/s?wd=" +
-            "自闭症" +
-            encodeURIComponent(nodeName)
-        );
+        console.log("准备跳转到百度搜索:", nodeName);
+
+        // 使用try-catch捕获可能的错误
+        try {
+          const searchUrl =
+            "https://www.baidu.com/s?wd=" +
+            encodeURIComponent("自闭症" + nodeName);
+          console.log("搜索URL:", searchUrl);
+
+          // 尝试多种方式打开链接
+          const opened = window.open(searchUrl, "_blank");
+
+          // 检查是否成功打开
+          if (!opened) {
+            console.warn("弹窗可能被浏览器阻止，请检查浏览器设置");
+            // 提供替代方案
+            alert("请允许弹窗或点击以下链接查看:\n" + searchUrl);
+          }
+        } catch (error) {
+          console.error("打开链接时出错:", error);
+        }
       }
     }
   });
@@ -282,7 +288,6 @@ function initializeCharts() {
   // 窗口自适应
   window.addEventListener("resize", () => chartk.resize());
   setTimeout(() => {
-    // chartk.resize();
     m1.resize();
     m2.resize();
   }, 100);
