@@ -55,6 +55,11 @@ jobs:
     needs: validate-html-css-js
     runs-on: ubuntu-latest
 
+    # 添加环境配置
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     permissions:
       contents: read
       pages: write
