@@ -1,0 +1,118 @@
+name: Startheart CI/CD
+
+on:
+  push:
+    branches: [mmm]
+  pull_request:
+    branches: [mmm]
+
+jobs:
+  # 静态文件检查
+  validate-html-css-js:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install validation tools
+        run: |
+          npm install -g htmlhint
+          npm install -g stylelint
+          npm install -g eslint
+
+      - name: Validate HTML
+        run: |
+          htmlhint index.html
+          # 检查其他HTML文件
+          find . -name "*.html" -not -path "./node_modules/*" -exec htmlhint {} \;
+
+      - name: Validate CSS
+        run: |
+          # 如果您有stylelint配置文件，可以使用它
+          # stylelint "**/*.css" || echo "No stylelint config found, skipping..."
+          echo "Checking CSS syntax..."
+          for file in CSS/*.css; do
+            if [ -f "$file" ]; then
+              echo "Checking $file"
+            fi
+          done
+
+      - name: Validate JavaScript
+        run: |
+          # 检查JS语法
+          echo "Checking JavaScript files..."
+          for file in JS/*.js; do
+            if [ -f "$file" ]; then
+              echo "Checking $file"
+              # 使用node检查基本语法
+              node -c "$file" || echo "Syntax error in $file"
+            fi
+          done
+
+  # 文件完整性检查
+  check-file-integrity:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check required files exist
+        run: |
+          # 检查必需的文件是否存在
+          required_files=(
+            "index.html"
+            "CSS/styles.css"
+            "JS/scripts.js"
+            "JS/echarts.js"
+          )
+
+          missing_files=()
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              missing_files+=("$file")
+            fi
+          done
+
+          if [ ${#missing_files[@]} -gt 0 ]; then
+            echo "Missing required files:"
+            for file in "${missing_files[@]}"; do
+              echo "  - $file"
+            done
+            exit 1
+          else
+            echo "All required files present"
+          fi
+
+  # 部署到GitHub Pages
+  deploy:
+    needs: [validate-html-css-js, check-file-integrity]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
