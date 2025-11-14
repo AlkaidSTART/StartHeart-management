@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 添加一个小延迟确保所有资源加载完成
     setTimeout(function () {
       initializeCharts();
-    }, 100);
+    }, 1000);
   });
 });
 
@@ -64,7 +64,6 @@ function initializeCharts() {
     animationEasing: "linear",
     animationEasingUpdate: "linear",
   };
-  m1.setOption(option1);
 
   // 初始化第二个图表
   let m2 = echarts.init(document.getElementById("chart2"), "vintage");
@@ -97,7 +96,15 @@ function initializeCharts() {
       },
     ],
   };
-  m2.setOption(option2);
+  // 获取当前模块ID
+  const modules = document.querySelectorAll("main > section");
+  modules.forEach((module) => {
+    const moduleID = module.id;
+    if (moduleID === "home") {
+      m1.setOption(option1);
+      m2.setOption(option2);
+    }
+  });
 
   // 初始化知识库树状图
   const kechartContainer = document.getElementById("kechart");
@@ -267,8 +274,6 @@ function initializeCharts() {
           const searchUrl =
             "https://www.baidu.com/s?wd=" +
             encodeURIComponent("自闭症" + nodeName);
-          console.log("搜索URL:", searchUrl);
-
           // 尝试多种方式打开链接
           const opened = window.open(searchUrl, "_blank");
 
