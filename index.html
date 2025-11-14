@@ -529,128 +529,170 @@
     </section>
 
     <!-- 星语助手模块 -->
+    <!-- 星语助手模块 -->
     <section id="assistant" class="module">
       <div class="module-header">
         <h2>星语助手</h2>
       </div>
       <div class="assistant-content">
         <div class="chat-container">
+          <div class="chat-header">
+            <div class="ai-avatar">
+              <div class="avatar-circle">
+                <span>🤖</span>
+              </div>
+              <div class="ai-status">
+                <div class="status-indicator online"></div>
+                <span>星语助手在线</span>
+              </div>
+            </div>
+            <div class="chat-controls">
+              <button class="btn-icon" id="clear-chat">
+                <span>🗑️</span>
+              </button>
+            </div>
+          </div>
           <div class="chat-messages">
             <div class="message system">
+              <div class="message-avatar">
+                <div class="avatar-circle">
+                  <span>🤖</span>
+                </div>
+              </div>
               <div class="message-content">
-                <p>
-                  欢迎使用星语助手，我可以为您解答关于自闭症的问题，或帮助记录孩子的行为观察。
-                </p>
+                <div class="message-bubble">
+                  <p>
+                    欢迎使用星语助手，我可以为您解答关于自闭症的问题，或帮助记录孩子的行为观察。
+                  </p>
+                </div>
+                <div class="message-time">刚刚</div>
               </div>
             </div>
             <div class="message assistant">
+              <div class="message-avatar">
+                <div class="avatar-circle">
+                  <span>🤖</span>
+                </div>
+              </div>
               <div class="message-content">
-                <p>您可以向我询问以下方面的问题：</p>
-                <ul>
-                  <li>自闭症基础知识</li>
-                  <li>干预方法咨询</li>
-                  <li>行为观察记录</li>
-                  <li>家庭支持建议</li>
-                </ul>
+                <div class="message-bubble">
+                  <p>您可以向我询问以下方面的问题：</p>
+                  <ul class="suggestion-list">
+                    <li class="suggestion-item">自闭症基础知识</li>
+                    <li class="suggestion-item">干预方法咨询</li>
+                    <li class="suggestion-item">行为观察记录</li>
+                    <li class="suggestion-item">家庭支持建议</li>
+                  </ul>
+                </div>
+                <div class="message-time">刚刚</div>
               </div>
             </div>
           </div>
-          <div class="chat-input">
-            <textarea placeholder="请输入您的问题..."></textarea>
-            <button class="btn">发送</button>
+          <div class="chat-input-area">
+            <div class="input-container">
+              <textarea placeholder="请输入您的问题..." class="chat-textarea"></textarea>
+              <button class="send-button">
+                <span>发送</span>
+              </button>
+            </div>
+            <div class="typing-indicator" id="typing-indicator" style="display: none;">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  </main>
 
-  <div id="verification-modal" class="modal">
-    <div class="modal-content">
-      <h3>访问验证</h3>
-      <p>请选择查看此信息的目的：</p>
-      <select id="access-purpose">
-        <option value="">请选择访问目的</option>
-        <option value="assessment">评估需要</option>
-        <option value="treatment">治疗计划制定</option>
-        <option value="progress">进度跟踪</option>
-        <option value="consultation">专家咨询</option>
-      </select>
-      <div class="biometric-verification">
-        <p>需要生物识别验证:</p>
-        <button class="btn btn-biometric">开始验证</button>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-cancel">取消</button>
-        <button class="btn btn-confirm" disabled>确认</button>
-      </div>
-      <div class="privacy-notice">
-        <p>您的访问将被记录在审计日志中，包括时间戳、设备信息和访问内容。</p>
+    <div id="verification-modal" class="modal">
+      <div class="modal-content">
+        <h3>访问验证</h3>
+        <p>请选择查看此信息的目的：</p>
+        <select id="access-purpose">
+          <option value="">请选择访问目的</option>
+          <option value="assessment">评估需要</option>
+          <option value="treatment">治疗计划制定</option>
+          <option value="progress">进度跟踪</option>
+          <option value="consultation">专家咨询</option>
+        </select>
+        <div class="biometric-verification">
+          <p>需要生物识别验证:</p>
+          <button class="btn btn-biometric">开始验证</button>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-cancel">取消</button>
+          <button class="btn btn-confirm" disabled>确认</button>
+        </div>
+        <div class="privacy-notice">
+          <p>您的访问将被记录在审计日志中，包括时间戳、设备信息和访问内容。</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2023 星心自闭症支持系统 - 版本 1.2.0</p>
-      <p>系统已通过HIPAA/GDPR合规认证</p>
-      <p><span id="session-timer">会话将在 15:00 后自动锁定</span></p>
-    </div>
-  </footer>
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2023 星心自闭症支持系统 - 版本 1.2.0</p>
+        <p>系统已通过HIPAA/GDPR合规认证</p>
+        <p><span id="session-timer">会话将在 15:00 后自动锁定</span></p>
+      </div>
+    </footer>
 
-  <script src="./JS/scripts.js"></script>
-  <script>
-    // 导航菜单切换功能
-    document.addEventListener("DOMContentLoaded", function () {
-      // 获取所有导航链接
-      const navLinks = document.querySelectorAll("nav a");
+    <script src="./JS/scripts.js"></script>
+    <script>
+      // 导航菜单切换功能
+      document.addEventListener("DOMContentLoaded", function () {
+        // 获取所有导航链接
+        const navLinks = document.querySelectorAll("nav a");
 
-      // 获取所有内容模块
-      const allModules = document.querySelectorAll("main > section");
+        // 获取所有内容模块
+        const allModules = document.querySelectorAll("main > section");
 
-      // 默认显示首页内容
-      showModule("");
+        // 默认显示首页内容
+        showModule("");
 
-      // 为每个导航链接添加点击事件
-      navLinks.forEach((link) => {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
+        // 为每个导航链接添加点击事件
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
 
-          // 移除所有导航链接的active类
-          navLinks.forEach((l) => l.classList.remove("active"));
+            // 移除所有导航链接的active类
+            navLinks.forEach((l) => l.classList.remove("active"));
 
-          // 给当前点击的链接添加active类
-          this.classList.add("active");
+            // 给当前点击的链接添加active类
+            this.classList.add("active");
 
-          // 提取要显示的模块ID
-          const moduleId = this.getAttribute("href").substring(1);
+            // 提取要显示的模块ID
+            const moduleId = this.getAttribute("href").substring(1);
 
-          // 显示相应模块
-          showModule(moduleId);
-        });
-      });
-
-      // 显示特定模块的函数
-      function showModule(moduleId) {
-        // 隐藏所有模块
-        allModules.forEach((module) => {
-          module.style.display = "none";
+            // 显示相应模块
+            showModule(moduleId);
+          });
         });
 
-        // 显示选中的模块
-        const selectedModule = document.getElementById(moduleId);
-        if (selectedModule) {
-          selectedModule.style.display = "block";
-        } else if (moduleId === "home") {
-          // 如果是首页但没有首页模块，显示第一个模块
-          if (allModules.length > 0) {
-            allModules[0].style.display = "block";
+        // 显示特定模块的函数
+        function showModule(moduleId) {
+          // 隐藏所有模块
+          allModules.forEach((module) => {
+            module.style.display = "none";
+          });
+
+          // 显示选中的模块
+          const selectedModule = document.getElementById(moduleId);
+          if (selectedModule) {
+            selectedModule.style.display = "block";
+          } else if (moduleId === "home") {
+            // 如果是首页但没有首页模块，显示第一个模块
+            if (allModules.length > 0) {
+              allModules[0].style.display = "block";
+            }
           }
         }
-      }
-    });
-  </script>
-  <script src="./JS/animation.js"></script>
-  <script src="./JS/echarts.js"></script>
+      });
+    </script>
+    <script src="./JS/animation.js"></script>
+    <script src="./JS/echarts.js"></script>
+    <script src="./JS/AI.js" async></script>
 </body>
 
 </html>
