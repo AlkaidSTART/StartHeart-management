@@ -1,5 +1,3 @@
-// 在文件末尾添加以下代码
-
 // 星语助手功能增强
 document.addEventListener("DOMContentLoaded", function () {
   // 获取聊天相关元素
@@ -8,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const sendButton = document.querySelector(".send-button");
   const clearChatButton = document.getElementById("clear-chat");
   const typingIndicator = document.getElementById("typing-indicator");
-  const suggestionItems = document.querySelectorAll(".suggestion-item");
 
   // 发送消息函数
   function sendMessage() {
@@ -97,18 +94,63 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // 为建议项添加点击事件
-  suggestionItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      chatTextarea.value = this.textContent;
-      chatTextarea.focus();
-    });
-  });
-
   // 添加欢迎消息
   function addWelcomeMessages() {
-    // 这里可以重新添加初始欢迎消息
+    const welcomeMessages = `
+      <div class="message system">
+        <div class="message-avatar">
+          <div class="avatar-circle">
+            <span>🤖</span>
+          </div>
+        </div>
+        <div class="message-content">
+          <div class="message-bubble">
+            <p>
+              欢迎使用星语助手，我可以为您解答关于自闭症的问题，或帮助记录孩子的行为观察。
+            </p>
+          </div>
+          <div class="message-time">刚刚</div>
+        </div>
+      </div>
+      <div class="message assistant">
+        <div class="message-avatar">
+          <div class="avatar-circle">
+            <span>🤖</span>
+          </div>
+        </div>
+        <div class="message-content">
+          <div class="message-bubble">
+            <p>您可以向我询问以下方面的问题：</p>
+            <ul class="suggestion-list">
+              <li class="suggestion-item">自闭症基础知识</li>
+              <li class="suggestion-item">干预方法咨询</li>
+              <li class="suggestion-item">行为观察记录</li>
+              <li class="suggestion-item">家庭支持建议</li>
+            </ul>
+          </div>
+          <div class="message-time">刚刚</div>
+        </div>
+      </div>
+    `;
+    chatMessages.innerHTML = welcomeMessages;
+
+    // 重新绑定建议项点击事件
+    bindSuggestionEvents();
   }
+
+  // 绑定建议项点击事件
+  function bindSuggestionEvents() {
+    const suggestionItems = document.querySelectorAll(".suggestion-item");
+    suggestionItems.forEach((item) => {
+      item.addEventListener("click", function () {
+        chatTextarea.value = this.textContent;
+        chatTextarea.focus();
+      });
+    });
+  }
+
+  // 初始化时绑定建议项事件
+  bindSuggestionEvents();
 
   // 初始化时滚动到底部
   chatMessages.scrollTop = chatMessages.scrollHeight;
