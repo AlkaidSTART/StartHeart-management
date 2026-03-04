@@ -1,0 +1,232 @@
+/* 预约服务简约优化样式 */
+.appointment-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.appointment-simple {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+}
+
+.appointment-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.appointment-header h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.appointment-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.appointment-form-simple {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.form-group-simple {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-simple label {
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.form-group-simple input,
+.form-group-simple select,
+.form-group-simple textarea {
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+
+.form-group-simple input:focus,
+.form-group-simple select:focus,
+.form-group-simple textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(107, 159, 213, 0.1);
+}
+
+.form-group-simple textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group-full {
+    grid-column: 1 / -1;
+}
+
+.submit-btn-simple {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(107, 159, 213, 0.3);
+    justify-self: start;
+}
+
+.submit-btn-simple:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(107, 159, 213, 0.4);
+}
+
+.appointment-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 25px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.info-title {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.info-list li {
+    color: #666;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.info-list li::before {
+    content: '•';
+    color: var(--primary-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.quick-contact {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.contact-icon {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .appointment-simple {
+        padding: 20px;
+    }
+    
+    .appointment-form-simple {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .submit-btn-simple {
+        justify-self: stretch;
+        width: 100%;
+    }
+    
+    .appointment-info {
+        padding: 20px;
+    }
+}
+
+/* 加载动画 */
+.loading-state {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+    animation: slideInUp 0.5s ease;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 表单验证样式 */
+.form-group-simple.error input,
+.form-group-simple.error select,
+.form-group-simple.error textarea {
+    border-color: #dc3545;
+    background: #f8d7da;
+}
+
+.form-group-simple.success input,
+.form-group-simple.success select,
+.form-group-simple.success textarea {
+    border-color: #28a745;
+    background: #d4edda;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.success-message-form {
+    color: #28a745;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}

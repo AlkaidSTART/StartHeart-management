@@ -1,0 +1,541 @@
+/* AI助手布局优化 - 清洁简约专业版本 */
+
+/* 基础变量 */
+:root {
+    --ai-assistant-width: 380px;
+    --ai-assistant-height: 600px;
+    --ai-header-height: 60px;
+    --ai-border-radius: 12px;
+    --ai-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --ai-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* AI助手容器 - 固定定位，避免重叠 */
+.assistant-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: var(--ai-assistant-width);
+    height: var(--ai-assistant-height);
+    z-index: 1000;
+    transition: var(--ai-transition);
+    transform-origin: bottom right;
+}
+
+.assistant-container.minimized {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.assistant-container.dragging {
+    transition: none;
+}
+
+/* AI助手主界面 */
+.assistant-main {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: var(--ai-border-radius);
+    box-shadow: var(--ai-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.assistant-container.minimized .assistant-main {
+    border-radius: 50%;
+}
+
+/* 头部区域 */
+.assistant-header {
+    height: var(--ai-header-height);
+    background: linear-gradient(135deg, #6B9FD5 0%, #5B8FB9 100%);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.assistant-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.assistant-title::before {
+    content: '🤖';
+    font-size: 1.3rem;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.assistant-subtitle {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    margin: 0;
+    font-weight: 300;
+}
+
+.assistant-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.header-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(5px);
+}
+
+.header-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+.header-btn:active {
+    transform: translateY(0);
+}
+
+/* 聊天区域 */
+.assistant-chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fafbfc;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* 消息样式 */
+.message {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    animation: messageSlideIn 0.3s ease;
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message.user {
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.message.user .message-avatar {
+    background: linear-gradient(135deg, #6B9FD5 0%, #5B8FB9 100%);
+    color: white;
+}
+
+.message-content {
+    max-width: 280px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.message.assistant .message-content {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: var(--text-color);
+    border-bottom-left-radius: 4px;
+}
+
+.message.user .message-content {
+    background: linear-gradient(135deg, #6B9FD5 0%, #5B8FB9 100%);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message-time {
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.4);
+    margin-top: 4px;
+    text-align: right;
+}
+
+/* 输入区域 */
+.chat-input-area {
+    padding: 16px 20px;
+    background: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+}
+
+.input-container {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.chat-input {
+    flex: 1;
+    background: #f8f9fa;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    resize: none;
+    max-height: 100px;
+    min-height: 40px;
+    font-family: inherit;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+    color: var(--text-color);
+}
+
+.chat-input:focus {
+    outline: none;
+    border-color: #6B9FD5;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(107, 159, 213, 0.1);
+}
+
+.chat-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.send-btn {
+    background: linear-gradient(135deg, #6B9FD5 0%, #5B8FB9 100%);
+    border: none;
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.send-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(107, 159, 213, 0.3);
+}
+
+.send-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 快速功能区域 */
+.quick-functions {
+    padding: 16px 20px;
+    background: white;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    display: none;
+}
+
+.quick-functions.active {
+    display: block;
+}
+
+.quick-functions-title {
+    font-size: 0.8rem;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.quick-function-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.quick-function-item {
+    background: #f8f9fa;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.quick-function-item:hover {
+    background: #e9ecef;
+    border-color: #6B9FD5;
+    color: #6B9FD5;
+}
+
+/* 最小化状态 */
+.assistant-container.minimized .assistant-main {
+    background: linear-gradient(135deg, #6B9FD5 0%, #5B8FB9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.assistant-container.minimized .assistant-header,
+.assistant-container.minimized .assistant-chat {
+    display: none;
+}
+
+.minimized-icon {
+    font-size: 1.5rem;
+    color: white;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-5px);
+    }
+    60% {
+        transform: translateY(-3px);
+    }
+}
+
+/* 拖拽手柄 */
+.drag-handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 20px;
+    cursor: move;
+    z-index: 10;
+    background: transparent;
+}
+
+.assistant-container.minimized .drag-handle {
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* 打字指示器 */
+.typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    border-bottom-left-radius: 4px;
+    width: fit-content;
+}
+
+.typing-dot {
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    animation: typing 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.typing-dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes typing {
+    0%, 80%, 100% {
+        transform: scale(0.8);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .assistant-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        left: 20px;
+        width: auto;
+        max-width: 100%;
+        height: 70vh;
+        max-height: 500px;
+    }
+    
+    .assistant-container.minimized {
+        width: 50px;
+        height: 50px;
+        left: auto;
+    }
+    
+    .chat-messages {
+        padding: 15px;
+        gap: 12px;
+    }
+    
+    .message-content {
+        max-width: 75%;
+        font-size: 0.85rem;
+    }
+    
+    .chat-input-area {
+        padding: 12px 15px;
+    }
+    
+    .assistant-header {
+        padding: 0 15px;
+    }
+    
+    .assistant-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .assistant-container {
+        bottom: 15px;
+        right: 15px;
+        left: 15px;
+        height: 75vh;
+        max-height: 450px;
+    }
+    
+    .assistant-container.minimized {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .message-content {
+        max-width: 80%;
+        font-size: 0.8rem;
+        padding: 10px 12px;
+    }
+    
+    .chat-input {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+    
+    .send-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .assistant-main {
+        background: #2d3748;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .chat-messages {
+        background: #1a202c;
+    }
+    
+    .message.assistant .message-content {
+        background: #2d3748;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #e2e8f0;
+    }
+    
+    .chat-input {
+        background: #2d3748;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #e2e8f0;
+    }
+    
+    .chat-input:focus {
+        background: #374151;
+    }
+    
+    .quick-function-item {
+        background: #374151;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #e2e8f0;
+    }
+    
+    .quick-function-item:hover {
+        background: #4a5568;
+        border-color: #6B9FD5;
+    }
+}
