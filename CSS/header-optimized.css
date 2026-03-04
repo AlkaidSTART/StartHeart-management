@@ -1,0 +1,582 @@
+/* 优化顶部导航栏大小和显示 - 专业简约版本 */
+
+/* 基础变量重新定义 */
+:root {
+    --header-height: 70px;
+    --header-padding: 15px;
+    --nav-item-padding: 10px 15px;
+    --logo-size: 40px;
+    --font-size-sm: 0.85rem;
+    --font-size-base: 0.95rem;
+    --font-size-lg: 1.1rem;
+}
+
+/* 优化头部容器 */
+.modern-header {
+    background: var(--gradient-primary);
+    box-shadow: 0 2px 15px rgba(107, 159, 213, 0.25);
+    height: var(--header-height);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-radius: 0 0 12px 12px;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--header-padding);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    overflow: visible;
+}
+
+/* 优化Logo区域 */
+.logo-section {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.logo-icon {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    border-radius: 10px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px;
+    transition: transform 0.3s ease;
+}
+
+.logo-wrapper:hover .logo-icon {
+    transform: rotate(10deg) scale(1.05);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.logo-title {
+    color: white;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    line-height: 1.2;
+}
+
+.logo-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: var(--font-size-sm);
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* 优化主导航 */
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 4px;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--nav-item-padding);
+    border-radius: 8px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    transition: all 0.2s ease;
+    position: relative;
+    min-width: 60px;
+    text-align: center;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: white;
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+.nav-icon {
+    font-size: 1.1rem;
+    transition: transform 0.2s ease;
+}
+
+.nav-link:hover .nav-icon {
+    transform: scale(1.1);
+}
+
+.nav-text {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* 优化右侧操作区域 */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 8px 35px 8px 12px;
+    color: white;
+    font-size: var(--font-size-sm);
+    width: 180px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    width: 220px;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+.search-btn {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.search-btn:hover {
+    color: white;
+}
+
+.notification-area {
+    position: relative;
+}
+
+.notification-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.notification-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05);
+}
+
+.notification-icon {
+    font-size: 1rem;
+    color: white;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background: #FF6B6B;
+    color: white;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.user-profile:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.user-avatar-img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.user-name {
+    color: white;
+    font-weight: 500;
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+.user-role {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.7rem;
+    line-height: 1.2;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-menu-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    color: white;
+    font-size: 0.7rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.user-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 6px 0;
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.dropdown-item:hover {
+    background: var(--light-gray);
+    color: var(--primary-color);
+}
+
+/* 移动端菜单按钮（仅在移动端显示） */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    flex-direction: column;
+    gap: 3px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu-toggle span {
+    width: 20px;
+    height: 2px;
+    background: white;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .header-container {
+        padding: 0 20px;
+    }
+    
+    .nav-link {
+        padding: 8px 12px;
+        min-width: 55px;
+    }
+    
+    .search-input {
+        width: 160px;
+    }
+    
+    .search-input:focus {
+        width: 190px;
+    }
+}
+
+@media (max-width: 992px) {
+    :root {
+        --header-height: 65px;
+        --logo-size: 36px;
+    }
+    
+    .header-container {
+        padding: 0 15px;
+        gap: 15px;
+    }
+    
+    .logo-title {
+        font-size: 1rem;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.75rem;
+    }
+    
+    .nav-link {
+        padding: 6px 10px;
+        min-width: 50px;
+    }
+    
+    .nav-icon {
+        font-size: 1rem;
+    }
+    
+    .nav-text {
+        font-size: 0.75rem;
+    }
+    
+    .search-input {
+        width: 140px;
+        font-size: 0.8rem;
+    }
+    
+    .search-input:focus {
+        width: 170px;
+    }
+    
+    .user-name {
+        font-size: 0.75rem;
+    }
+    
+    .user-role {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --header-height: 60px;
+        --logo-size: 32px;
+    }
+    
+    .header-container {
+        padding: 0 12px;
+        gap: 12px;
+    }
+    
+    .logo-wrapper {
+        gap: 8px;
+    }
+    
+    .logo-icon {
+        padding: 5px;
+    }
+    
+    .logo-title {
+        font-size: 0.95rem;
+    }
+    
+    .logo-subtitle {
+        font-size: 0.7rem;
+    }
+    
+    .main-nav {
+        display: none; /* 移动端隐藏桌面导航 */
+    }
+    
+    .header-actions {
+        gap: 10px;
+    }
+    
+    .search-box {
+        display: none; /* 移动端隐藏搜索框 */
+    }
+    
+    .user-profile {
+        padding: 5px 8px;
+        gap: 6px;
+    }
+    
+    .user-avatar-img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .user-name {
+        font-size: 0.75rem;
+    }
+    
+    .user-role {
+        display: none; /* 移动端隐藏用户角色 */
+    }
+    
+    .notification-btn {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .notification-icon {
+        font-size: 0.9rem;
+    }
+    
+    .user-menu-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 0.6rem;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex; /* 移动端显示菜单按钮 */
+    }
+}
+
+@media (max-width: 480px) {
+    .header-container {
+        padding: 0 10px;
+        gap: 8px;
+    }
+    
+    .logo-title {
+        font-size: 0.85rem;
+    }
+    
+    .logo-subtitle {
+        display: none; /* 超小屏幕隐藏副标题 */
+    }
+    
+    .user-name {
+        font-size: 0.7rem;
+    }
+    
+    .notification-badge {
+        width: 14px;
+        height: 14px;
+        font-size: 0.6rem;
+    }
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 防止内容溢出 */
+body {
+    overflow-x: hidden;
+}
+
+/* 确保主要内容不被头部遮挡 */
+main {
+    padding-top: 20px;
+}
+
+/* 滚动时头部效果 */
+.modern-header.scrolled {
+    box-shadow: 0 4px 25px rgba(107, 159, 213, 0.35);
+    transform: translateY(-2px);
+}

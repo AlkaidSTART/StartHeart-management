@@ -1,0 +1,735 @@
+/* 头部UI优化增强版本 */
+
+/* 基础变量重新定义 */
+:root {
+    --header-height: 68px;
+    --header-padding: 14px;
+    --nav-item-padding: 8px 14px;
+    --logo-size: 38px;
+    --search-width: 220px;
+    --search-focus-width: 280px;
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 优化的头部容器 */
+.modern-header {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    box-shadow: var(--shadow-md);
+    height: var(--header-height);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: var(--transition-normal);
+}
+
+.modern-header.scrolled {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-1px);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--header-padding);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    overflow: visible;
+}
+
+/* 优化的Logo区域 */
+.logo-section {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.logo-wrapper:hover {
+    transform: scale(1.02);
+}
+
+.logo-icon {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    border-radius: var(--border-radius-sm);
+    object-fit: contain;
+    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+    padding: 6px;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+}
+
+.logo-wrapper:hover .logo-icon {
+    transform: rotate(8deg) scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.logo-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #4A90E2 0%, #50C878 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo-subtitle {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin: 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* 优化的主导航 */
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2px;
+    align-items: center;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: var(--nav-item-padding);
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    color: #495057;
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: var(--transition-fast);
+    position: relative;
+    min-width: 60px;
+    text-align: center;
+    background: transparent;
+    border: 2px solid transparent;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(80, 200, 120, 0.1) 100%);
+    border-radius: var(--border-radius-sm);
+    opacity: 0;
+    transition: var(--transition-fast);
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+    opacity: 1;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #4A90E2;
+    border-color: rgba(74, 144, 226, 0.2);
+    transform: translateY(-1px);
+}
+
+.nav-icon {
+    font-size: 1rem;
+    transition: var(--transition-fast);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.nav-link:hover .nav-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 2px 4px rgba(74, 144, 226, 0.2));
+}
+
+.nav-text {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+}
+
+/* 增强的搜索功能 */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+.search-input {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 24px;
+    padding: 10px 40px 10px 16px;
+    color: #495057;
+    font-size: 0.85rem;
+    width: var(--search-width);
+    transition: var(--transition-fast);
+    backdrop-filter: blur(5px);
+    font-family: inherit;
+}
+
+.search-input::placeholder {
+    color: #adb5bd;
+    font-weight: 400;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #4A90E2;
+    background: rgba(255, 255, 255, 0.95);
+    width: var(--search-focus-width);
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.15), var(--shadow-sm);
+}
+
+.search-btn {
+    position: absolute;
+    right: 8px;
+    background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.9rem;
+    transition: var(--transition-fast);
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.search-btn:active {
+    transform: scale(0.95);
+}
+
+/* 搜索建议下拉框 */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition-fast);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.search-suggestions.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(8px);
+}
+
+.search-suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+}
+
+.search-suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.search-suggestion-item:hover {
+    background: rgba(74, 144, 226, 0.05);
+    color: #4A90E2;
+}
+
+.search-suggestion-item.active {
+    background: rgba(74, 144, 226, 0.1);
+    color: #4A90E2;
+}
+
+.suggestion-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.suggestion-text {
+    flex: 1;
+    font-weight: 500;
+}
+
+.suggestion-category {
+    font-size: 0.7rem;
+    color: #6c757d;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 400;
+}
+
+/* 通知区域优化 */
+.notification-area {
+    position: relative;
+}
+
+.notification-btn {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #495057;
+    font-size: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.notification-btn:hover {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-color: rgba(74, 144, 226, 0.3);
+    color: #4A90E2;
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.notification-icon {
+    font-size: 1rem;
+    transition: var(--transition-fast);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF5252 100%);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    animation: pulse 2s infinite;
+    box-shadow: var(--shadow-sm);
+}
+
+/* 用户区域优化 */
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+}
+
+.user-profile:hover {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-color: rgba(74, 144, 226, 0.3);
+    transform: scale(1.02);
+    box-shadow: var(--shadow-sm);
+}
+
+.user-avatar-img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(74, 144, 226, 0.3);
+    transition: var(--transition-fast);
+}
+
+.user-profile:hover .user-avatar-img {
+    border-color: #4A90E2;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.user-name {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+
+.user-role {
+    color: #6c757d;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    font-weight: 500;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-menu-btn {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    color: #495057;
+    font-size: 0.8rem;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.user-menu-btn:hover {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-color: rgba(74, 144, 226, 0.3);
+    color: #4A90E2;
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: 6px 0;
+    min-width: 160px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: var(--transition-fast);
+    z-index: 1001;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 10px 16px;
+    color: #495057;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: var(--transition-fast);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.dropdown-item:hover {
+    background: rgba(74, 144, 226, 0.05);
+    color: #4A90E2;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计增强 */
+@media (max-width: 1200px) {
+    .header-container {
+        padding: 0 20px;
+        gap: 20px;
+    }
+    
+    .nav-link {
+        padding: 6px 12px;
+        min-width: 55px;
+    }
+    
+    .search-input {
+        width: 180px;
+    }
+    
+    .search-input:focus {
+        width: 220px;
+    }
+}
+
+@media (max-width: 992px) {
+    :root {
+        --header-height: 64px;
+        --logo-size: 34px;
+    }
+    
+    .header-container {
+        padding: 0 16px;
+        gap: 16px;
+    }
+    
+    .logo-title {
+        font-size: 1.1rem;
+    }
+    
+    .nav-link {
+        padding: 6px 10px;
+        min-width: 50px;
+    }
+    
+    .nav-icon {
+        font-size: 0.9rem;
+    }
+    
+    .nav-text {
+        font-size: 0.7rem;
+    }
+    
+    .search-input {
+        width: 160px;
+        font-size: 0.8rem;
+    }
+    
+    .search-input:focus {
+        width: 200px;
+    }
+    
+    .user-name {
+        font-size: 0.75rem;
+    }
+    
+    .user-role {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --header-height: 58px;
+        --logo-size: 30px;
+    }
+    
+    .header-container {
+        padding: 0 12px;
+        gap: 12px;
+    }
+    
+    .logo-wrapper {
+        gap: 8px;
+    }
+    
+    .logo-icon {
+        padding: 4px;
+    }
+    
+    .logo-title {
+        font-size: 1rem;
+    }
+    
+    .logo-subtitle {
+        display: none;
+    }
+    
+    .main-nav {
+        display: none;
+    }
+    
+    .header-actions {
+        gap: 10px;
+    }
+    
+    .search-box {
+        display: none;
+    }
+    
+    .user-profile {
+        padding: 5px 8px;
+        gap: 6px;
+    }
+    
+    .user-avatar-img {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .user-name {
+        font-size: 0.7rem;
+    }
+    
+    .user-role {
+        display: none;
+    }
+    
+    .notification-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .notification-icon {
+        font-size: 0.9rem;
+    }
+    
+    .user-menu-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-container {
+        padding: 0 10px;
+        gap: 8px;
+    }
+    
+    .logo-title {
+        font-size: 0.9rem;
+    }
+    
+    .user-profile {
+        max-width: 120px;
+    }
+    
+    .user-name {
+        font-size: 0.7rem;
+    }
+    
+    .notification-badge {
+        width: 16px;
+        height: 16px;
+        font-size: 0.6rem;
+    }
+}

@@ -6,16 +6,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>星心自闭症支持系统</title>
   <link rel="icon" href="./assets/猫咪.png" />
-  <link rel="stylesheet" href="./CSS/styles.css" async />
+  
+  <!-- 预加载关键资源 -->
+  <link rel="preload" href="./CSS/styles.css" as="style" />
+  <link rel="preload" href="./CSS/self.css" as="style" />
+  <link rel="preload" href="./CSS/base.css" as="style" />
+  
+  <!-- 加载CSS -->
+  <link rel="stylesheet" href="./CSS/styles.css" />
   <link rel="stylesheet" href="./CSS/self.css" />
   <link rel="stylesheet" href="./CSS/base.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
-  <script src="https://cdn.tailwindcss.com" async></script>
-  <script src="./JS/animation.js"></script>
-  <script src="./JS/vintage.js" async></script>
+  <link rel="stylesheet" href="./CSS/header-enhanced.css" />
+  <link rel="stylesheet" href="./CSS/data-overview-enhanced.css" />
+  <link rel="stylesheet" href="./CSS/insights-enhanced.css" />
+  <link rel="stylesheet" href="./CSS/layout-clean.css" />
+  <link rel="stylesheet" href="./CSS/knowledge-enhanced.css" />
+  <link rel="stylesheet" href="./CSS/knowledge-floating-modal.css" />
+  <link rel="stylesheet" href="./CSS/intervention-enhanced.css" />
+  <link rel="stylesheet" href="./CSS/intervention-floating.css" />
+  <link rel="stylesheet" href="./CSS/ai-assistant-clean.css" />
+  <link rel="stylesheet" href="./CSS/appointment-simple.css" />
+  
+  <!-- 异步加载第三方库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js" defer></script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  
+  <!-- 异步加载自定义脚本 -->
+  <script src="./JS/animation.js" defer></script>
+  <script src="./JS/vintage.js" defer></script>
+  <script src="./JS/performance.js" defer></script>
+  
   <style>
-    /* 增加的医生卡片样式 */
+    /* 内联关键CSS - 优化首次渲染 */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #6B9FD5 0%, #5B8FB9 100%);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease;
+    }
+    
+    .stars-loader {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    /* 优化字体加载 */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    }
     .member-card {
       background-color: white;
       border-radius: var(--border-radius);
@@ -73,34 +133,197 @@
   <div class="loading-overlay" id="loadingOverlay">
     <div class="stars-loader" id="starsLoader"></div>
   </div>
-  <header>
-    <div class="logo-container">
-      <img src="https://via.placeholder.com/40x40?text=Logo" alt="机构徽标" class="logo" />
-      <h1>星心自闭症支持系统</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#base" class="active">数据总览</a></li>
-        <li><a href="#home">数据里的星光</a></li>
-        <li><a href="#assessment">星光洞察</a></li>
-        <li><a href="#team">星光守护团</a></li>
-        <li><a href="#intervention">星光引路</a></li>
-        <li><a href="#knowledge">星光知识库</a></li>
-        <li><a href="#appointment">星光有约</a></li>
-        <li><a href="#assistant">星语助手</a></li>
-      </ul>
-    </nav>
-    <div class="user-info">
-      <span class="user-name">Berry</span>
-      <div class="user-avatar">
-        <img src="./assets/1.jpg" alt="用户头像" />
+  <header class="modern-header">
+    <div class="header-container">
+      <div class="logo-section">
+        <div class="logo-wrapper">
+          <img src="./assets/猫咪.png" alt="星心标志" class="logo-icon" />
+          <div class="logo-text">
+            <h1 class="logo-title">星心自闭症支持系统</h1>
+            <p class="logo-subtitle">专业 · 温暖 · 陪伴</p>
+          </div>
+        </div>
+      </div>
+      
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#base" class="nav-link active" data-section="数据总览">
+              <span class="nav-icon">📊</span>
+              <span class="nav-text">数据总览</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#home" class="nav-link" data-section="数据里的星光">
+              <span class="nav-icon">⭐</span>
+              <span class="nav-text">星光数据</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#assessment" class="nav-link" data-section="星光洞察">
+              <span class="nav-icon">🔍</span>
+              <span class="nav-text">星光洞察</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#team" class="nav-link" data-section="星光守护团">
+              <span class="nav-icon">👥</span>
+              <span class="nav-text">守护团队</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#intervention" class="nav-link" data-section="星光引路">
+              <span class="nav-icon">🎯</span>
+              <span class="nav-text">干预引路</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#knowledge" class="nav-link" data-section="星光知识库">
+              <span class="nav-icon">📚</span>
+              <span class="nav-text">知识库</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#appointment" class="nav-link" data-section="星光有约">
+              <span class="nav-icon">📅</span>
+              <span class="nav-text">预约服务</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#assistant" class="nav-link" data-section="星语助手">
+              <span class="nav-icon">🤖</span>
+              <span class="nav-text">星语助手</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="header-actions">
+        <div class="search-container">
+          <div class="search-box">
+            <input type="text" placeholder="搜索功能或内容..." class="search-input" id="searchInput" />
+            <button class="search-btn" id="searchBtn">🔍</button>
+          </div>
+          <div class="search-suggestions" id="searchSuggestions"></div>
+        </div>
+        
+        <div class="notification-area">
+          <button class="notification-btn">
+            <span class="notification-icon">🔔</span>
+            <span class="notification-badge">3</span>
+          </button>
+        </div>
+        
+        <div class="user-section">
+          <div class="user-profile">
+            <img src="./assets/1.jpg" alt="用户头像" class="user-avatar-img" />
+            <div class="user-info">
+              <span class="user-name">Berry</span>
+              <span class="user-role">专业用户</span>
+            </div>
+          </div>
+          <div class="user-menu">
+            <button class="user-menu-btn">▼</button>
+            <div class="user-dropdown">
+              <a href="#" class="dropdown-item">个人设置</a>
+              <a href="#" class="dropdown-item">使用记录</a>
+              <a href="#" class="dropdown-item">帮助中心</a>
+              <a href="#" class="dropdown-item">退出登录</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    
+    <!-- 移动端菜单按钮 -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
 
   <main>
     <section id="base" class="module">
-      <div class="box bg-[#F0F8FF]"></div>
+      <div class="data-overview-enhanced">
+        <div class="module-header">
+          <h2>数据总览</h2>
+          <p class="module-subtitle">自闭症支持系统实时数据洞察</p>
+        </div>
+        
+        <!-- 增强的统计卡片 -->
+        <div class="stats-grid-enhanced">
+          <div class="stat-card-enhanced primary">
+            <div class="stat-icon-enhanced">👥</div>
+            <div class="stat-number-enhanced">1,247</div>
+            <div class="stat-label-enhanced">累计服务患者</div>
+            <div class="stat-trend-enhanced trend-up">
+              <span>📈</span>
+              <span>+12% 本月</span>
+            </div>
+          </div>
+          
+          <div class="stat-card-enhanced secondary">
+            <div class="stat-icon-enhanced">📊</div>
+            <div class="stat-number-enhanced">89.3%</div>
+            <div class="stat-label-enhanced">干预有效率</div>
+            <div class="stat-trend-enhanced trend-up">
+              <span>📈</span>
+              <span>+5% 较上季度</span>
+            </div>
+          </div>
+          
+          <div class="stat-card-enhanced accent">
+            <div class="stat-icon-enhanced">⭐</div>
+            <div class="stat-number-enhanced">4.8</div>
+            <div class="stat-label-enhanced">家长满意度</div>
+            <div class="stat-trend-enhanced trend-up">
+              <span>📈</span>
+              <span>+0.2 本月</span>
+            </div>
+          </div>
+          
+          <div class="stat-card-enhanced warning">
+            <div class="stat-icon-enhanced">🎯</div>
+            <div class="stat-number-enhanced">156</div>
+            <div class="stat-label-enhanced">活跃干预计划</div>
+            <div class="stat-trend-enhanced trend-up">
+              <span>📈</span>
+              <span>+8 本周</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 图表区域 -->
+        <div class="charts-container-enhanced">
+          <div class="chart-card-enhanced">
+            <div class="chart-header-enhanced">
+              <h3 class="chart-title-enhanced">📈 月度服务趋势</h3>
+              <div class="chart-controls-enhanced">
+                <button class="chart-control-btn active" onclick="switchTimeRange('month')">月度</button>
+                <button class="chart-control-btn" onclick="switchTimeRange('quarter')">季度</button>
+                <button class="chart-control-btn" onclick="switchTimeRange('year')">年度</button>
+              </div>
+            </div>
+            <div class="chart-container-enhanced" id="monthlyTrendChart"></div>
+          </div>
+          
+          <div class="chart-card-enhanced">
+            <div class="chart-header-enhanced">
+              <h3 class="chart-title-enhanced">🎯 干预类型分布</h3>
+              <div class="chart-controls-enhanced">
+                <button class="chart-control-btn active" onclick="switchChartType('pie')">饼图</button>
+                <button class="chart-control-btn" onclick="switchChartType('bar')">柱状图</button>
+              </div>
+            </div>
+            <div class="distribution-chart" id="interventionDistributionChart"></div>
+            <div class="distribution-legend" id="distributionLegend"></div>
+          </div>
+        </div>
+        
+        <!-- 详细数据表格 -->
+        <div class="data-table-enhanced" id="dataTableContainer"></div>
+      </div>
     </section>
 
 
@@ -108,97 +331,53 @@
 
 
     <section id="home" class="module">
-      <!-- <div class="module-header">
-        <h2>系统首页</h2>
-      </div> -->
-      <div class="welcome-content">
-        <h3 style="font-size: 24px;text-align: center;margin-bottom: 20px;">八年轨迹：自闭症群体增长趋势观察</h3>
-        <div class="chart-container" style="width: 100%;padding-bottom: 50px; margin-top: 20px;">
-          <div id="chart1"
-            style="width: 700px; height: 400px; min-width: 600px; border: 1px solid #d1d5db;margin-left: auto;margin-right: auto;">
-          </div>
-          <div id="chart2"
-            style="width: 400px; height: 400px; min-width: 300px; border: 1px solid #d1d5db;margin-left: auto;margin-right: auto;">
+      <div class="welcome-container">
+        <div class="welcome-header">
+          <div class="welcome-emoji">🌟</div>
+          <h2>欢迎来到星心自闭症支持系统</h2>
+          <p class="welcome-subtitle">用数据点亮希望，用专业守护成长</p>
+        </div>
+        <div class="welcome-content">
+          <h3 style="font-size: 24px;text-align: center;margin-bottom: 20px;">八年轨迹：自闭症群体增长趋势观察</h3>
+          <div class="chart-container" style="width: 100%;padding-bottom: 50px; margin-top: 20px;">
+            <div id="chart1"
+              style="width: 700px; height: 400px; min-width: 600px; border: 1px solid #d1d5db;margin-left: auto;margin-right: auto;">
+            </div>
+            <div id="chart2"
+              style="width: 400px; height: 400px; min-width: 300px; border: 1px solid #d1d5db;margin-left: auto;margin-right: auto;">
+            </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- 患者评估模块 -->
+    <!-- 星光洞察增强模块 -->
     <section id="assessment" class="module">
-      <div class="module-header">
-        <h2>星光洞察</h2>
-        <div class="search-filters">
-          <select id="assessment-stage">
-            <option value="">按评估阶段筛选</option>
-            <option value="initial">初次评估</option>
-            <option value="progress">进展评估</option>
-            <option value="final">终期评估</option>
-          </select>
-          <select id="intervention-needs">
-            <option value="">按干预需求筛选</option>
-            <option value="communication">社交沟通</option>
-            <option value="behavior">行为干预</option>
-            <option value="sensory">感觉统合</option>
-          </select>
-          <select id="therapist">
-            <option value="">按治疗师筛选</option>
-            <option value="t001">王治疗师</option>
-            <option value="t002">张治疗师</option>
-            <option value="t003">李治疗师</option>
-          </select>
-          <input type="text" placeholder="搜索患者ID..." class="search-input" />
-          <button class="search-btn">搜索</button>
+      <div class="insights-container-enhanced">
+        <div class="insights-header-enhanced">
+          <div class="insights-title-section">
+            <h2 class="insights-title-enhanced">星光洞察</h2>
+            <p class="insights-subtitle-enhanced">基于AI的智能分析与预测系统</p>
+          </div>
+          <div class="insights-controls-enhanced">
+            <button class="insights-filter-btn active" onclick="filterInsights('all')">全部</button>
+            <button class="insights-filter-btn" onclick="filterInsights('behavior')">行为</button>
+            <button class="insights-filter-btn" onclick="filterInsights('progress')">进展</button>
+            <button class="insights-filter-btn" onclick="filterInsights('prediction')">预测</button>
+            <button class="insights-filter-btn" onclick="filterInsights('recommendation')">推荐</button>
+          </div>
         </div>
-      </div>
-
-      <div class="data-table">
-        <table>
-          <thead>
-            <tr>
-              <th>匿名ID</th>
-              <th>年龄阶段</th>
-              <th>最后评估日期</th>
-              <th>ABC量表评分趋势</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ASD-2025-001</td>
-              <td>儿童</td>
-              <td>2025-8-15</td>
-              <td>
-                <div class="mini-chart">
-                  <svg width="100" height="30" class="trend-chart">
-                    <polyline points="5,25 20,20 35,22 50,15 65,18 80,10 95,8" fill="none" stroke="#5B8FB9"
-                      stroke-width="2"></polyline>
-                  </svg>
-                </div>
-              </td>
-              <td>
-                <button class="btn btn-view" data-verify="true">查看</button>
-                <button class="btn btn-refer" data-verify="true">转介</button>
-              </td>
-            </tr>
-            <tr>
-              <td>ASD-2025-042</td>
-              <td>青少年</td>
-              <td>2025-10-02</td>
-              <td>
-                <div class="mini-chart">
-                  <svg width="100" height="30" class="trend-chart">
-                    <polyline points="5,20 20,18 35,15 50,12 65,10 80,8 95,5" fill="none" stroke="#5B8FB9"
-                      stroke-width="2"></polyline>
-                  </svg>
-                </div>
-              </td>
-              <td>
-                <button class="btn btn-view" data-verify="true">查看</button>
-                <button class="btn btn-refer" data-verify="true">转介</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        
+        <!-- 洞察卡片网格 -->
+        <div class="insights-grid-enhanced" id="insightsCardsContainer"></div>
+        
+        <!-- 趋势分析图表 -->
+        <div id="insightTrendsContainer"></div>
+        
+        <!-- 预测分析 -->
+        <div id="predictionContainer"></div>
+        
+        <!-- 智能推荐 -->
+        <div id="recommendationsContainer"></div>
       </div>
     </section>
 
@@ -360,7 +539,7 @@
         <div class="team-members">
           <div class="member-card">
             <div class="member-image">
-              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=王医生" alt="王医生" />
+              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=300&h=300&fit=crop&crop=face" alt="王医生" />
             </div>
             <h3>王医生</h3>
             <p>儿童精神科 / 主任医师</p>
@@ -374,7 +553,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=张治疗师" alt="张治疗师" />
+              <img src="https://images.unsplash.com/photo-1582750433449-648520640b3d?w=300&h=300&fit=crop&crop=face" alt="张治疗师" />
             </div>
             <h3>张治疗师</h3>
             <p>语言治疗 / 高级治疗师</p>
@@ -388,7 +567,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=李老师" alt="李老师" />
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="李老师" />
             </div>
             <h3>李老师</h3>
             <p>行为分析师 / BCBA认证</p>
@@ -402,7 +581,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=赵老师" alt="赵老师" />
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" alt="赵老师" />
             </div>
             <h3>赵老师</h3>
             <p>感统训练 / 高级治疗师</p>
@@ -416,7 +595,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=陈心理师" alt="陈心理师" />
+              <img src="https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=300&h=300&fit=crop&crop=face" alt="陈心理师" />
             </div>
             <h3>陈心理师</h3>
             <p>心理咨询 / 注册心理师</p>
@@ -430,7 +609,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://via.placeholder.com/300x300/5B8FB9/FFFFFF?text=杨老师" alt="杨老师" />
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face" alt="杨老师" />
             </div>
             <h3>杨老师</h3>
             <p>特殊教育 / 高级教师</p>
@@ -450,25 +629,581 @@
     <section id="intervention" class="module">
       <div class="module-header">
         <h2>星光引路</h2>
+        <p class="module-subtitle">科学干预方案，点亮成长之路</p>
       </div>
-      <div class="intervention-content">
-        <div class="intervention-types">
-          <div class="intervention-card">
-            <h3>ABA行为干预</h3>
-            <p>
-              应用行为分析疗法，帮助改善自闭症儿童的社交、沟通和行为能力。
-            </p>
-            <button class="btn">查看详情</button>
+      <div class="intervention-container">
+        <!-- 干预方案导航 -->
+        <div class="intervention-nav">
+          <div class="nav-pills">
+            <button class="pill-btn active" data-intervention="behavioral">行为干预</button>
+            <button class="pill-btn" data-intervention="developmental">发展训练</button>
+            <button class="pill-btn" data-intervention="social">社交技能</button>
+            <button class="pill-btn" data-intervention="communication">沟通训练</button>
+            <button class="pill-btn" data-intervention="sensory">感觉统合</button>
           </div>
-          <div class="intervention-card">
-            <h3>感觉统合训练</h3>
-            <p>通过感觉刺激和运动训练，帮助改善感觉处理能力和身体协调性。</p>
-            <button class="btn">查看详情</button>
+          <div class="intervention-filters">
+            <select class="age-filter">
+              <option value="">选择年龄段</option>
+              <option value="0-3">0-3岁</option>
+              <option value="3-6">3-6岁</option>
+              <option value="6-12">6-12岁</option>
+              <option value="12+">12岁以上</option>
+            </select>
+            <select class="severity-filter">
+              <option value="">选择严重程度</option>
+              <option value="mild">轻度</option>
+              <option value="moderate">中度</option>
+              <option value="severe">重度</option>
+            </select>
           </div>
-          <div class="intervention-card">
-            <h3>社交技能培训</h3>
-            <p>针对性训练社交互动、情绪识别和沟通表达能力。</p>
-            <button class="btn">查看详情</button>
+        </div>
+
+        <!-- 干预方案内容区域 -->
+        <div class="intervention-content-area">
+          <!-- 行为干预标签页 -->
+          <div class="intervention-tab active" id="behavioral">
+            <div class="intervention-grid">
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">🎯</div>
+                  <div class="card-badge">循证有效</div>
+                </div>
+                <h3>ABA应用行为分析</h3>
+                <p>基于行为学原理，通过正向强化和行为塑造技术，系统性改善目标行为。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>个体化行为计划</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>数据驱动决策</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>泛化训练</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">2-12岁</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">训练强度：</span>
+                    <span class="meta-value">25-40小时/周</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                  </div>
+                  <span class="progress-text">85% 家长满意度</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">🌟</div>
+                  <div class="card-badge">推荐</div>
+                </div>
+                <h3>正向行为支持(PBS)</h3>
+                <p>关注行为背后的功能，通过环境调整和能力建设来预防和减少问题行为。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>功能性行为评估</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>预防性策略</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>生活技能培养</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">全年龄段</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">训练强度：</span>
+                    <span class="meta-value">灵活安排</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 78%"></div>
+                  </div>
+                  <span class="progress-text">78% 行为改善率</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 行为干预工具包 -->
+            <div class="intervention-toolkit">
+              <h3>🛠️ 行为干预工具包</h3>
+              <div class="toolkit-grid">
+                <div class="tool-item">
+                  <div class="tool-icon">📊</div>
+                  <h4>行为记录表</h4>
+                  <p>系统性记录行为发生的频率、持续时间和强度</p>
+                  <button class="tool-btn">下载模板</button>
+                </div>
+                <div class="tool-item">
+                  <div class="tool-icon">🎁</div>
+                  <h4>强化物清单</h4>
+                  <p>个性化强化物评估和选择指南</p>
+                  <button class="tool-btn">查看清单</button>
+                </div>
+                <div class="tool-item">
+                  <div class="tool-icon">📋</div>
+                  <h4>代币经济系统</h4>
+                  <p>建立有效的代币交换和奖励机制</p>
+                  <button class="tool-btn">获取方案</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 发展训练标签页 -->
+          <div class="intervention-tab" id="developmental">
+            <div class="intervention-grid">
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">🌱</div>
+                  <div class="card-badge">早期干预</div>
+                </div>
+                <h3>早期介入丹佛模式(ESDM)</h3>
+                <p>针对1-4岁儿童的综合性早期干预，融合ABA和发展心理学原理。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>自然情境教学</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>发展技能序列</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>家长参与训练</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">12-48个月</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">训练强度：</span>
+                    <span class="meta-value">20小时/周</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 92%"></div>
+                  </div>
+                  <span class="progress-text">92% 发展商数提升</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">🧩</div>
+                  <div class="card-badge">认知训练</div>
+                </div>
+                <h3>关键反应训练(PRT)</h3>
+                <p>通过关键领域干预，促进动机、自我管理等多重技能发展。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>动机激发策略</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>自我启动能力</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>多重线索反应</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">2-16岁</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">训练强度：</span>
+                    <span class="meta-value">15-25小时/周</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 87%"></div>
+                  </div>
+                  <span class="progress-text">87% 技能泛化成功</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 社交技能标签页 -->
+          <div class="intervention-tab" id="social">
+            <div class="intervention-grid">
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">👥</div>
+                  <div class="card-badge">循证有效</div>
+                </div>
+                <h3>社交故事训练</h3>
+                <p>通过个性化故事帮助理解社交情境，学习适当的社交行为。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>情境预演</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>视觉支持</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>个性化定制</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">3-16岁</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">训练形式：</span>
+                    <span class="meta-value">个别/小组</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 81%"></div>
+                  </div>
+                  <span class="progress-text">81% 社交技能改善</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">🎭</div>
+                  <div class="card-badge">角色扮演</div>
+                </div>
+                <h3>社交技能团体训练</h3>
+                <p>在结构化小组环境中练习社交互动、情绪识别和沟通技能。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>同伴互动</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>结构化活动</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>即时反馈</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">6-18岁</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">小组规模：</span>
+                    <span class="meta-value">3-6人</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 76%"></div>
+                  </div>
+                  <span class="progress-text">76% 同伴互动改善</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 沟通训练标签页 -->
+          <div class="intervention-tab" id="communication">
+            <div class="intervention-grid">
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">💬</div>
+                  <div class="card-badge">语言训练</div>
+                </div>
+                <h3>言语语言治疗</h3>
+                <p>改善语言表达、理解和社交沟通能力的综合性训练。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>发音清晰度训练</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>语言理解能力</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>社交语用技能</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">全年龄段</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">训练频率：</span>
+                    <span class="meta-value">2-3次/周</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 83%"></div>
+                  </div>
+                  <span class="progress-text">83% 沟通能力提升</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">🗣️</div>
+                  <div class="card-badge">AAC辅助</div>
+                </div>
+                <h3>替代性沟通系统</h3>
+                <p>为口语受限儿童提供图片交换、手势语言等替代沟通方式。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>PECS图片交换</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>手势语言训练</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>电子沟通设备</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">2岁以上</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">沟通方式：</span>
+                    <span class="meta-value">多模式</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 79%"></div>
+                  </div>
+                  <span class="progress-text">79% 沟通成功率</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 感觉统合标签页 -->
+          <div class="intervention-tab" id="sensory">
+            <div class="intervention-grid">
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">⚖️</div>
+                  <div class="card-badge">感觉调节</div>
+                </div>
+                <h3>感觉统合训练</h3>
+                <p>通过专业器材和活动，改善感觉处理和整合能力。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>前庭觉刺激</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>本体觉训练</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>触觉脱敏</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">2-12岁</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">训练频率：</span>
+                    <span class="meta-value">2-3次/周</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 86%"></div>
+                  </div>
+                  <span class="progress-text">86% 感觉调节改善</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+
+              <div class="intervention-card-enhanced">
+                <div class="card-header">
+                  <div class="card-icon">🏠</div>
+                  <div class="card-badge">环境适应</div>
+                </div>
+                <h3>感觉饮食计划</h3>
+                <p>制定个性化的感觉活动计划，帮助调节觉醒状态和行为表现。</p>
+                <div class="card-features">
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>个性化评估</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>日常活动整合</span>
+                  </div>
+                  <div class="feature-item">
+                    <span class="feature-icon">✓</span>
+                    <span>环境调整建议</span>
+                  </div>
+                </div>
+                <div class="card-meta">
+                  <div class="meta-item">
+                    <span class="meta-label">适用年龄：</span>
+                    <span class="meta-value">全年龄段</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-label">实施方式：</span>
+                    <span class="meta-value">日常融入</span>
+                  </div>
+                </div>
+                <div class="card-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 82%"></div>
+                  </div>
+                  <span class="progress-text">82% 行为状态改善</span>
+                </div>
+                <div class="card-actions">
+                  <button class="primary-btn">开始训练</button>
+                  <button class="secondary-btn">了解详情</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 个性化推荐区域 -->
+        <div class="personalized-recommendations">
+          <div class="recommendation-header">
+            <h3>🎯 个性化干预推荐</h3>
+            <p>基于孩子的评估结果和发展特点，为您推荐最适合的干预方案</p>
+          </div>
+          <div class="recommendation-cards">
+            <div class="recommendation-card">
+              <div class="rec-icon">📊</div>
+              <h4>智能匹配系统</h4>
+              <p>基于评估数据和最佳实践证据，智能推荐干预方案</p>
+              <button class="rec-btn">开始评估</button>
+            </div>
+            <div class="recommendation-card">
+              <div class="rec-icon">🎯</div>
+              <h4>目标设定助手</h4>
+              <p>帮助您制定SMART目标，确保干预目标具体可测量</p>
+              <button class="rec-btn">设定目标</button>
+            </div>
+            <div class="recommendation-card">
+              <div class="rec-icon">📈</div>
+              <h4>进展追踪系统</h4>
+              <p>实时监测干预效果，及时调整训练计划</p>
+              <button class="rec-btn">查看进展</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 成功案例展示 -->
+        <div class="success-stories">
+          <div class="stories-header">
+            <h3>成功案例分享</h3>
+            <p>真实的干预成功故事，给您信心和启发</p>
+          </div>
+          <div class="stories-carousel">
+            <div class="story-card">
+              <div class="story-avatar">
+              </div>
+              <div class="story-content">
+                <h4>小明的故事</h4>
+                <p>通过6个月的ABA训练，从几乎无语言到能够进行简单对话</p>
+                <div class="story-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%"></div>
+                  </div>
+                  <span>语言能力提升85%</span>
+                </div>
+              </div>
+            </div>
+            <div class="story-card">
+              <div class="story-avatar">
+              </div>
+              <div class="story-content">
+                <h4>小红的进步</h4>
+                <p>感觉统合训练帮助她克服了触觉防御，能够正常穿衣和洗澡</p>
+                <div class="story-progress">
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 92%"></div>
+                  </div>
+                  <span>感觉调节改善92%</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -478,9 +1213,260 @@
     <section id="knowledge" class="module">
       <div class="module-header">
         <h2>星光知识库</h2>
+        <p class="module-subtitle">专业知识资源，助力科学干预</p>
       </div>
-      <div class="knowledge-content" style="width: 100%;">
-        <div id="kechart" style="width: 1600px; height: 700px;">
+      <div class="knowledge-container">
+        <!-- 知识库导航 -->
+        <div class="knowledge-nav">
+          <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="basics">基础知识</button>
+            <button class="tab-btn" data-tab="intervention">干预方法</button>
+            <button class="tab-btn" data-tab="assessment">评估工具</button>
+            <button class="tab-btn" data-tab="resources">实用资源</button>
+            <button class="tab-btn" data-tab="research">最新研究</button>
+          </div>
+          <div class="knowledge-search">
+            <input type="text" placeholder="搜索知识库..." class="knowledge-search-input" />
+            <button class="knowledge-search-btn">🔍</button>
+          </div>
+        </div>
+
+        <!-- 知识库内容区域 -->
+        <div class="knowledge-content">
+          <!-- 基础知识标签页 -->
+          <div class="tab-content active" id="basics">
+            <div class="knowledge-grid">
+              <div class="knowledge-card">
+                <div class="card-icon">🧠</div>
+                <h3>自闭症谱系障碍概述</h3>
+                <p>了解ASD的基本概念、诊断标准和流行病学数据</p>
+                <div class="card-meta">
+                  <span class="difficulty">初级</span>
+                  <span class="read-time">5分钟</span>
+                </div>
+                <button class="card-btn">开始学习</button>
+              </div>
+
+              <div class="knowledge-card">
+                <div class="card-icon">🎯</div>
+                <h3>早期识别信号</h3>
+                <p>掌握婴幼儿期自闭症的早期预警信号和筛查要点</p>
+                <div class="card-meta">
+                  <span class="difficulty">初级</span>
+                  <span class="read-time">8分钟</span>
+                </div>
+                <button class="card-btn">开始学习</button>
+              </div>
+
+              <div class="knowledge-card">
+                <div class="card-icon">🧬</div>
+                <h3>病因与发病机制</h3>
+                <p>深入了解自闭症的遗传、环境和神经生物学因素</p>
+                <div class="card-meta">
+                  <span class="difficulty">中级</span>
+                  <span class="read-time">12分钟</span>
+                </div>
+                <button class="card-btn">开始学习</button>
+              </div>
+
+              <div class="knowledge-card">
+                <div class="card-icon">📊</div>
+                <h3>共患病管理</h3>
+                <p>学习自闭症常见共患病的识别和管理策略</p>
+                <div class="card-meta">
+                  <span class="difficulty">高级</span>
+                  <span class="read-time">15分钟</span>
+                </div>
+                <button class="card-btn">开始学习</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 干预方法标签页 -->
+          <div class="tab-content" id="intervention">
+            <div class="intervention-methods">
+              <div class="method-category">
+                <h3>循证干预方法</h3>
+                <div class="method-grid">
+                  <div class="method-card">
+                    <div class="method-header">
+                      <h4>ABA应用行为分析</h4>
+                      <span class="evidence-level">高证据等级</span>
+                    </div>
+                    <p>基于行为学原理，通过系统性干预改善目标行为</p>
+                    <div class="method-tags">
+                      <span class="tag">行为干预</span>
+                      <span class="tag">技能训练</span>
+                    </div>
+                    <button class="method-btn">详细了解</button>
+                  </div>
+
+                  <div class="method-card">
+                    <div class="method-header">
+                      <h4>早期介入丹佛模式</h4>
+                      <span class="evidence-level">高证据等级</span>
+                    </div>
+                    <p>针对1-4岁儿童的综合性早期干预方法</p>
+                    <div class="method-tags">
+                      <span class="tag">早期干预</span>
+                      <span class="tag">发展训练</span>
+                    </div>
+                    <button class="method-btn">详细了解</button>
+                  </div>
+
+                  <div class="method-card">
+                    <div class="method-header">
+                      <h4>关键反应训练</h4>
+                      <span class="evidence-level">中证据等级</span>
+                    </div>
+                    <p>通过关键领域干预促进广泛技能发展</p>
+                    <div class="method-tags">
+                      <span class="tag">动机</span>
+                      <span class="tag">自我管理</span>
+                    </div>
+                    <button class="method-btn">详细了解</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 评估工具标签页 -->
+          <div class="tab-content" id="assessment">
+            <div class="assessment-tools-grid">
+              <div class="tool-card">
+                <div class="tool-header">
+                  <h3>ADOS-2</h3>
+                  <span class="tool-type">金标准</span>
+                </div>
+                <p>自闭症诊断观察量表，标准化诊断工具</p>
+                <div class="tool-details">
+                  <div class="detail-item">
+                    <span class="label">适用年龄：</span>
+                    <span class="value">12个月-成人</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="label">评估时间：</span>
+                    <span class="value">30-60分钟</span>
+                  </div>
+                </div>
+                <button class="tool-btn">使用指南</button>
+              </div>
+
+              <div class="tool-card">
+                <div class="tool-header">
+                  <h3>ABC量表</h3>
+                  <span class="tool-type">行为评估</span>
+                </div>
+                <p>自闭症行为检查表，用于行为症状评估</p>
+                <div class="tool-details">
+                  <div class="detail-item">
+                    <span class="label">适用年龄：</span>
+                    <span class="value">18个月-35岁</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="label">评估时间：</span>
+                    <span class="value">15-20分钟</span>
+                  </div>
+                </div>
+                <button class="tool-btn">使用指南</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 实用资源标签页 -->
+          <div class="tab-content" id="resources">
+            <div class="resources-categories">
+              <div class="resource-category">
+                <h3>📚 推荐书籍</h3>
+                <div class="resource-list">
+                  <div class="resource-item">
+                    <div class="resource-icon">📖</div>
+                    <div class="resource-info">
+                      <h4>《自闭症儿童社交游戏训练》</h4>
+                      <p>Brooke Ingersoll 著</p>
+                      <span class="resource-type">专业书籍</span>
+                    </div>
+                  </div>
+                  <div class="resource-item">
+                    <div class="resource-icon">📖</div>
+                    <div class="resource-info">
+                      <h4>《自闭症谱系障碍家长指南》</h4>
+                      <p>中国自闭症研究中心</p>
+                      <span class="resource-type">家长指南</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="resource-category">
+                <h3>🌐 在线资源</h3>
+                <div class="resource-list">
+                  <div class="resource-item">
+                    <div class="resource-icon">🔗</div>
+                    <div class="resource-info">
+                      <h4>中国自闭症联盟</h4>
+                      <p>提供最新研究资讯和专业培训</p>
+                      <a href="#" class="resource-link">访问网站</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 最新研究标签页 -->
+          <div class="tab-content" id="research">
+            <div class="research-updates">
+              <div class="research-card">
+                <div class="research-header">
+                  <span class="research-date">2024年1月</span>
+                  <span class="research-tag">基因研究</span>
+                </div>
+                <h3>自闭症谱系障碍的遗传异质性研究新进展</h3>
+                <p>最新研究发现100多个与自闭症相关的基因变异，为精准诊断和治疗提供新方向...</p>
+                <div class="research-actions">
+                  <button class="research-btn">阅读摘要</button>
+                  <button class="research-btn secondary">收藏</button>
+                </div>
+              </div>
+
+              <div class="research-card">
+                <div class="research-header">
+                  <span class="research-date">2023年12月</span>
+                  <span class="research-tag">干预技术</span>
+                </div>
+                <h3>虚拟现实技术在自闭症社交训练中的应用</h3>
+                <p>系统综述了VR技术在改善自闭症儿童社交技能方面的有效性和可行性...</p>
+                <div class="research-actions">
+                  <button class="research-btn">阅读摘要</button>
+                  <button class="research-btn secondary">收藏</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 知识统计图表 -->
+        <div class="knowledge-stats">
+          <div class="stats-card">
+            <h3>知识库使用统计</h3>
+            <div id="knowledgeChart" style="width: 100%; height: 300px;"></div>
+          </div>
+          <div class="stats-summary">
+            <div class="summary-item">
+              <div class="summary-number">1,247</div>
+              <div class="summary-label">总访问次数</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-number">89%</div>
+              <div class="summary-label">用户满意度</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-number">156</div>
+              <div class="summary-label">收藏资源数</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -489,42 +1475,86 @@
     <section id="appointment" class="module">
       <div class="module-header">
         <h2>星光有约</h2>
+        <p class="module-subtitle">便捷预约，专业服务</p>
       </div>
-      <div class="appointment-content">
-        <div class="appointment-form">
-          <div class="form-group">
-            <label>预约服务类型：</label>
-            <select>
-              <option>初诊评估</option>
-              <option>随访复诊</option>
-              <option>家长咨询</option>
-              <option>团体训练</option>
-            </select>
+      <div class="appointment-container">
+        <div class="appointment-simple">
+          <div class="appointment-header">
+            <h3>在线预约</h3>
+            <p>请填写以下信息，我们将在24小时内与您联系确认</p>
           </div>
-          <div class="form-group">
-            <label>期望日期：</label>
-            <input type="date" />
-          </div>
-          <div class="form-group">
-            <label>期望时间段：</label>
-            <select>
-              <option>上午 (9:00-12:00)</option>
-              <option>下午 (14:00-17:00)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>简要说明需求：</label>
-            <textarea placeholder="请简要描述孩子的情况和您的需求..."></textarea>
-          </div>
-          <button class="btn">提交预约</button>
+          
+          <form class="appointment-form-simple">
+            <div class="form-group-simple">
+              <label for="serviceType">服务类型</label>
+              <select name="serviceType" id="serviceType" required>
+                <option value="">请选择服务类型</option>
+                <option value="initial-assessment">初诊评估</option>
+                <option value="follow-up">随访复诊</option>
+                <option value="parent-consultation">家长咨询</option>
+                <option value="group-training">团体训练</option>
+                <option value="individual-therapy">个别治疗</option>
+                <option value="sensory-training">感觉统合训练</option>
+              </select>
+            </div>
+            
+            <div class="form-group-simple">
+              <label for="preferredDate">期望日期</label>
+              <input type="date" name="preferredDate" id="preferredDate" required />
+            </div>
+            
+            <div class="form-group-simple">
+              <label for="timeSlot">时间段</label>
+              <select name="timeSlot" id="timeSlot" required>
+                <option value="">请选择时间段</option>
+                <option value="morning">上午 (9:00-12:00)</option>
+                <option value="afternoon">下午 (14:00-17:00)</option>
+                <option value="evening">晚上 (18:00-20:00)</option>
+              </select>
+            </div>
+            
+            <div class="form-group-simple">
+              <label for="contactName">联系人姓名</label>
+              <input type="text" name="contactName" id="contactName" placeholder="请输入您的姓名" required />
+            </div>
+            
+            <div class="form-group-simple">
+              <label for="contactPhone">联系电话</label>
+              <input type="tel" name="contactPhone" id="contactPhone" placeholder="请输入手机号码" required />
+            </div>
+            
+            <div class="form-group-simple form-group-full">
+              <label for="requirements">需求描述</label>
+              <textarea name="requirements" id="requirements" placeholder="请简要描述孩子的情况和您的需求（可选）" rows="3"></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn-simple">提交预约</button>
+          </form>
         </div>
-        <div class="appointment-notice">
-          <h3>预约须知</h3>
-          <ul>
-            <li>请提前3-5个工作日预约</li>
+        
+        <div class="appointment-info">
+          <div class="info-title">📋 预约须知</div>
+          <ul class="info-list">
+            <li>请提前3-5个工作日预约，确保有充足的时间安排</li>
             <li>首次评估需要准备儿童成长记录和既往医疗资料</li>
-            <li>如需取消预约，请提前24小时通知</li>
+            <li>如需取消或修改预约，请提前24小时通知我们</li>
+            <li>预约成功后，我们将在24小时内与您联系确认</li>
           </ul>
+          
+          <div class="quick-contact">
+            <div class="contact-item">
+              <span class="contact-icon">📞</span>
+              <span>咨询热线：400-123-4567</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">⏰</span>
+              <span>工作时间：周一至周五 9:00-18:00</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <span>邮箱：support@xingxin.com</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -534,13 +1564,64 @@
     <section id="assistant" class="module">
       <div class="module-header">
         <h2>星语助手</h2>
+        <p class="module-subtitle">AI智能助手，24小时陪伴支持</p>
       </div>
-      <div class="assistant-content">
-        <div class="chat-container">
-          <iframe src="http://localhost/chatbot/AXp5SRW7FtuyZFBB" style="width: 100%; height: 100%; min-height: 700px"
-            frameborder="0" allow="microphone">
-          </iframe>
+      
+      <!-- 清洁版本AI助手 -->
+      <div class="assistant-container minimized" id="assistantContainer">
+        <div class="assistant-main">
+          <div class="drag-handle"></div>
+          
+          <!-- 头部 -->
+          <div class="assistant-header">
+            <div>
+              <h3 class="assistant-title">星语助手</h3>
+              <p class="assistant-subtitle">专业自闭症支持AI伙伴</p>
+            </div>
+            <div class="assistant-header-actions">
+              <button class="header-btn minimize-btn" title="最小化">−</button>
+              <button class="header-btn close-btn" title="关闭">✕</button>
+            </div>
+          </div>
+          
+          <!-- 聊天区域 -->
+          <div class="assistant-chat">
+            <div class="chat-messages" id="chatMessages">
+              <!-- 消息将动态添加到这里 -->
+            </div>
+            
+            <!-- 快速功能 -->
+            <div class="quick-functions" id="quickFunctions">
+              <div class="quick-functions-title">快速功能</div>
+              <div class="quick-function-list">
+                <button class="quick-function-item">评估指导</button>
+                <button class="quick-function-item">干预建议</button>
+                <button class="quick-function-item">知识查询</button>
+                <button class="quick-function-item">紧急支持</button>
+                <button class="quick-function-item">进展跟踪</button>
+                <button class="quick-function-item">资源推荐</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 输入区域 -->
+          <div class="chat-input-area">
+            <div class="input-container">
+              <textarea 
+                class="chat-input" 
+                id="chatInput" 
+                placeholder="输入您的问题或需求..."
+                rows="1"
+              ></textarea>
+              <button class="send-btn" id="sendBtn" title="发送消息">
+                <span>➤</span>
+              </button>
+            </div>
+          </div>
         </div>
+        
+        <!-- 最小化状态 -->
+        <div class="minimized-icon">🤖</div>
       </div>
     </section>
 
@@ -571,9 +1652,7 @@
 
     <footer>
       <div class="footer-content">
-        <p>&copy; 2023 星心自闭症支持系统 - 版本 1.2.0</p>
-        <p>系统已通过HIPAA/GDPR合规认证</p>
-        <p><span id="session-timer">会话将在 15:00 后自动锁定</span></p>
+        <p>&copy; 星心自闭症支持系统</p>
       </div>
     </footer>
 
@@ -631,7 +1710,14 @@
     </script>
     <script src="./JS/animation.js"></script>
     <script src="./JS/echarts.js"></script>
-    <script src="./JS/AI.js" async></script>
+    <script src="./JS/header-enhanced.js"></script>
+    <script src="./JS/data-overview-enhanced.js"></script>
+    <script src="./JS/insights-enhanced.js"></script>
+    <script src="./JS/ai-assistant-clean.js"></script>
+    <script src="./JS/knowledge-enhanced.js"></script>
+    <script src="./JS/intervention-enhanced.js"></script>
+    <script src="./JS/intervention-floating.js"></script>
+    <script src="./JS/appointment-simple.js"></script>
 </body>
 
 </html>
