@@ -1,0 +1,278 @@
+/* 表情符号选择器样式 */
+.emoji-picker {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    padding: 16px;
+    display: none;
+    z-index: 1000;
+    max-width: 300px;
+    backdrop-filter: blur(10px);
+}
+
+.emoji-picker.active {
+    display: block;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.emoji-picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.emoji-picker-header span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #495057;
+}
+
+.emoji-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #6c757d;
+    padding: 4px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.emoji-close-btn:hover {
+    background: rgba(108, 117, 125, 0.1);
+    color: #495057;
+}
+
+.emoji-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.emoji-item {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+}
+
+.emoji-item:hover {
+    background: rgba(74, 144, 226, 0.1);
+    transform: scale(1.2);
+}
+
+.emoji-item:active {
+    transform: scale(1.1);
+}
+
+/* Toast通知样式 */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    color: #495057;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 10000;
+    transform: translateX(400px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 300px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast-success {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.toast-error {
+    background: linear-gradient(135deg, #f44336 0%, #da190b 100%);
+    color: white;
+    border-color: rgba(244, 67, 54, 0.3);
+}
+
+.toast-info {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    border-color: rgba(33, 150, 243, 0.3);
+}
+
+.toast-warning {
+    background: linear-gradient(135deg, #ff9800 0%, #e68900 100%);
+    color: white;
+    border-color: rgba(255, 152, 0, 0.3);
+}
+
+.toast::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.toast-success::before {
+    content: '✓';
+}
+
+.toast-error::before {
+    content: '✕';
+}
+
+.toast-info::before {
+    content: 'ℹ';
+}
+
+.toast-warning::before {
+    content: '⚠';
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .emoji-picker {
+        background: #374151;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #e2e8f0;
+    }
+    
+    .emoji-picker-header {
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .emoji-picker-header span {
+        color: #e2e8f0;
+    }
+    
+    .emoji-close-btn {
+        color: #a0aec0;
+    }
+    
+    .emoji-close-btn:hover {
+        color: #e2e8f0;
+        background: rgba(160, 174, 192, 0.1);
+    }
+    
+    .emoji-item:hover {
+        background: rgba(74, 144, 226, 0.2);
+    }
+    
+    .toast {
+        background: #374151;
+        color: #e2e8f0;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .toast-success {
+        background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    }
+    
+    .toast-error {
+        background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    }
+    
+    .toast-info {
+        background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    }
+    
+    .toast-warning {
+        background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .emoji-picker {
+        max-width: 280px;
+        padding: 12px;
+    }
+    
+    .emoji-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+    }
+    
+    .emoji-item {
+        padding: 6px;
+        font-size: 1.3rem;
+        min-height: 32px;
+    }
+    
+    .toast {
+        right: 10px;
+        top: 10px;
+        left: 10px;
+        max-width: none;
+        font-size: 0.85rem;
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .emoji-picker {
+        max-width: 260px;
+        padding: 10px;
+    }
+    
+    .emoji-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+    }
+    
+    .emoji-item {
+        padding: 4px;
+        font-size: 1.2rem;
+        min-height: 28px;
+    }
+    
+    .toast {
+        font-size: 0.8rem;
+        padding: 10px 14px;
+    }
+}
+
+/* 动画效果 */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}

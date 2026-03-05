@@ -1,0 +1,324 @@
+/* 导航栏溢出滚动和成员图片优化 */
+
+/* 导航列表溢出滚动优化 */
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+    margin-top: 8px;
+    overflow: hidden; /* 防止溢出 */
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 4px;
+    align-items: center;
+    overflow-x: auto; /* 启用水平滚动 */
+    overflow-y: hidden; /* 禁止垂直滚动 */
+    scrollbar-width: thin; /* Firefox 滚动条样式 */
+    scrollbar-color: rgba(74, 144, 226, 0.3) transparent; /* Firefox 滚动条颜色 */
+    max-width: 100%; /* 限制最大宽度 */
+    padding-bottom: 8px; /* 为滚动条预留空间 */
+    -webkit-overflow-scrolling: touch; /* iOS 平滑滚动 */
+}
+
+/* Webkit 浏览器滚动条样式 */
+.nav-list::-webkit-scrollbar {
+    height: 4px; /* 水平滚动条高度 */
+}
+
+.nav-list::-webkit-scrollbar-track {
+    background: transparent; /* 轨道背景透明 */
+    border-radius: 2px;
+}
+
+.nav-list::-webkit-scrollbar-thumb {
+    background: rgba(74, 144, 226, 0.3); /* 滚动条颜色 */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.nav-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(74, 144, 226, 0.5); /* 悬停时颜色加深 */
+}
+
+/* 导航项优化 */
+.nav-item {
+    position: relative;
+    flex-shrink: 0; /* 防止导航项被压缩 */
+    min-width: fit-content; /* 根据内容自适应宽度 */
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #495057;
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    min-width: 65px;
+    text-align: center;
+    background: transparent;
+    border: 2px solid transparent;
+    white-space: nowrap; /* 防止文本换行 */
+}
+
+/* 成员图片尺寸优化 */
+.team-members {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* 允许换行 */
+    gap: 24px; /* 增加卡片间距 */
+    justify-content: center; /* 居中对齐 */
+    padding: 0 20px; /* 添加内边距 */
+}
+
+.member-card {
+    background-color: white;
+    border-radius: 16px; /* 增加圆角 */
+    padding: 24px; /* 增加内边距 */
+    margin-bottom: 0; /* 移除底部边距，使用gap代替 */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex: 0 1 calc(33.333% - 16px); /* 三列布局，考虑间距 */
+    max-width: 380px; /* 限制最大宽度 */
+    min-width: 280px; /* 限制最小宽度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.member-card:hover {
+    transform: translateY(-8px) scale(1.02); /* 增强悬停效果 */
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+
+.member-image {
+    width: 160px; /* 固定宽度 */
+    height: 160px; /* 固定高度，确保正方形 */
+    overflow: hidden;
+    border-radius: 50%; /* 圆形图片 */
+    margin-bottom: 20px; /* 增加底部边距 */
+    position: relative; /* 为伪元素定位 */
+    border: 4px solid rgba(74, 144, 226, 0.1); /* 添加边框 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.member-card:hover .member-image {
+    border-color: rgba(74, 144, 226, 0.3); /* 悬停时边框颜色加深 */
+    transform: scale(1.05); /* 图片容器轻微放大 */
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 保持图片比例，填充容器 */
+    object-position: center; /* 图片居中 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block; /* 移除图片底部间隙 */
+}
+
+.member-card:hover .member-image img {
+    transform: scale(1.1); /* 图片放大效果 */
+}
+
+/* 成员信息优化 */
+.member-card h3 {
+    font-size: 1.2rem; /* 增大姓名字体 */
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.member-card p {
+    margin: 4px 0;
+    line-height: 1.4;
+}
+
+.member-card p:not(.member-description):not(.member-qualification) {
+    font-size: 0.9rem;
+    color: #4A90E2;
+    font-weight: 500;
+}
+
+.member-description {
+    margin: 16px 0;
+    font-size: 0.85rem;
+    color: #6c757d;
+    line-height: 1.6;
+    flex-grow: 1; /* 占据剩余空间 */
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* 限制显示行数 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.member-qualification {
+    margin-top: 16px;
+    font-size: 0.75rem;
+    color: #adb5bd;
+    line-height: 1.5;
+    background: rgba(0, 0, 0, 0.02);
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(74, 144, 226, 0.3);
+}
+
+/* 响应式布局优化 */
+@media (max-width: 1200px) {
+    .member-card {
+        flex: 0 1 calc(50% - 12px); /* 两列布局 */
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-members {
+        gap: 16px;
+        padding: 0 16px;
+    }
+    
+    .member-card {
+        flex: 0 1 100%; /* 单列布局 */
+        max-width: 100%;
+        min-width: auto;
+        padding: 20px;
+    }
+    
+    .member-image {
+        width: 140px;
+        height: 140px;
+    }
+    
+    .member-description {
+        -webkit-line-clamp: 3; /* 移动端减少显示行数 */
+    }
+}
+
+@media (max-width: 480px) {
+    .team-members {
+        padding: 0 12px;
+        gap: 12px;
+    }
+    
+    .member-card {
+        padding: 16px;
+    }
+    
+    .member-image {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 16px;
+    }
+    
+    .member-card h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* 头部导航响应式优化 */
+@media (max-width: 1024px) {
+    .main-nav {
+        margin-top: 6px; /* 稍小一点的偏移 */
+    }
+    
+    .nav-list {
+        gap: 2px; /* 减小间距 */
+        padding-bottom: 6px; /* 减小底部内边距 */
+    }
+    
+    .nav-link {
+        padding: 8px 12px; /* 减小内边距 */
+        font-size: 0.75rem; /* 减小字体 */
+        min-width: 55px; /* 减小最小宽度 */
+    }
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        display: none; /* 移动端隐藏主导航 */
+    }
+    
+    .header-container {
+        gap: 12px; /* 减小头部间距 */
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .nav-list::-webkit-scrollbar-thumb {
+        background: rgba(144, 205, 244, 0.4); /* 深色模式滚动条颜色 */
+    }
+    
+    .nav-list::-webkit-scrollbar-thumb:hover {
+        background: rgba(144, 205, 244, 0.6);
+    }
+    
+    .member-card {
+        background: #374151; /* 深色背景 */
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    
+    .member-card:hover {
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+    }
+    
+    .member-image {
+        border-color: rgba(144, 205, 244, 0.2); /* 深色模式边框 */
+    }
+    
+    .member-card:hover .member-image {
+        border-color: rgba(144, 205, 244, 0.4);
+    }
+    
+    .member-card h3 {
+        color: #e2e8f0; /* 浅色文字 */
+    }
+    
+    .member-description {
+        color: #a0aec0;
+    }
+    
+    .member-qualification {
+        background: rgba(255, 255, 255, 0.05);
+        color: #cbd5e0;
+        border-left-color: rgba(144, 205, 244, 0.3);
+    }
+}
+
+/* 动画效果 */
+@keyframes memberCardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.member-card {
+    animation: memberCardAppear 0.6s ease forwards;
+}
+
+.member-card:nth-child(1) { animation-delay: 0.1s; }
+.member-card:nth-child(2) { animation-delay: 0.2s; }
+.member-card:nth-child(3) { animation-delay: 0.3s; }
+.member-card:nth-child(4) { animation-delay: 0.4s; }
+.member-card:nth-child(5) { animation-delay: 0.5s; }
+.member-card:nth-child(6) { animation-delay: 0.6s; }
