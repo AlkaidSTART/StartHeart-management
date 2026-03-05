@@ -25,8 +25,8 @@
   <link rel="stylesheet" href="./CSS/knowledge-floating-modal.css" />
   <link rel="stylesheet" href="./CSS/intervention-enhanced.css" />
   <link rel="stylesheet" href="./CSS/intervention-floating.css" />
-  <link rel="stylesheet" href="./CSS/ai-assistant-dialog-enhanced.css" />
-  <link rel="stylesheet" href="./CSS/ai-assistant-dialog-components.css" />
+  <link rel="stylesheet" href="./CSS/uify-iframe-enhanced-v2.css" />
+  <link rel="stylesheet" href="./CSS/uify-notification-system.css" />
   <link rel="stylesheet" href="./CSS/appointment-simple.css" />
   
   <!-- 异步加载第三方库 -->
@@ -1562,107 +1562,78 @@
         <p class="module-subtitle">AI智能助手，24小时陪伴支持</p>
       </div>
       
-      <!-- 增强版AI助手对话框 -->
-      <div class="assistant-container minimized" id="assistantContainer">
-        <div class="chat-dialog-container">
-          <!-- 对话框头部 -->
-          <div class="chat-dialog-header">
-            <div class="chat-dialog-title">
-              🤖 星语助手
-              <div class="chat-dialog-subtitle">专业自闭症支持AI伙伴</div>
-            </div>
-            <div class="dialog-status">
-              <div class="status-indicator"></div>
-              <span class="status-text">在线</span>
-            </div>
-            <div class="dialog-header-actions">
-              <button class="dialog-header-btn minimize-btn" title="最小化">−</button>
-              <button class="dialog-header-btn close-btn" title="关闭">✕</button>
+      <!-- Uify iframe 集成 - 现代化UI -->
+      <div class="uify-container" id="uifyContainer">
+        <!-- Uify头部 -->
+        <!-- <div class="uify-header">
+          <div class="uify-title-section">
+            <div class="uify-avatar">🤖</div>
+            <div class="uify-title-content">
+              <h2>星语助手</h2>
+              <p class="uify-subtitle">专业自闭症支持AI伙伴</p>
             </div>
           </div>
-
-          <!-- 对话框工具栏 -->
-          <div class="chat-dialog-toolbar">
-            <div class="toolbar-left">
-              <button class="toolbar-btn" id="clearChatBtn" title="清空对话">
-                🗑️ 清空
-              </button>
-              <button class="toolbar-btn" id="exportChatBtn" title="导出对话">
-                📥 导出
-              </button>
-            </div>
-            <div class="toolbar-right">
-              <button class="toolbar-btn" id="voiceHistoryBtn" title="语音历史">
-                🎤 语音
-              </button>
-              <button class="toolbar-btn" id="settingsBtn" title="设置">
-                ⚙️ 设置
-              </button>
-            </div>
+          <div class="uify-status" id="uifyConnectionStatus">
+            <div class="uify-status-indicator"></div>
+            <span>连接中...</span>
           </div>
+          <div class="uify-header-actions">
+            <button class="uify-header-btn minimize-btn" title="最小化">−</button>
+            <button class="uify-header-btn close-btn" title="关闭">✕</button>
+          </div>
+        </div> -->
 
-          <!-- 对话框内容区域 -->
-          <div class="chat-dialog-content">
-            <!-- 消息区域 -->
-            <div class="chat-messages-enhanced" id="chatMessages">
-              <!-- 消息将动态添加到这里 -->
-            </div>
+        
 
-            <!-- 快速回复区域 -->
-            <div class="quick-reply-area" id="quickReplyArea">
-              <div class="quick-reply-title">💡 快速回复</div>
-              <div class="quick-reply-list">
-                <button class="quick-reply-item">谢谢您的回复</button>
-                <button class="quick-reply-item">我需要更多信息</button>
-                <button class="quick-reply-item">这很有帮助</button>
-                <button class="quick-reply-item">我还有其他问题</button>
-                <button class="quick-reply-item">请给我具体建议</button>
-                <button class="quick-reply-item">我想了解评估流程</button>
+        <!-- Uify内容区域 -->
+        <div class="uify-content">
+          <!-- 加载状态 -->
+          <div class="uify-loading" id="uifyLoading">
+            <div class="uify-loading-content">
+              <div class="uify-loading-icon">🤖</div>
+              <div class="uify-loading-spinner"></div>
+              <div class="uify-loading-text">正在加载星语助手...</div>
+              <div class="uify-loading-subtext">请稍候，正在建立连接</div>
+              <div class="uify-loading-progress">
+                <div class="uify-loading-progress-bar"></div>
               </div>
             </div>
           </div>
 
-          <!-- 输入区域 -->
-          <div class="chat-input-area-enhanced">
-            <div class="input-container-enhanced">
-              <!-- 输入操作按钮 -->
-              <div class="input-actions">
-                <button class="input-action-btn" id="voiceBtn" title="语音输入">🎤</button>
-                <button class="input-action-btn" id="emojiBtn" title="表情符号">�</button>
-                <button class="input-action-btn" id="fileBtn" title="上传文件">📎</button>
-              </div>
-              
-              <!-- 输入框 -->
-              <textarea 
-                class="chat-input-enhanced" 
-                id="chatInput" 
-                placeholder="💬 请输入您的问题，如：什么是自闭症？如何早期识别？ABA干预怎么做？"
-                rows="1"
-              ></textarea>
-              
-              <!-- 发送按钮 -->
-              <button class="send-btn-enhanced" id="sendBtn" title="发送消息">
-                <span>➤</span>
-              </button>
-              
-              <!-- 输入建议 -->
-              <div class="input-suggestions" id="inputSuggestions"></div>
+          <!-- 错误状态 -->
+          <div class="uify-error" id="uifyError" style="display: none;">
+            <div class="uify-error-content">
+              <div class="uify-error-icon">😔</div>
+              <div class="uify-error-title">连接失败</div>
+              <div class="uify-error-message">无法连接到星语助手服务，请检查网络连接后重试。</div>
+              <button class="uify-retry-btn">重新连接</button>
             </div>
-            
-            <!-- 语音输入指示器 -->
-            <div class="voice-input-indicator" id="voiceInputIndicator">
-              <span class="voice-icon">🎤</span>
-              <span class="voice-text">正在听取语音输入...</span>
-            </div>
-            
-            <!-- 表情符号选择器 -->
-            <div class="emoji-picker" id="emojiPicker"></div>
+          </div>
+
+          <!-- Uify iframe -->
+          <div class="uify-iframe-container">
+            <div class="uify-iframe-decoration"></div>
+            <iframe 
+              id="uifyIframe"
+              class="uify-iframe"
+              src="https://udify.app/chatbot/EmUprlFna2N9LIv7"
+              style="width: 100%; height: 100%; min-height: 600px;"
+              frameborder="0"
+              allow="microphone"
+              title=""
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-top-navigation-by-user-activation"
+            >
+            </iframe>
           </div>
         </div>
-        
-        <!-- 最小化状态 -->
-        <div class="minimized-icon-enhanced">🤖</div>
       </div>
+
+      <!-- 最小化状态 -->
+      <div class="uify-minimized" id="uifyMinimized" style="display: none;">
+        <span class="uify-minimized-icon">🤖</span>
+        <span class="notification-badge" style="display: none;">0</span>
+      </div>
+    </section>
     </section>
 
     <div id="verification-modal" class="modal">
@@ -1753,7 +1724,7 @@
     <script src="./JS/header-nav-optimized.js"></script>
     <script src="./JS/data-overview-enhanced.js"></script>
     <script src="./JS/insights-enhanced.js"></script>
-    <script src="./JS/ai-assistant-dialog-enhanced.js"></script>
+    <script src="./JS/uify-iframe-enhanced-manager.js"></script>
     <script src="./JS/knowledge-enhanced.js"></script>
     <script src="./JS/intervention-enhanced.js"></script>
     <script src="./JS/intervention-floating.js"></script>
