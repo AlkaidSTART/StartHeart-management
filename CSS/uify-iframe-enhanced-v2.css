@@ -1,0 +1,648 @@
+/* Uify iframe 区域优化 - 现代化设计 */
+
+/* iframe容器 - 玻璃拟态增强版 */
+.uify-iframe-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 20px 20px;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+        rgba(248, 249, 250, 0.8) 0%, 
+        rgba(255, 255, 255, 0.95) 100%);
+    box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(15px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.uify-iframe-container:hover {
+    box-shadow: inset 0 2px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+/* iframe样式 - 现代化设计 */
+.uify-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0 0 20px 20px;
+    background: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.uify-iframe.loading {
+    opacity: 0.6;
+    transform: scale(0.98);
+}
+
+.uify-iframe.loaded {
+    opacity: 1;
+    transform: scale(1);
+    animation: iframeFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* iframe装饰边框 */
+.uify-iframe-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0 0 20px 20px;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.uify-iframe-decoration::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg, 
+        rgba(74, 144, 226, 0.3) 0%, 
+        rgba(80, 200, 120, 0.3) 50%,
+        rgba(102, 126, 234, 0.3) 100%);
+    border-radius: 0 0 22px 22px;
+    z-index: -1;
+    animation: decorationGlow 4s ease-in-out infinite alternate;
+}
+
+.uify-iframe-decoration::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 100%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* 加载状态增强 */
+.uify-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95) 0%, 
+        rgba(248, 249, 250, 0.98) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    border-radius: 0 0 20px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.uify-loading-content {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    max-width: 400px;
+    width: 90%;
+}
+
+.uify-loading-spinner {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin: 0 auto 24px;
+}
+
+.uify-loading-spinner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 4px solid rgba(74, 144, 226, 0.1);
+    border-top: 4px solid #4A90E2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.uify-loading-spinner::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 3px solid rgba(80, 200, 120, 0.2);
+    border-top: 3px solid #50C878;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite reverse;
+}
+
+.uify-loading-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    animation: pulse 2s ease-in-out infinite;
+    background: linear-gradient(135deg, #4A90E2 0%, #50C878 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.uify-loading-text {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #2c3e50 0%, #4A90E2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.uify-loading-subtext {
+    font-size: 1rem;
+    color: #6c757d;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.uify-loading-progress {
+    width: 100%;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.uify-loading-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4A90E2 0%, #50C878 100%);
+    border-radius: 3px;
+    animation: loadingProgress 2s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+.uify-loading-progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: progressShine 1.5s ease-in-out infinite;
+}
+
+/* 连接状态指示器增强 */
+.uify-connection-status {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95) 0%, 
+        rgba(248, 249, 250, 0.98) 100%);
+    padding: 12px 16px;
+    border-radius: 24px;
+    font-size: 0.85rem;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+}
+
+.uify-connection-status:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.uify-connection-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+.uify-connection-indicator::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.3;
+    animation: pulseRing 2s infinite;
+}
+
+.uify-connection-status.connected .uify-connection-indicator {
+    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+}
+
+.uify-connection-status.connecting .uify-connection-indicator {
+    background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%);
+    animation: pulse 1s infinite, spin 2s linear infinite;
+}
+
+.uify-connection-status.disconnected .uify-connection-indicator {
+    background: linear-gradient(135deg, #f44336 0%, #ff5722 100%);
+    animation: none;
+}
+
+.uify-connection-status.disconnected .uify-connection-indicator::before {
+    animation: none;
+}
+
+/* 错误状态增强 */
+.uify-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.98) 0%, 
+        rgba(248, 249, 250, 0.99) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    text-align: center;
+    padding: 40px;
+    border-radius: 0 0 20px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.uify-error-content {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    max-width: 450px;
+    width: 100%;
+}
+
+.uify-error-icon {
+    font-size: 4.5rem;
+    margin-bottom: 24px;
+    animation: shake 0.5s ease-in-out;
+    background: linear-gradient(135deg, #f44336 0%, #ff5722 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.uify-error-title {
+    font-size: 1.5rem;
+    color: #d32f2f;
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.uify-error-message {
+    font-size: 1.1rem;
+    color: #6c757d;
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+.uify-retry-btn {
+    background: linear-gradient(135deg, #4A90E2 0%, #50C878 100%);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.uify-retry-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.uify-retry-btn:hover::before {
+    left: 100%;
+}
+
+.uify-retry-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
+}
+
+.uify-retry-btn:active {
+    transform: translateY(-1px);
+}
+
+/* 动画关键帧 */
+@keyframes iframeFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes decorationGlow {
+    0% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes loadingProgress {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 70%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes progressShine {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .uify-iframe-container {
+        border-radius: 0 0 16px 16px;
+    }
+    
+    .uify-loading-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .uify-loading-spinner {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .uify-loading-icon {
+        font-size: 2.5rem;
+    }
+    
+    .uify-loading-text {
+        font-size: 1.1rem;
+    }
+    
+    .uify-loading-subtext {
+        font-size: 0.9rem;
+    }
+    
+    .uify-connection-status {
+        top: 15px;
+        right: 15px;
+        padding: 10px 14px;
+        font-size: 0.8rem;
+    }
+    
+    .uify-error-content {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .uify-error-icon {
+        font-size: 3.5rem;
+    }
+    
+    .uify-error-title {
+        font-size: 1.2rem;
+    }
+    
+    .uify-error-message {
+        font-size: 1rem;
+    }
+    
+    .uify-retry-btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .uify-iframe-container {
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .uify-loading-content {
+        padding: 24px 16px;
+        margin: 15px;
+    }
+    
+    .uify-loading-spinner {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .uify-loading-icon {
+        font-size: 2rem;
+    }
+    
+    .uify-loading-text {
+        font-size: 1rem;
+    }
+    
+    .uify-loading-subtext {
+        font-size: 0.85rem;
+    }
+    
+    .uify-connection-status {
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+    }
+    
+    .uify-error-content {
+        padding: 24px 16px;
+        margin: 15px;
+    }
+    
+    .uify-error-icon {
+        font-size: 3rem;
+    }
+    
+    .uify-error-title {
+        font-size: 1.1rem;
+    }
+    
+    .uify-error-message {
+        font-size: 0.9rem;
+    }
+    
+    .uify-retry-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+    .uify-iframe-container {
+        background: linear-gradient(135deg, 
+            rgba(26, 26, 26, 0.9) 0%, 
+            rgba(55, 65, 81, 0.95) 100%);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .uify-iframe-decoration::before {
+        background: linear-gradient(135deg, 
+            rgba(74, 144, 226, 0.2) 0%, 
+            rgba(80, 200, 120, 0.2) 50%,
+            rgba(102, 126, 234, 0.2) 100%);
+    }
+    
+    .uify-loading {
+        background: linear-gradient(135deg, 
+            rgba(26, 26, 26, 0.98) 0%, 
+            rgba(55, 65, 81, 0.99) 100%);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .uify-loading-content {
+        background: rgba(55, 65, 81, 0.9);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .uify-loading-text {
+        background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .uify-loading-subtext {
+        color: #a0aec0;
+    }
+    
+    .uify-connection-status {
+        background: linear-gradient(135deg, 
+            rgba(55, 65, 81, 0.95) 0%, 
+            rgba(75, 85, 99, 0.98) 100%);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #e2e8f0;
+    }
+    
+    .uify-error {
+        background: linear-gradient(135deg, 
+            rgba(26, 26, 26, 0.98) 0%, 
+            rgba(55, 65, 81, 0.99) 100%);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .uify-error-content {
+        background: rgba(55, 65, 81, 0.9);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .uify-error-title {
+        background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .uify-error-message {
+        color: #a0aec0;
+    }
+}
