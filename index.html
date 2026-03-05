@@ -18,13 +18,15 @@
   <link rel="stylesheet" href="./CSS/base.css" />
   <link rel="stylesheet" href="./CSS/header-nav-optimized.css" />
   <link rel="stylesheet" href="./CSS/data-overview-enhanced.css" />
+  <link rel="stylesheet" href="./CSS/nav-member-optimized.css" />
   <link rel="stylesheet" href="./CSS/insights-enhanced.css" />
   <link rel="stylesheet" href="./CSS/layout-clean.css" />
   <link rel="stylesheet" href="./CSS/knowledge-enhanced.css" />
   <link rel="stylesheet" href="./CSS/knowledge-floating-modal.css" />
   <link rel="stylesheet" href="./CSS/intervention-enhanced.css" />
   <link rel="stylesheet" href="./CSS/intervention-floating.css" />
-  <link rel="stylesheet" href="./CSS/ai-assistant-clean.css" />
+  <link rel="stylesheet" href="./CSS/ai-assistant-dialog-enhanced.css" />
+  <link rel="stylesheet" href="./CSS/ai-assistant-dialog-components.css" />
   <link rel="stylesheet" href="./CSS/appointment-simple.css" />
   
   <!-- 异步加载第三方库 -->
@@ -532,7 +534,7 @@
         <div class="team-members">
           <div class="member-card">
             <div class="member-image">
-              <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=300&h=300&fit=crop&crop=face" alt="王医生" />
+              <img src="https://pic.616pic.com/ys_bnew_img/00/52/28/U8TGM6DYNy.jpg" alt="王医生" />
             </div>
             <h3>王医生</h3>
             <p>儿童精神科 / 主任医师</p>
@@ -546,7 +548,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://images.unsplash.com/photo-1582750433449-648520640b3d?w=300&h=300&fit=crop&crop=face" alt="张治疗师" />
+              <img src="https://img.tukuppt.com/png_preview/02/98/27/iUFvM4yLNz.jpg!/fw/780" alt="张治疗师" />
             </div>
             <h3>张治疗师</h3>
             <p>语言治疗 / 高级治疗师</p>
@@ -560,7 +562,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face" alt="李老师" />
+              <img src="https://img.tukuppt.com/png_preview/02/98/27/eldhqJ95Jn.jpg!/fw/780" alt="李老师" />
             </div>
             <h3>李老师</h3>
             <p>行为分析师 / BCBA认证</p>
@@ -574,7 +576,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" alt="赵老师" />
+              <img src="https://img.tukuppt.com/png_preview/02/98/27/LaWFk1yDem.jpg!/fw/780" alt="赵老师" />
             </div>
             <h3>赵老师</h3>
             <p>感统训练 / 高级治疗师</p>
@@ -588,7 +590,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://images.unsplash.com/photo-1494790108755-2616b612b5bc?w=300&h=300&fit=crop&crop=face" alt="陈心理师" />
+              <img src="https://img.tukuppt.com/png_preview/02/98/27/J4g3PThIlO.jpg!/fw/780" alt="陈心理师" />
             </div>
             <h3>陈心理师</h3>
             <p>心理咨询 / 注册心理师</p>
@@ -602,7 +604,7 @@
           </div>
           <div class="member-card">
             <div class="member-image">
-              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face" alt="杨老师" />
+              <img src="https://img.tukuppt.com/png_preview/02/98/27/Z1JdyQIRfB.jpg!/fw/780" alt="杨老师" />
             </div>
             <h3>杨老师</h3>
             <p>特殊教育 / 高级教师</p>
@@ -1560,61 +1562,106 @@
         <p class="module-subtitle">AI智能助手，24小时陪伴支持</p>
       </div>
       
-      <!-- 清洁版本AI助手 -->
+      <!-- 增强版AI助手对话框 -->
       <div class="assistant-container minimized" id="assistantContainer">
-        <div class="assistant-main">
-          <div class="drag-handle"></div>
-          
-          <!-- 头部 -->
-          <div class="assistant-header">
-            <div>
-              <h3 class="assistant-title">星语助手</h3>
-              <p class="assistant-subtitle">专业自闭症支持AI伙伴</p>
+        <div class="chat-dialog-container">
+          <!-- 对话框头部 -->
+          <div class="chat-dialog-header">
+            <div class="chat-dialog-title">
+              🤖 星语助手
+              <div class="chat-dialog-subtitle">专业自闭症支持AI伙伴</div>
             </div>
-            <div class="assistant-header-actions">
-              <button class="header-btn minimize-btn" title="最小化">−</button>
-              <button class="header-btn close-btn" title="关闭">✕</button>
+            <div class="dialog-status">
+              <div class="status-indicator"></div>
+              <span class="status-text">在线</span>
+            </div>
+            <div class="dialog-header-actions">
+              <button class="dialog-header-btn minimize-btn" title="最小化">−</button>
+              <button class="dialog-header-btn close-btn" title="关闭">✕</button>
             </div>
           </div>
-          
-          <!-- 聊天区域 -->
-          <div class="assistant-chat">
-            <div class="chat-messages" id="chatMessages">
+
+          <!-- 对话框工具栏 -->
+          <div class="chat-dialog-toolbar">
+            <div class="toolbar-left">
+              <button class="toolbar-btn" id="clearChatBtn" title="清空对话">
+                🗑️ 清空
+              </button>
+              <button class="toolbar-btn" id="exportChatBtn" title="导出对话">
+                📥 导出
+              </button>
+            </div>
+            <div class="toolbar-right">
+              <button class="toolbar-btn" id="voiceHistoryBtn" title="语音历史">
+                🎤 语音
+              </button>
+              <button class="toolbar-btn" id="settingsBtn" title="设置">
+                ⚙️ 设置
+              </button>
+            </div>
+          </div>
+
+          <!-- 对话框内容区域 -->
+          <div class="chat-dialog-content">
+            <!-- 消息区域 -->
+            <div class="chat-messages-enhanced" id="chatMessages">
               <!-- 消息将动态添加到这里 -->
             </div>
-            
-            <!-- 快速功能 -->
-            <div class="quick-functions" id="quickFunctions">
-              <div class="quick-functions-title">快速功能</div>
-              <div class="quick-function-list">
-                <button class="quick-function-item">评估指导</button>
-                <button class="quick-function-item">干预建议</button>
-                <button class="quick-function-item">知识查询</button>
-                <button class="quick-function-item">紧急支持</button>
-                <button class="quick-function-item">进展跟踪</button>
-                <button class="quick-function-item">资源推荐</button>
+
+            <!-- 快速回复区域 -->
+            <div class="quick-reply-area" id="quickReplyArea">
+              <div class="quick-reply-title">💡 快速回复</div>
+              <div class="quick-reply-list">
+                <button class="quick-reply-item">谢谢您的回复</button>
+                <button class="quick-reply-item">我需要更多信息</button>
+                <button class="quick-reply-item">这很有帮助</button>
+                <button class="quick-reply-item">我还有其他问题</button>
+                <button class="quick-reply-item">请给我具体建议</button>
+                <button class="quick-reply-item">我想了解评估流程</button>
               </div>
             </div>
           </div>
-          
+
           <!-- 输入区域 -->
-          <div class="chat-input-area">
-            <div class="input-container">
+          <div class="chat-input-area-enhanced">
+            <div class="input-container-enhanced">
+              <!-- 输入操作按钮 -->
+              <div class="input-actions">
+                <button class="input-action-btn" id="voiceBtn" title="语音输入">🎤</button>
+                <button class="input-action-btn" id="emojiBtn" title="表情符号">�</button>
+                <button class="input-action-btn" id="fileBtn" title="上传文件">📎</button>
+              </div>
+              
+              <!-- 输入框 -->
               <textarea 
-                class="chat-input" 
+                class="chat-input-enhanced" 
                 id="chatInput" 
-                placeholder="输入您的问题或需求..."
+                placeholder="💬 请输入您的问题，如：什么是自闭症？如何早期识别？ABA干预怎么做？"
                 rows="1"
               ></textarea>
-              <button class="send-btn" id="sendBtn" title="发送消息">
+              
+              <!-- 发送按钮 -->
+              <button class="send-btn-enhanced" id="sendBtn" title="发送消息">
                 <span>➤</span>
               </button>
+              
+              <!-- 输入建议 -->
+              <div class="input-suggestions" id="inputSuggestions"></div>
             </div>
+            
+            <!-- 语音输入指示器 -->
+            <div class="voice-input-indicator" id="voiceInputIndicator">
+              <span class="voice-icon">🎤</span>
+              <span class="voice-text">正在听取语音输入...</span>
+            </div>
+            
+            <!-- 表情符号选择器 -->
+            <div class="emoji-picker" id="emojiPicker"></div>
           </div>
         </div>
         
         <!-- 最小化状态 -->
-        <div class="minimized-icon">🤖</div>
+        <div class="minimized-icon-enhanced">🤖</div>
       </div>
     </section>
 
@@ -1706,7 +1753,7 @@
     <script src="./JS/header-nav-optimized.js"></script>
     <script src="./JS/data-overview-enhanced.js"></script>
     <script src="./JS/insights-enhanced.js"></script>
-    <script src="./JS/ai-assistant-clean.js"></script>
+    <script src="./JS/ai-assistant-dialog-enhanced.js"></script>
     <script src="./JS/knowledge-enhanced.js"></script>
     <script src="./JS/intervention-enhanced.js"></script>
     <script src="./JS/intervention-floating.js"></script>
