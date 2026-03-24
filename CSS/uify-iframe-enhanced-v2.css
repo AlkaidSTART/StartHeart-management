@@ -257,7 +257,7 @@
 }
 
 .uify-connection-status.connected .uify-connection-indicator {
-    background: linear-gradient(135deg, #4CAF50 0%, #8BC34A 100%);
+    background: linear-gradient(135deg, #4CAF50 0%, #2CD4BF 100%);
 }
 
 .uify-connection-status.connecting .uify-connection-indicator {

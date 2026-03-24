@@ -13,7 +13,7 @@
 .typing-dots span {
     width: 8px;
     height: 8px;
-    background: #6B9FD5;
+    background: #3B71CA;
     border-radius: 50%;
     animation: typing 1.4s infinite ease-in-out;
 }
@@ -57,7 +57,7 @@
 }
 
 .suggestions-header {
-    color: #6B9FD5;
+    color: #3B71CA;
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 0.9rem;
@@ -71,18 +71,18 @@
 
 .suggestion-chip {
     background: white;
-    border: 2px solid #6B9FD5;
+    border: 2px solid #3B71CA;
     border-radius: 20px;
     padding: 8px 15px;
     cursor: pointer;
     font-size: 0.85rem;
-    color: #6B9FD5;
+    color: #3B71CA;
     transition: all 0.3s ease;
     font-weight: 500;
 }
 
 .suggestion-chip:hover {
-    background: #6B9FD5;
+    background: #3B71CA;
     color: white;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(107, 159, 213, 0.3);
@@ -94,7 +94,7 @@
 }
 
 .message-content strong {
-    color: #6B9FD5;
+    color: #3B71CA;
     font-weight: 600;
 }
 
@@ -184,12 +184,12 @@
 }
 
 #chatMessages::-webkit-scrollbar-thumb {
-    background: #6B9FD5;
+    background: #3B71CA;
     border-radius: 3px;
 }
 
 #chatMessages::-webkit-scrollbar-thumb:hover {
-    background: #5B8FB9;
+    background: #2F5BA1;
 }
 
 /* 输入框增强 */
@@ -198,7 +198,7 @@
 }
 
 #chatInput:focus {
-    border-color: #6B9FD5;
+    border-color: #3B71CA;
     box-shadow: 0 0 0 3px rgba(107, 159, 213, 0.1);
     transform: scale(1.02);
 }
@@ -279,7 +279,7 @@
 }
 
 .view-plan-btn {
-    background: #6B9FD5;
+    background: #3B71CA;
     color: white;
 }
 

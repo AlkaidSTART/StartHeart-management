@@ -126,6 +126,9 @@
     padding: 0;
     gap: 2px;
     align-items: center;
+    margin-top: 8px;
+    /* 向下移动导航 */
+    min-width: 0;
 }
 
 .nav-item {

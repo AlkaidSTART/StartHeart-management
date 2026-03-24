@@ -367,7 +367,7 @@
 }
 
 .tool-btn:hover {
-    background: #5B8FB9;
+    background: #2F5BA1;
     transform: translateY(-2px);
 }
 
@@ -546,7 +546,138 @@
     white-space: nowrap;
 }
 
-/* 响应式设计 */
+/* 家庭观察要点样式 */
+.observation-points {
+    margin-top: 30px;
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+.observation-header {
+    margin-bottom: 25px;
+}
+
+.observation-header h3 {
+    font-size: 1.3rem;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.observation-header p {
+    color: var(--light-text);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.observation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.observation-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    background: #fafafa;
+    transition: all 0.3s ease;
+    display: flex;
+    gap: 20px;
+}
+
+.observation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+    background: white;
+}
+
+.observation-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.observation-content {
+    flex: 1;
+}
+
+.observation-content h4 {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.observation-content p {
+    color: var(--light-text);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.observation-level {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.level-label {
+    font-size: 0.85rem;
+    color: var(--light-text);
+    min-width: 60px;
+}
+
+.level-bar {
+    flex: 1;
+    height: 8px;
+    background: var(--light-gray);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.level-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.level-value {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    min-width: 30px;
+}
+
+.observation-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.observation-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* 响应式样式 */
 @media (max-width: 768px) {
     .intervention-nav {
         flex-direction: column;
@@ -578,21 +709,13 @@
         grid-template-columns: 1fr;
     }
     
-    .stories-carousel {
+    /* 观察要点响应式 */
+    .observation-grid {
         grid-template-columns: 1fr;
     }
     
-    .story-card {
+    .observation-card {
         flex-direction: column;
         text-align: center;
-    }
-    
-    .story-progress {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .story-progress .progress-bar {
-        width: 100%;
     }
 }

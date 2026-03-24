@@ -153,19 +153,7 @@
     margin-bottom: 16px;
 }
 
-.insight-card-icon-enhanced {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--card-accent-color) 0%, rgba(var(--card-accent-color-rgb), 0.8) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    color: white;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(var(--card-accent-color-rgb), 0.3);
-}
+
 
 .insight-card-title-enhanced {
     font-size: 1.1rem;
@@ -293,21 +281,168 @@
     font-weight: 400;
 }
 
+/* 时间范围选择器 */
+.time-range-selector-enhanced {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.time-range-buttons-enhanced {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.time-range-btn-enhanced {
+    padding: 10px 24px;
+    border: 2px solid #e1e8ed;
+    background-color: white;
+    color: #667580;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.time-range-btn-enhanced:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.time-range-btn-enhanced.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 113, 202, 0.3);
+}
+
+/* 时间范围数据展示 */
+.time-range-data-enhanced {
+    margin-top: 20px;
+}
+
+.time-range-section-enhanced {
+    display: none;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+}
+
+.time-range-section-enhanced.active {
+    display: block;
+}
+
+.time-range-title-enhanced {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.time-range-content-enhanced {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 表现指标 */
+.performance-metrics-enhanced {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.performance-metric-enhanced {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s ease;
+}
+
+.performance-metric-enhanced:hover {
+    transform: translateY(-2px);
+}
+
+.metric-label-enhanced {
+    display: block;
+    font-size: 0.9rem;
+    color: #667580;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.metric-value-enhanced {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.metric-trend-enhanced {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.metric-trend-enhanced.up {
+    background-color: rgba(46, 204, 113, 0.1);
+    color: #2ecc71;
+}
+
+.metric-trend-enhanced.down {
+    background-color: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.metric-trend-enhanced.stable {
+    background-color: rgba(155, 89, 182, 0.1);
+    color: #9b59b6;
+}
+
+/* 指标详情 */
+.metric-details-enhanced {
+    padding: 20px;
+    background-color: var(--primary-light);
+    border-radius: 12px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.metric-details-enhanced p {
+    margin: 0;
+    color: #2c3e50;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
 /* 趋势图表区域 */
 .insight-trends-enhanced {
     background: white;
     border-radius: 12px;
-    padding: 20px;
+    padding: 0;
     margin-bottom: 20px;
     border: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
 }
 
 .trends-header-enhanced {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .trends-title-enhanced {
@@ -320,18 +455,26 @@
     gap: 8px;
 }
 
-.trends-title-enhanced::before {
-    content: '📈';
-    font-size: 1.2rem;
-}
+
 
 .trend-chart-container-enhanced {
-    height: 200px;
+    height: 500px;
+    min-height: 500px;
+    width: 100%;
     background: #fafbfc;
     border-radius: 8px;
-    padding: 12px;
+    padding: 0 !important;
     position: relative;
     overflow: hidden;
+    display: block;
+}
+
+#comprehensiveTrendChart {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 500px;
+    margin: 0 !important;
 }
 
 /* 预测卡片 */
