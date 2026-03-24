@@ -1,10 +1,48 @@
 // 简约预约服务功能
 document.addEventListener('DOMContentLoaded', function() {
     initializeSimpleAppointment();
+    initializeServiceTypeCards();
 });
 
+// 服务类型卡片选择功能
+function initializeServiceTypeCards() {
+    const serviceCards = document.querySelectorAll('.service-type-card');
+    const serviceTypeSelect = document.getElementById('serviceType');
+    
+    serviceCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // 移除其他卡片的激活状态
+            serviceCards.forEach(c => c.classList.remove('active'));
+            
+            // 添加当前卡片的激活状态
+            this.classList.add('active');
+            
+            // 同步更新下拉框
+            const serviceValue = this.getAttribute('data-service');
+            if (serviceTypeSelect) {
+                serviceTypeSelect.value = serviceValue;
+                // 触发验证
+                serviceTypeSelect.dispatchEvent(new Event('blur'));
+            }
+        });
+    });
+    
+    // 下拉框变化时同步更新卡片
+    if (serviceTypeSelect) {
+        serviceTypeSelect.addEventListener('change', function() {
+            const selectedValue = this.value;
+            serviceCards.forEach(card => {
+                card.classList.remove('active');
+                if (card.getAttribute('data-service') === selectedValue) {
+                    card.classList.add('active');
+                }
+            });
+        });
+    }
+}
+
 function initializeSimpleAppointment() {
-    const appointmentForm = document.querySelector('.appointment-form-simple');
+    const appointmentForm = document.getElementById('appointmentForm');
     if (!appointmentForm) return;
 
     const submitBtn = appointmentForm.querySelector('.submit-btn-simple');

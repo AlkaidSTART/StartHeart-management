@@ -1,5 +1,12 @@
 // 星光洞察增强功能 - 智能分析和预测
 document.addEventListener('DOMContentLoaded', function() {
+    // 检查ECharts是否加载成功
+    if (typeof echarts === 'undefined') {
+        console.error('ECharts未加载成功');
+    } else {
+        console.log('ECharts已加载，版本:', echarts.version);
+    }
+    
     initializeEnhancedInsights();
 });
 
@@ -16,10 +23,41 @@ function initializeEnhancedInsights() {
     // 初始化推荐系统
     initRecommendations();
     
+    // 初始化时间范围选择器
+    initTimeRangeSelector();
+    
+
+    
     // 添加交互功能
     addInsightInteractions();
     
     console.log('星光洞察增强功能初始化完成');
+}
+
+// 初始化时间范围选择器
+function initTimeRangeSelector() {
+    const buttons = document.querySelectorAll('.time-range-btn-enhanced');
+    const sections = document.querySelectorAll('.time-range-section-enhanced');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const timeRange = this.getAttribute('data-time-range');
+            
+            // 更新按钮状态
+            buttons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 更新显示内容
+            sections.forEach(section => section.classList.remove('active'));
+            const targetSection = document.getElementById(`${timeRange}Data`);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // 更新综合趋势图表
+            updateComprehensiveTrendChart(timeRange);
+        });
+    });
 }
 
 // 洞察数据
@@ -27,7 +65,6 @@ const insightsData = {
     behavior: {
         title: "行为模式分析",
         category: "行为分析",
-        icon: "🎯",
         confidence: 92,
         description: "基于过去6个月的数据分析，发现患者在社交互动方面有明显改善趋势。",
         metrics: [
@@ -41,7 +78,6 @@ const insightsData = {
     progress: {
         title: "干预效果评估",
         category: "效果评估",
-        icon: "📈",
         confidence: 88,
         description: "ABA干预方法在本月显示出最佳效果，建议继续加强该领域的投入。",
         metrics: [
@@ -55,7 +91,6 @@ const insightsData = {
     prediction: {
         title: "发展趋势预测",
         category: "智能预测",
-        icon: "🔮",
         confidence: 78,
         description: "根据当前干预进度和历史数据，预测下月社交技能将有显著提升。",
         metrics: [
@@ -69,7 +104,6 @@ const insightsData = {
     recommendation: {
         title: "个性化建议",
         category: "智能推荐",
-        icon: "💡",
         confidence: 85,
         description: "建议增加感觉统合训练频次，同时配合语言治疗以获得更好效果。",
         metrics: [
@@ -159,9 +193,6 @@ function initInsightCards() {
     const cardsHTML = Object.entries(insightsData).map(([key, data]) => `
         <div class="insight-card-enhanced ${key}" data-insight-type="${key}">
             <div class="insight-card-header-enhanced">
-                <div class="insight-card-icon-enhanced">
-                    ${data.icon}
-                </div>
                 <div class="insight-card-meta-enhanced">
                     <h3 class="insight-card-title-enhanced">${data.title}</h3>
                     <span class="insight-card-category-enhanced">${data.category}</span>
@@ -498,7 +529,7 @@ function showInsightDetails(insightType) {
     modal.innerHTML = `
         <div class="insight-detail-content">
             <div class="insight-detail-header">
-                <h2>${insight.icon} ${insight.title}</h2>
+                <h2>${insight.title}</h2>
                 <button class="close-btn" onclick="this.closest('.insight-detail-modal').remove()">✕</button>
             </div>
             <div class="insight-detail-body">
@@ -643,6 +674,12 @@ function showToast(message, type = 'info') {
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
+
+;
+
+
+
+
 
 // 导出函数供全局使用
 window.EnhancedInsights = {

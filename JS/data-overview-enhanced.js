@@ -58,30 +58,258 @@ function initMonthlyTrendChart() {
     const chartContainer = document.getElementById('monthlyTrendChart');
     if (!chartContainer) return;
 
-    // 创建简单的SVG图表
-    const svg = createSVGChart(chartContainer, {
-        width: '100%',
-        height: '100%',
-        viewBox: '0 0 800 300'
-    });
+    // 初始化ECharts实例
+    const chart = echarts.init(chartContainer);
 
-    // 绘制月度趋势
-    drawLineChart(svg, monthlyTrendData);
+    // 设置图表配置项
+    const option = {
+        tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            borderColor: 'transparent',
+            textStyle: {
+                color: '#fff'
+            },
+            formatter: function(params) {
+                let result = params[0].name + '<br/>';
+                params.forEach(item => {
+                    result += `${item.marker} ${item.seriesName}: ${item.value}<br/>`;
+                });
+                return result;
+            }
+        },
+        legend: {
+            data: ['评估次数', '干预次数', '咨询次数', '总计'],
+            top: 0,
+            textStyle: {
+                color: '#666'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {
+                    pixelRatio: 2,
+                    backgroundColor: '#fff'
+                }
+            },
+            right: 10
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: monthlyTrendData.months,
+            axisLine: {
+                lineStyle: {
+                    color: '#e8e8e8'
+                }
+            },
+            axisLabel: {
+                color: '#666'
+            },
+            axisTick: {
+                show: false
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLine: {
+                show: false
+            },
+            axisLabel: {
+                color: '#666'
+            },
+            axisTick: {
+                show: false
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#f0f0f0'
+                }
+            }
+        },
+        series: [
+            {
+                name: '评估次数',
+                type: 'line',
+                stack: 'Total',
+                data: monthlyTrendData.assessments,
+                smooth: true,
+                lineStyle: {
+                    color: '#4A90E2',
+                    width: 3
+                },
+                itemStyle: {
+                    color: '#4A90E2'
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(74, 144, 226, 0.3)' },
+                        { offset: 1, color: 'rgba(74, 144, 226, 0.05)' }
+                    ])
+                }
+            },
+            {
+                name: '干预次数',
+                type: 'line',
+                stack: 'Total',
+                data: monthlyTrendData.interventions,
+                smooth: true,
+                lineStyle: {
+                    color: '#50C878',
+                    width: 3
+                },
+                itemStyle: {
+                    color: '#50C878'
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(80, 200, 120, 0.3)' },
+                        { offset: 1, color: 'rgba(80, 200, 120, 0.05)' }
+                    ])
+                }
+            },
+            {
+                name: '咨询次数',
+                type: 'line',
+                stack: 'Total',
+                data: monthlyTrendData.consultations,
+                smooth: true,
+                lineStyle: {
+                    color: '#FF9800',
+                    width: 3
+                },
+                itemStyle: {
+                    color: '#FF9800'
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: 'rgba(255, 152, 0, 0.3)' },
+                        { offset: 1, color: 'rgba(255, 152, 0, 0.05)' }
+                    ])
+                }
+            },
+            {
+                name: '总计',
+                type: 'line',
+                data: monthlyTrendData.totalServices,
+                smooth: true,
+                lineStyle: {
+                    color: '#FF6B6B',
+                    width: 4
+                },
+                itemStyle: {
+                    color: '#FF6B6B'
+                },
+                emphasis: {
+                    focus: 'series'
+                }
+            }
+        ]
+    };
+
+    // 应用图表配置
+    chart.setOption(option);
+
+    // 响应式调整
+    window.addEventListener('resize', function() {
+        chart.resize();
+    });
 }
 
 function initInterventionDistributionChart() {
     const chartContainer = document.getElementById('interventionDistributionChart');
     if (!chartContainer) return;
 
-    // 创建饼图
-    const svg = createSVGChart(chartContainer, {
-        width: '100%',
-        height: '100%',
-        viewBox: '0 0 300 300'
-    });
+    // 初始化ECharts实例
+    const chart = echarts.init(chartContainer);
 
-    // 绘制饼图
-    drawPieChart(svg, interventionDistributionData);
+    // 处理数据格式
+    const processedData = interventionDistributionData.map(item => ({
+        name: item.name,
+        value: item.value,
+        itemStyle: {
+            color: item.color
+        }
+    }));
+
+    // 设置图表配置项
+    const option = {
+        tooltip: {
+            trigger: 'item',
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            borderColor: 'transparent',
+            textStyle: {
+                color: '#fff'
+            },
+            formatter: function(params) {
+                return `${params.marker} ${params.name}<br/>占比: ${params.percent}%<br/>数量: ${params.value}`;
+            }
+        },
+        legend: {
+            orient: 'horizontal',
+            bottom: 10,
+            left: 'center',
+            textStyle: {
+                color: '#666',
+                fontSize: '12'
+            },
+            itemGap: 15
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {
+                    pixelRatio: 2,
+                    backgroundColor: '#fff'
+                }
+            },
+            right: 10,
+            top: 10
+        },
+        series: [
+            {
+                name: '干预类型分布',
+                type: 'pie',
+                radius: ['45%', '70%'],
+                avoidLabelOverlap: false,
+                center: ['50%', '45%'],
+                itemStyle: {
+                    borderRadius: 8,
+                    borderColor: '#fff',
+                    borderWidth: 2
+                },
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '14',
+                        fontWeight: 'bold',
+                        color: '#333'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: processedData
+            }
+        ]
+    };
+
+    // 应用图表配置
+    chart.setOption(option);
+
+    // 响应式调整
+    window.addEventListener('resize', function() {
+        chart.resize();
+    });
 }
 
 function initDataTable() {
@@ -129,271 +357,7 @@ function initDataTable() {
     tableContainer.innerHTML = tableHTML;
 }
 
-function createSVGChart(container, attributes) {
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    Object.entries(attributes).forEach(([key, value]) => {
-        svg.setAttribute(key, value);
-    });
-    container.appendChild(svg);
-    return svg;
-}
-
-function drawLineChart(svg, data) {
-    const width = 800;
-    const height = 300;
-    const margin = { top: 20, right: 30, bottom: 40, left: 50 };
-    const chartWidth = width - margin.left - margin.right;
-    const chartHeight = height - margin.top - margin.bottom;
-
-    // 创建主组
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('transform', `translate(${margin.left}, ${margin.top})`);
-    svg.appendChild(g);
-
-    // 计算比例
-    const maxValue = Math.max(...data.totalServices);
-    const xScale = chartWidth / (data.months.length - 1);
-    const yScale = chartHeight / maxValue;
-
-    // 绘制网格线
-    for (let i = 0; i <= 5; i++) {
-        const y = chartHeight - (i * chartHeight / 5);
-        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        line.setAttribute('x1', 0);
-        line.setAttribute('y1', y);
-        line.setAttribute('x2', chartWidth);
-        line.setAttribute('y2', y);
-        line.setAttribute('stroke', '#f0f0f0');
-        line.setAttribute('stroke-width', '1');
-        g.appendChild(line);
-    }
-
-    // 绘制趋势线
-    const colors = ['#4A90E2', '#50C878', '#FF9800', '#FF6B6B'];
-    const datasets = [data.assessments, data.interventions, data.consultations, data.totalServices];
-    const labels = ['评估次数', '干预次数', '咨询次数', '总计'];
-
-    datasets.forEach((dataset, index) => {
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        let pathData = `M ${0} ${chartHeight - dataset[0] * yScale}`;
-        
-        for (let i = 1; i < dataset.length; i++) {
-            const x = i * xScale;
-            const y = chartHeight - dataset[i] * yScale;
-            pathData += ` L ${x} ${y}`;
-        }
-
-        path.setAttribute('d', pathData);
-        path.setAttribute('stroke', colors[index]);
-        path.setAttribute('stroke-width', index === 3 ? '3' : '2');
-        path.setAttribute('fill', 'none');
-        path.setAttribute('stroke-linecap', 'round');
-        path.setAttribute('stroke-linejoin', 'round');
-        
-        if (index === 3) {
-            path.setAttribute('stroke-dasharray', '0');
-        }
-        
-        g.appendChild(path);
-
-        // 添加数据点
-        dataset.forEach((value, i) => {
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            circle.setAttribute('cx', i * xScale);
-            circle.setAttribute('cy', chartHeight - value * yScale);
-            circle.setAttribute('r', index === 3 ? '4' : '3');
-            circle.setAttribute('fill', colors[index]);
-            circle.setAttribute('stroke', 'white');
-            circle.setAttribute('stroke-width', '2');
-            circle.style.cursor = 'pointer';
-            
-            // 添加悬停效果
-            circle.addEventListener('mouseenter', function() {
-                this.setAttribute('r', '6');
-                showTooltip(this, `${data.months[i]}: ${value} ${labels[index]}`);
-            });
-            
-            circle.addEventListener('mouseleave', function() {
-                this.setAttribute('r', index === 3 ? '4' : '3');
-                hideTooltip();
-            });
-            
-            g.appendChild(circle);
-        });
-    });
-
-    // 添加坐标轴
-    const xAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    xAxis.setAttribute('x1', 0);
-    xAxis.setAttribute('y1', chartHeight);
-    xAxis.setAttribute('x2', chartWidth);
-    xAxis.setAttribute('y2', chartHeight);
-    xAxis.setAttribute('stroke', '#ccc');
-    xAxis.setAttribute('stroke-width', '1');
-    g.appendChild(xAxis);
-
-    const yAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    yAxis.setAttribute('x1', 0);
-    yAxis.setAttribute('y1', 0);
-    yAxis.setAttribute('x2', 0);
-    yAxis.setAttribute('y2', chartHeight);
-    yAxis.setAttribute('stroke', '#ccc');
-    yAxis.setAttribute('stroke-width', '1');
-    g.appendChild(yAxis);
-
-    // 添加月份标签
-    data.months.forEach((month, i) => {
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', i * xScale);
-        text.setAttribute('y', chartHeight + 20);
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('font-size', '12');
-        text.setAttribute('fill', '#666');
-        text.textContent = month;
-        g.appendChild(text);
-    });
-}
-
-function drawPieChart(svg, data) {
-    const width = 300;
-    const height = 300;
-    const centerX = width / 2;
-    const centerY = height / 2;
-    const radius = Math.min(width, height) / 2 - 20;
-
-    let currentAngle = -Math.PI / 2; // 从顶部开始
-    const total = data.reduce((sum, item) => sum + item.value, 0);
-
-    data.forEach((item, index) => {
-        const angle = (item.value / total) * 2 * Math.PI;
-        const endAngle = currentAngle + angle;
-
-        // 创建扇形路径
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        const largeArcFlag = angle > Math.PI ? 1 : 0;
-        
-        const x1 = centerX + radius * Math.cos(currentAngle);
-        const y1 = centerY + radius * Math.sin(currentAngle);
-        const x2 = centerX + radius * Math.cos(endAngle);
-        const y2 = centerY + radius * Math.sin(endAngle);
-
-        const pathData = [
-            `M ${centerX} ${centerY}`,
-            `L ${x1} ${y1}`,
-            `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${x2} ${y2}`,
-            'Z'
-        ].join(' ');
-
-        path.setAttribute('d', pathData);
-        path.setAttribute('fill', item.color);
-        path.setAttribute('stroke', 'white');
-        path.setAttribute('stroke-width', '2');
-        path.style.cursor = 'pointer';
-        path.style.transition = 'all 0.3s ease';
-
-        // 添加悬停效果
-        path.addEventListener('mouseenter', function() {
-            this.style.transform = `scale(1.05)`;
-            this.style.transformOrigin = `${centerX}px ${centerY}px`;
-            showTooltip(this, `${item.icon} ${item.name}: ${item.value}%`);
-        });
-
-        path.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-            hideTooltip();
-        });
-
-        svg.appendChild(path);
-
-        // 添加标签
-        const labelAngle = currentAngle + angle / 2;
-        const labelRadius = radius * 0.7;
-        const labelX = centerX + labelRadius * Math.cos(labelAngle);
-        const labelY = centerY + labelRadius * Math.sin(labelAngle);
-
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('x', labelX);
-        text.setAttribute('y', labelY);
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('dominant-baseline', 'middle');
-        text.setAttribute('font-size', '12');
-        text.setAttribute('font-weight', 'bold');
-        text.setAttribute('fill', 'white');
-        text.setAttribute('filter', 'url(#textOutline)');
-        text.textContent = `${item.value}%`;
-        svg.appendChild(text);
-
-        currentAngle = endAngle;
-    });
-
-    // 添加文本轮廓滤镜
-    const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-    const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-    filter.setAttribute('id', 'textOutline');
-    filter.setAttribute('x', '-20%');
-    filter.setAttribute('y', '-20%');
-    filter.setAttribute('width', '140%');
-    filter.setAttribute('height', '140%');
-
-    const feMorphology = document.createElementNS('http://www.w3.org/2000/svg', 'feMorphology');
-    feMorphology.setAttribute('in', 'SourceAlpha');
-    feMorphology.setAttribute('operator', 'dilate');
-    feMorphology.setAttribute('radius', '1');
-
-    const feGaussianBlur = document.createElementNS('http://www.w3.org/2000/svg', 'feGaussianBlur');
-    feGaussianBlur.setAttribute('in', 'SourceAlpha');
-    feGaussianBlur.setAttribute('stdDeviation', '1');
-
-    const feColorMatrix = document.createElementNS('http://www.w3.org/2000/svg', 'feColorMatrix');
-    feColorMatrix.setAttribute('in', 'SourceAlpha');
-    feColorMatrix.setAttribute('type', 'matrix');
-    feColorMatrix.setAttribute('values', '0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0');
-
-    const feComposite = document.createElementNS('http://www.w3.org/2000/svg', 'feComposite');
-    feComposite.setAttribute('in', 'SourceGraphic');
-    feComposite.setAttribute('in2', 'SourceAlpha');
-    feComposite.setAttribute('operator', 'over');
-
-    filter.appendChild(feMorphology);
-    filter.appendChild(feGaussianBlur);
-    filter.appendChild(feColorMatrix);
-    filter.appendChild(feComposite);
-    defs.appendChild(filter);
-    svg.appendChild(defs);
-}
-
-function showTooltip(element, text) {
-    const tooltip = document.createElement('div');
-    tooltip.className = 'chart-tooltip';
-    tooltip.textContent = text;
-    tooltip.style.cssText = `
-        position: absolute;
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 8px 12px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: 500;
-        z-index: 1000;
-        pointer-events: none;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(10px);
-    `;
-    
-    document.body.appendChild(tooltip);
-    
-    const rect = element.getBoundingClientRect();
-    tooltip.style.left = (rect.left + rect.width / 2) + 'px';
-    tooltip.style.top = (rect.top - 40) + 'px';
-    tooltip.style.transform = 'translateX(-50%)';
-}
-
-function hideTooltip() {
-    const tooltip = document.querySelector('.chart-tooltip');
-    if (tooltip) {
-        tooltip.remove();
-    }
-}
+// ECharts已经内置了工具提示功能，不再需要自定义tooltip函数
 
 function addChartInteractions() {
     // 图表控制按钮

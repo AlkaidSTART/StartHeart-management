@@ -1,8 +1,158 @@
 /* 预约服务简约优化样式 */
 .appointment-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
+}
+
+/* 服务类型选择区域 */
+.service-types-section {
+    margin-bottom: 30px;
+}
+
+.section-subtitle {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.service-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.service-type-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.service-type-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(107, 159, 213, 0.2);
+}
+
+.service-type-card.active {
+    border-color: var(--primary-color);
+    background: linear-gradient(135deg, rgba(107, 159, 213, 0.1) 0%, rgba(107, 159, 213, 0.05) 100%);
+}
+
+.service-icon {
+    font-size: 2rem;
+}
+
+.service-name {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+/* 预约进度查询 */
+.appointment-progress-section {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+}
+
+.progress-query-box {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.query-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.query-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(107, 159, 213, 0.1);
+}
+
+.query-btn {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.query-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(107, 159, 213, 0.3);
+}
+
+.progress-placeholder {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    color: #999;
+    border: 2px dashed #e9ecef;
+}
+
+/* 预约信息网格布局 */
+.appointment-info-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.quick-contact-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 25px;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.contact-label {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.contact-value {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.required {
+    color: #dc3545;
 }
 
 .appointment-simple {
@@ -156,7 +306,36 @@
 }
 
 /* 响应式设计 */
+@media (max-width: 992px) {
+    .appointment-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .team-members-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .team-member-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .member-education {
+        justify-content: center;
+    }
+    
+    .credentials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
+    .appointment-container,
+    .team-container {
+        padding: 15px;
+    }
+    
     .appointment-simple {
         padding: 20px;
     }
@@ -173,6 +352,80 @@
     
     .appointment-info {
         padding: 20px;
+    }
+    
+    .service-types-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .service-type-card {
+        padding: 15px 10px;
+    }
+    
+    .service-icon {
+        font-size: 1.5rem;
+    }
+    
+    .service-name {
+        font-size: 0.8rem;
+    }
+    
+    .progress-query-box {
+        flex-direction: column;
+    }
+    
+    .query-btn {
+        width: 100%;
+    }
+    
+    .team-philosophy {
+        padding: 25px;
+    }
+    
+    .philosophy-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .team-member-card {
+        padding: 20px;
+    }
+    
+    .member-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .credentials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .credential-item {
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-types-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .team-philosophy {
+        padding: 20px;
+    }
+    
+    .philosophy-header h4 {
+        font-size: 1.2rem;
+    }
+    
+    .member-name {
+        font-size: 1.1rem;
     }
 }
 
@@ -229,4 +482,220 @@
     color: #28a745;
     font-size: 0.8rem;
     margin-top: 5px;
+}
+
+/* ==================== 守护团队样式 ==================== */
+
+.team-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 团队理念 */
+.team-philosophy {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+.philosophy-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.philosophy-header h4 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.philosophy-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.philosophy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.philosophy-item {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.philosophy-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.philosophy-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.philosophy-item h5 {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.philosophy-item p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* 团队成员区域 */
+.team-members-section {
+    margin-bottom: 40px;
+}
+
+.section-subtitle-wrapper {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-subtitle-wrapper .section-subtitle {
+    margin-bottom: 10px;
+}
+
+.section-subtitle-wrapper p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.team-members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.team-member-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    gap: 20px;
+}
+
+.team-member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.member-photo {
+    flex-shrink: 0;
+}
+
+.member-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    box-shadow: 0 4px 12px rgba(107, 159, 213, 0.3);
+}
+
+.member-info {
+    flex: 1;
+}
+
+.member-name {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.member-title {
+    display: block;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.member-specialty {
+    margin-bottom: 10px;
+}
+
+.specialty-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(168, 216, 185, 0.2) 0%, rgba(168, 216, 185, 0.1) 100%);
+    color: #2e7d32;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.member-bio {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.member-education {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #888;
+    font-size: 0.8rem;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.education-icon {
+    font-size: 1rem;
+}
+
+/* 专业资质认证 */
+.team-credentials {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+}
+
+.credentials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.credential-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.credential-item:hover {
+    background: linear-gradient(135deg, rgba(107, 159, 213, 0.1) 0%, rgba(107, 159, 213, 0.05) 100%);
+}
+
+.credential-icon {
+    font-size: 1.2rem;
+    color: var(--success-color);
+}
+
+.credential-text {
+    color: var(--text-color);
+    font-size: 0.9rem;
 }
