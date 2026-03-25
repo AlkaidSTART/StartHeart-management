@@ -1,0 +1,120 @@
+/* ========================================
+   模块滚动隔离样式
+   ======================================== */
+
+/* 主容器设置为相对定位 */
+main {
+  position: relative;
+  overflow-y: auto;
+}
+
+/* 内容模块基础样式 - 全屏高度 */
+.content-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  
+  /* 隐藏滚动条但保持功能 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-light) transparent;
+}
+
+/* Webkit浏览器滚动条样式 */
+.content-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content-section::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content-section::-webkit-scrollbar-thumb {
+  background-color: var(--primary-light);
+  border-radius: 3px;
+}
+
+.content-section::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary-color);
+}
+
+/* 激活的模块 */
+.content-section.active {
+  display: block;
+}
+
+/* 非激活模块隐藏 */
+.content-section.inactive {
+  display: none;
+}
+
+/* 模块切换动画 */
+.content-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.content-section.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 模块内部容器 */
+.section-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* 防止body滚动 */
+body.module-isolation-mode {
+  overflow-y: auto;
+}
+
+body.module-isolation-mode main {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .content-section {
+    min-height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
+  }
+  
+  .section-container {
+    padding: var(--spacing-md);
+  }
+}
+
+/* 平滑滚动提示 */
+.scroll-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  animation: bounce 2s infinite;
+  pointer-events: none;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}

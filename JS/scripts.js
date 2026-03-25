@@ -2029,6 +2029,17 @@ function initNavigation() {
     });
     
     window.showModule = function(moduleId) {
+        // 如果模块滚动管理器存在，使用它来切换模块
+        if (window.moduleScrollManager) {
+            const groupName = window.moduleScrollManager.findGroupForModule(moduleId);
+            if (groupName) {
+                window.moduleScrollManager.showGroup(groupName);
+                initModuleSpecific(moduleId);
+                return;
+            }
+        }
+        
+        // 回退到原始逻辑
         allModules.forEach(module => {
             module.style.display = 'none';
         });

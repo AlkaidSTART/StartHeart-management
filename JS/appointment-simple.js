@@ -198,6 +198,7 @@ function initializeSimpleAppointment() {
         const appointmentData = {
             serviceType: formData.get('serviceType'),
             preferredDate: formData.get('preferredDate'),
+            preferredDoctor: formData.get('preferredDoctor'),
             timeSlot: formData.get('timeSlot'),
             requirements: formData.get('requirements'),
             contactName: formData.get('contactName'),
