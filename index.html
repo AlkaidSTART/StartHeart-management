@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://udify.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; connect-src 'self' https://udify.app; frame-src https://udify.app; object-src 'none'; base-uri 'self'; form-action 'self';"
+    />
     <title>星心守护 - 儿童康复服务平台</title>
 
     <!-- CSS Files -->
@@ -26,13 +31,27 @@
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
+      integrity="sha384-2+8OcleUOxnP/2cYXK9FBoMe12ojS0iPrrJy9Um4ICFk2AXl8iODUaIoUKI6TmGj"
+      crossorigin="anonymous"
     />
     <!-- GSAP for Animations -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+      integrity="sha384-d+vyQ0dYcymoP8ndq2hW7FGC50nqGdXUEgoOUGxbbkAJwZqL7h+jKN0GGgn9hFDS"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+      integrity="sha384-poC0r6usQOX2Ayt/VGA+t81H6V3iN9L+Irz9iO8o+s0X20tLpzc9DOOtnKxhaQSE"
+      crossorigin="anonymous"
+    ></script>
     
     <!-- ECharts for Data Visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"
+      integrity="sha384-BQKzmHvQLMCAnL3UtDBA1Al5tFjsCz1wrMlIUA1wkzo14DYkRWjywW+p9pCj0cwd"
+      crossorigin="anonymous"
+    ></script>
     <!-- 路由状态管理 -->
     <script src="JS/route-store.js"></script>
   </head>
@@ -223,13 +242,7 @@
 
           <!-- 6. 星语助手 -->
           <li class="menu-item">
-            <a
-              class="menu-link"
-              onclick="
-                toggleChatPopup();
-                setActive(this);
-              "
-            >
+            <a class="menu-link" href="#assistant" onclick="setActive(this)">
               <span class="menu-icon"><i class="ri-robot-line"></i></span>
               <span class="menu-text">星语助手</span>
             </a>
@@ -2426,6 +2439,8 @@
                     <option value="dr-li">李医生</option>
                     <option value="dr-wang">王医生</option>
                     <option value="dr-zhang">张医生</option>
+                    <option value="dr-chen">陈医生</option>
+                    <option value="dr-liu">刘医生</option>
                   </select>
                 </div>
 
@@ -2565,7 +2580,9 @@
                 <!-- 王医生 -->
                 <div class="team-member-card">
                   <div class="member-photo">
-                    <img src="https://api.multiavatar.com/王医生.svg" alt="王医生 Q版头像" class="member-avatar-img">
+                    <div class="member-avatar-icon" aria-label="王医生">
+                      <i class="ri-stethoscope-line"></i>
+                    </div>
                   </div>
                   <div class="member-info">
                     <h5 class="member-name">王医生</h5>
@@ -2586,7 +2603,9 @@
                 <!-- 张治疗师 -->
                 <div class="team-member-card">
                   <div class="member-photo">
-                    <img src="https://api.multiavatar.com/张治疗师.svg" alt="张治疗师 Q版头像" class="member-avatar-img">
+                    <div class="member-avatar-icon" aria-label="张治疗师">
+                      <i class="ri-nurse-line"></i>
+                    </div>
                   </div>
                   <div class="member-info">
                     <h5 class="member-name">张治疗师</h5>
@@ -2607,7 +2626,9 @@
                 <!-- 李老师 -->
                 <div class="team-member-card">
                   <div class="member-photo">
-                    <img src="https://api.multiavatar.com/李老师.svg" alt="李老师 Q版头像" class="member-avatar-img">
+                    <div class="member-avatar-icon" aria-label="李老师">
+                      <i class="ri-brain-line"></i>
+                    </div>
                   </div>
                   <div class="member-info">
                     <h5 class="member-name">李老师</h5>
@@ -2628,7 +2649,9 @@
                 <!-- 赵老师 -->
                 <div class="team-member-card">
                   <div class="member-photo">
-                    <img src="https://api.multiavatar.com/赵老师.svg" alt="赵老师 Q版头像" class="member-avatar-img">
+                    <div class="member-avatar-icon" aria-label="赵老师">
+                      <i class="ri-contrast-drop-line"></i>
+                    </div>
                   </div>
                   <div class="member-info">
                     <h5 class="member-name">赵老师</h5>
@@ -2649,7 +2672,9 @@
                 <!-- 陈心理师 -->
                 <div class="team-member-card">
                   <div class="member-photo">
-                    <img src="https://api.multiavatar.com/陈心理师.svg" alt="陈心理师 Q版头像" class="member-avatar-img">
+                    <div class="member-avatar-icon" aria-label="陈心理师">
+                      <i class="ri-psychotherapy-line"></i>
+                    </div>
                   </div>
                   <div class="member-info">
                     <h5 class="member-name">陈心理师</h5>
@@ -2670,7 +2695,9 @@
                 <!-- 杨老师 -->
                 <div class="team-member-card">
                   <div class="member-photo">
-                    <img src="https://api.multiavatar.com/杨老师.svg" alt="杨老师 Q版头像" class="member-avatar-img">
+                    <div class="member-avatar-icon" aria-label="杨老师">
+                      <i class="ri-graduation-cap-line"></i>
+                    </div>
                   </div>
                   <div class="member-info">
                     <h5 class="member-name">杨老师</h5>
@@ -3097,7 +3124,7 @@
             </div>
           </div>
 
-          <!-- AI助手界面 -->
+          <!-- AI助手入口（统一使用浮窗气泡） -->
           <div class="assistant-chat-container">
             <div class="chat-header">
               <div class="chat-avatar">
@@ -3109,24 +3136,10 @@
               </div>
             </div>
 
-            <div class="chat-iframe-wrapper">
-              <iframe
-                src="https://udify.app/chatbot/EmUprlFna2N9LIv7"
-                style="width: 100%; height: 100%; min-height: 700px"
-                frameborder="0"
-                allow="microphone"
-              >
-              </iframe>
-              <div class="iframe-loading" id="iframeLoading">
-                <div class="loading-spinner"></div>
-                <p>正在加载星语助手...</p>
-              </div>
-              <div class="iframe-error" id="iframeError" style="display: none">
-                <span class="error-icon"><i class="ri-error-warning-line"></i></span>
-                <p>加载失败，请检查网络连接</p>
-                <button onclick="reloadAssistant()" class="retry-btn">
-                  重新加载
-                </button>
+            <div class="chat-iframe-wrapper" style="min-height: 240px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px;">
+              <div>
+                <p style="margin-bottom: 8px; font-weight: 600;">已启用浮窗聊天气泡</p>
+                <p style="color: #666;">点击右下角蓝色对话气泡即可开始与星语助手对话。</p>
               </div>
             </div>
           </div>
@@ -3138,59 +3151,30 @@
         </footer>
       </main>
 
-      <!-- Star Language Assistant Floating Button -->
-      <div class="star-assistant-float" id="starAssistantFloat">
-        <div class="star-menu-items" id="starMenuItems">
-          <a class="star-menu-item" onclick="handleAssistantClick('qa')">
-            <span class="star-menu-icon"><i class="ri-lightbulb-line"></i></span>
-            <span>智能问答</span>
-          </a>
-          <a class="star-menu-item" onclick="handleAssistantClick('consult')">
-            <span class="star-menu-icon"><i class="ri-chat-3-line"></i></span>
-            <span>快捷咨询</span>
-          </a>
-        </div>
-        <button class="star-btn-main" id="starBtn" onclick="toggleMenu()">
-          <span class="star-btn-icon"><i class="ri-robot-line"></i></span>
-          <span class="pulse-ring"></span>
-        </button>
-      </div>
-
-      <!-- Chat Popup -->
-      <div class="chat-popup" id="chatPopup">
-        <div class="chat-header">
-          <h3><i class="ri-robot-2-fill"></i> 星语助手</h3>
-          <button class="close-btn" onclick="toggleChatPopup()">
-            <i class="ri-close-line"></i>
-          </button>
-        </div>
-        <div class="chat-body" id="chat-body">
-          <!-- Messages will be appended here -->
-        </div>
-        <div class="chat-footer">
-          <input
-            type="text"
-            id="chat-input"
-            placeholder="输入您的问题..."
-            autocomplete="off"
-          />
-          <button id="send-btn"><i class="ri-send-plane-fill"></i></button>
-        </div>
-      </div>
-
-      <!-- Chat Toggle Button (Alternative) -->
-      <button
-        class="chat-toggle-btn"
-        id="chatToggleBtn"
-        onclick="toggleChatPopup()"
-      >
-        <i class="ri-chat-3-line"></i>
-      </button>
+      <!-- 保留单一聊天气泡（Dify） -->
     </div>
+
+    <script>
+      window.difyChatbotConfig = {
+        token: 'EmUprlFna2N9LIv7',
+        inputs: {},
+        systemVariables: {},
+        userVariables: {},
+      };
+    </script>
+    <script src="https://udify.app/embed.min.js" id="EmUprlFna2N9LIv7" defer></script>
+    <style>
+      #dify-chatbot-bubble-button {
+        background-color: #1c64f2 !important;
+      }
+      #dify-chatbot-bubble-window {
+        width: 24rem !important;
+        height: 40rem !important;
+      }
+    </style>
 
     <!-- Core Scripts -->
     <script src="JS/scripts.js"></script>
-    <script src="JS/chat.js"></script>
     <script src="JS/floating-assistant.js"></script>
     <script src="JS/login.js"></script>
     <script src="JS/sidebar.js"></script>

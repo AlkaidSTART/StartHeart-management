@@ -50,6 +50,9 @@ function initFloatingButton() {
   const mainBtn = document.getElementById('starBtn');
   const menuItemsContainer = document.querySelector('.star-menu-items');
   const menuItems = document.querySelectorAll('.star-menu-item');
+  if (!mainBtn || !menuItemsContainer) {
+    return; // floating button not present on page
+  }
   const icon = mainBtn.querySelector('.star-btn-icon');
   
   isFloatingMenuOpen = false;
