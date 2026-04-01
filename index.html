@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="CSS/self.css" />
     <link rel="stylesheet" href="CSS/about.css" />
     <link rel="stylesheet" href="CSS/floating-assistant.css" />
+    <link rel="stylesheet" href="CSS/ai-assistant-dialog-enhanced.css" />
     <link rel="stylesheet" href="CSS/login.css" />
     <link rel="stylesheet" href="CSS/chat.css" />
 
@@ -243,7 +244,7 @@
         <div class="sidebar-footer">
           <div
             class="user-profile"
-            onclick="openLoginModal()"
+            onclick="window.useRouteStore.getState().setRoute('user-center')"
             style="cursor: pointer"
           >
             <img src="assets/1.jpg" alt="用户头像" class="user-avatar" />
@@ -256,18 +257,18 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="main-content" id="main-content">
+      <main class="main-content" id="main-content" style="flex: 1; overflow-y: auto; padding: 40px; background-color: var(--background-color);">
         <!-- Header Section -->
-        <header class="main-header">
-          <h2>欢迎来到星心守护</h2>
-          <p>专业的儿童康复服务平台，陪伴孩子健康成长</p>
+        <header class="main-header" style="margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">
+          <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 10px;">欢迎来到星心守护</h2>
+          <p style="font-size: 1.1rem; color: var(--text-light);">专业的儿童康复服务平台，陪伴孩子健康成长</p>
         </header>
 
         <!-- 1. 数据总览模块 -->
-        <section id="starlight-overview" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-star-line"></i> 星光总览</h3>
-            <p>全面了解孩子的成长数据与康复进展</p>
+        <section id="starlight-overview" class="content-section" style="max-width: 1200px; margin: 0 auto;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-star-line" style="color: var(--primary-color);"></i> 星光总览</h3>
+            <p style="color: var(--text-light);">全面了解孩子的成长数据与康复进展</p>
           </div>
 
           <!-- 数据总览增强容器 -->
@@ -380,10 +381,10 @@
           </div>
         </section>
 
-        <section id="trend-insights" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-search-line"></i> 趋势洞察</h3>
-            <p>深度分析孩子的成长趋势与变化</p>
+        <section id="trend-insights" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-search-line" style="color: var(--primary-color);"></i> 趋势洞察</h3>
+            <p style="color: var(--text-light);">深度分析孩子的成长趋势与变化</p>
           </div>
 
           <!-- 趋势洞察增强容器 -->
@@ -625,10 +626,10 @@
 
         <!-- 2. 干预引路模块 -->
         <!-- 2.1 成长指引 -->
-        <section id="growth-guidance" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-focus-3-line"></i> 成长指引</h3>
-            <p>了解孩子发展阶段，科学引导成长</p>
+        <section id="growth-guidance" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-focus-3-line" style="color: var(--primary-color);"></i> 成长指引</h3>
+            <p style="color: var(--text-light);">了解孩子发展阶段，科学引导成长</p>
           </div>
 
           <div class="intervention-container">
@@ -778,10 +779,10 @@
         </section>
 
         <!-- 2.2 日常训练 -->
-        <section id="daily-training" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-heart-pulse-line"></i> 日常训练</h3>
-            <p>科学训练计划，助力能力发展</p>
+        <section id="daily-training" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-heart-pulse-line" style="color: var(--primary-color);"></i> 日常训练</h3>
+            <p style="color: var(--text-light);">科学训练计划，助力能力发展</p>
           </div>
 
           <div class="intervention-container">
@@ -1420,8 +1421,21 @@
           </div>
         </section>
 
-                <span class="card-icon"><i class="ri-question-line"></i></span>
-                <h3>什么是自闭症谱系障碍</h3>
+        <!-- 3. 知识库 -->
+        <!-- 3.1 科普小课堂 -->
+        <section id="science-class" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-graduation-cap-line" style="color: var(--primary-color);"></i> 科普小课堂</h3>
+            <p style="color: var(--text-light);">系统学习自闭症知识，建立科学康复观念</p>
+          </div>
+          <div class="knowledge-container">
+            <!-- 核心概念模块 -->
+            <div class="method-category">
+              <h3><i class="ri-lightbulb-line"></i> 核心概念</h3>
+              <div class="knowledge-grid">
+                <div class="knowledge-card">
+                  <span class="card-icon"><i class="ri-question-line"></i></span>
+                  <h3>什么是自闭症谱系障碍</h3>
                 <p>
                   全面解读自闭症谱系障碍的定义、特征及诊断标准，帮助家长建立科学认知。
                 </p>
@@ -1521,10 +1535,10 @@
         </section>
 
         <!-- 3.2 康复手记 -->
-        <section id="recovery-notes" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-file-list-line"></i> 康复手记</h3>
-            <p>记录孩子的康复历程与心得，分享真实的成长故事</p>
+        <section id="recovery-notes" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-file-list-line" style="color: var(--primary-color);"></i> 康复手记</h3>
+            <p style="color: var(--text-light);">记录孩子的康复历程与心得，分享真实的成长故事</p>
           </div>
 
           <!-- 搜索栏 -->
@@ -1658,10 +1672,10 @@
         </section>
 
         <!-- 3.3 家长加油站 -->
-        <section id="parent-station" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-gas-station-line"></i> 家长加油站</h3>
-            <p>为家长提供心理支持与互助平台，陪伴您走过每一步</p>
+        <section id="parent-station" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-gas-station-line" style="color: var(--primary-color);"></i> 家长加油站</h3>
+            <p style="color: var(--text-light);">为家长提供心理支持与互助平台，陪伴您走过每一步</p>
           </div>
 
           <!-- 搜索栏 -->
@@ -1964,10 +1978,10 @@
         </section>
 
         <!-- 3.4 资料下载 -->
-        <section id="resources-download" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-download-line"></i> 资料下载</h3>
-            <p>康复资料与工具下载中心，助您科学开展家庭干预</p>
+        <section id="resources-download" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-download-line" style="color: var(--primary-color);"></i> 资料下载</h3>
+            <p style="color: var(--text-light);">康复资料与工具下载中心，助您科学开展家庭干预</p>
           </div>
 
           <!-- 搜索栏 -->
@@ -2217,10 +2231,10 @@
 
         <!-- 4. 服务中心模块 -->
         <!-- 4.1 预约陪伴 -->
-        <section id="appointment-companion" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-calendar-line"></i> 预约陪伴</h3>
-            <p>在线预约专业康复服务，陪伴孩子健康成长</p>
+        <section id="appointment-companion" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-calendar-line" style="color: var(--primary-color);"></i> 预约陪伴</h3>
+            <p style="color: var(--text-light);">在线预约专业康复服务，陪伴孩子健康成长</p>
           </div>
 
           <div class="appointment-container">
@@ -2399,10 +2413,10 @@
         </section>
 
         <!-- 4.2 守护团队 -->
-        <section id="guardian-team" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-team-line"></i> 守护团队</h3>
-            <p>专业的康复团队，用心守护每一位孩子</p>
+        <section id="guardian-team" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-team-line" style="color: var(--primary-color);"></i> 守护团队</h3>
+            <p style="color: var(--text-light);">专业的康复团队，用心守护每一位孩子</p>
           </div>
 
           <div class="team-container">
@@ -2643,10 +2657,10 @@
 
         <!-- 5. 关于我们模块 -->
         <!-- 5.1 星心简介 -->
-        <section id="about-intro" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-shining-line"></i> 星心简介</h3>
-            <p>了解星心守护的故事与使命</p>
+        <section id="about-intro" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-shining-line" style="color: var(--primary-color);"></i> 星心简介</h3>
+            <p style="color: var(--text-light);">了解星心守护的故事与使命</p>
           </div>
           <div class="about-intro-content">
             <!-- 机构介绍 -->
@@ -2764,10 +2778,10 @@
         </section>
 
         <!-- 5.3 联系我们 -->
-        <section id="about-contact" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-contacts-book-line"></i> 联系我们</h3>
-            <p>随时与我们取得联系</p>
+        <section id="about-contact" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-contacts-book-line" style="color: var(--primary-color);"></i> 联系我们</h3>
+            <p style="color: var(--text-light);">随时与我们取得联系</p>
           </div>
           <div class="about-contact-content">
             <div class="contact-grid">
@@ -2853,10 +2867,10 @@
         </section>
 
         <!-- 5.4 加入我们 -->
-        <section id="about-join" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-hand-heart-line"></i> 加入我们</h3>
-            <p>成为星心守护的一员</p>
+        <section id="about-join" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-hand-heart-line" style="color: var(--primary-color);"></i> 加入我们</h3>
+            <p style="color: var(--text-light);">成为星心守护的一员</p>
           </div>
           <div class="about-join-content">
             <div class="join-grid">
@@ -2969,10 +2983,11 @@
           </div>
 
           <!-- Dify 聊天对话框 -->
-          <div class="assistant-iframe-container" style="width: 100%; height: 700px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 30px;">
+          <div class="assistant-iframe-container" style="width: 100%; height: 750px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 30px;">
             <iframe
               src="https://udify.app/chatbot/EmUprlFna2N9LIv7"
-              style="width: 100%; height: 100%; border: none; min-height: 700px"
+              style="width: 100%; height: 100%; min-height: 700px"
+              frameborder="0"
               allow="microphone">
             </iframe>
           </div>
@@ -2997,6 +3012,48 @@
           </div>
         </section>
 
+        <!-- 个人中心模块 -->
+        <section id="user-center" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
+          <div class="section-header" style="margin-bottom: 30px;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-user-settings-line" style="color: var(--primary-color);"></i> 个人中心</h3>
+            <p style="color: var(--text-light);">管理您的账号信息与康复档案</p>
+          </div>
+          <div class="user-center-content" style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+            <div class="user-profile-header" style="display: flex; align-items: center; gap: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px;">
+              <img src="assets/1.jpg" alt="用户头像" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+              <div class="user-main-info">
+                <h4 style="margin: 0; font-size: 1.5rem;">家长用户 <span style="font-size: 0.8rem; background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 4px; vertical-align: middle;">VIP会员</span></h4>
+                <p style="color: #666; margin: 5px 0 0;">ID: SH88001 | 注册时间: 2024-01-15</p>
+              </div>
+            </div>
+            <div class="user-settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+              <div class="setting-item" style="padding: 20px; border: 1px solid #eee; border-radius: 8px; cursor: pointer;">
+                <i class="ri-shield-user-line" style="font-size: 1.5rem; color: #3b71ca;"></i>
+                <h5 style="margin: 10px 0 5px;">账户安全</h5>
+                <p style="font-size: 0.9rem; color: #888;">修改密码、手机绑定、注销账号</p>
+              </div>
+              <div class="setting-item" style="padding: 20px; border: 1px solid #eee; border-radius: 8px; cursor: pointer;">
+                <i class="ri-file-list-3-line" style="font-size: 1.5rem; color: #3b71ca;"></i>
+                <h5 style="margin: 10px 0 5px;">我的预约</h5>
+                <p style="font-size: 0.9rem; color: #888;">查看正在进行的与历史预约情况</p>
+              </div>
+              <div class="setting-item" style="padding: 20px; border: 1px solid #eee; border-radius: 8px; cursor: pointer;">
+                <i class="ri-heart-pulse-line" style="font-size: 1.5rem; color: #3b71ca;"></i>
+                <h5 style="margin: 10px 0 5px;">健康档案</h5>
+                <p style="font-size: 0.9rem; color: #888;">管理孩子的评估报告与干预记录</p>
+              </div>
+              <div class="setting-item" style="padding: 20px; border: 1px solid #eee; border-radius: 8px; cursor: pointer;">
+                <i class="ri-notification-3-line" style="font-size: 1.5rem; color: #3b71ca;"></i>
+                <h5 style="margin: 10px 0 5px;">通知设置</h5>
+                <p style="font-size: 0.9rem; color: #888;">训练提醒、系统消息、优惠活动</p>
+              </div>
+            </div>
+            <div style="margin-top: 40px; text-align: center;">
+              <button onclick="logout()" style="padding: 10px 40px; background: #ff6b6b; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">退 出 登 录</button>
+            </div>
+          </div>
+        </section>
+
         <!-- Footer -->
         <footer class="main-footer">
           <p>&copy; 2026 星心守护 - 儿童康复服务平台 | 让每个孩子都能闪耀星光</p>
@@ -3004,6 +3061,78 @@
       </main>
 
       <!-- 保留单一聊天气泡（Dify） -->
+      
+      <!-- 星语助手悬浮交互组件 -->
+      <div class="star-assistant-float" id="starAssistantFloat">
+        <!-- 悬浮菜单项 -->
+        <div class="star-menu-items" id="starMenuItems">
+          <div class="star-menu-item" onclick="handleAssistantClick('qa')">
+            <span class="star-menu-icon"><i class="ri-question-line"></i></span>
+            <span class="star-menu-label">智能问答</span>
+          </div>
+          <div class="star-menu-item" onclick="handleAssistantClick('consult')">
+            <span class="star-menu-icon"><i class="ri-chat-3-line"></i></span>
+            <span class="star-menu-label">快捷咨询</span>
+          </div>
+          <div class="star-menu-item" onclick="handleAssistantClick('plan')">
+            <span class="star-menu-icon"><i class="ri-calendar-todo-line"></i></span>
+            <span class="star-menu-label">训练计划</span>
+          </div>
+        </div>
+        
+        <!-- 主悬浮按钮 -->
+        <button class="star-btn-main" id="starBtn">
+          <div class="star-btn-icon">
+            <i class="ri-robot-fill"></i>
+          </div>
+          <div class="star-btn-text">星语助手</div>
+        </button>
+      </div>
+
+      <!-- 增强版对话弹窗容器 -->
+      <div class="chat-popup-overlay" id="chatPopupOverlay">
+        <div class="chat-dialog-container">
+          <!-- 头部 -->
+          <div class="chat-dialog-header">
+            <div class="chat-dialog-title">
+              <i class="ri-robot-line"></i>
+              <span>星语助手 - 专业康复咨询</span>
+            </div>
+            <div class="chat-dialog-actions">
+              <button class="chat-action-btn" title="最小化" onclick="toggleChatPopup()">
+                <i class="ri-subtract-line"></i>
+              </button>
+              <button class="chat-action-btn close" title="关闭" onclick="toggleChatPopup()">
+                <i class="ri-close-line"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- 消息内容区域 -->
+          <div class="chat-dialog-body" id="chatMessages">
+            <div class="message-item system">
+              <div class="message-content">
+                您好！我是星语助手。我可以为您提供自闭症科普知识、训练建议以及各类康复咨询。有什么我可以帮您的吗？
+              </div>
+            </div>
+          </div>
+
+          <!-- 输入区域 -->
+          <div class="chat-dialog-footer">
+            <div class="chat-input-tools">
+              <button class="tool-btn" id="emojiBtn"><i class="ri-emotion-line"></i></button>
+              <button class="tool-btn" id="fileBtn"><i class="ri-attachment-line"></i></button>
+              <button class="tool-btn" id="voiceBtn"><i class="ri-mic-line"></i></button>
+            </div>
+            <div class="chat-input-wrapper">
+              <textarea id="chatInput" placeholder="输入您的问题..." rows="1"></textarea>
+              <button id="sendBtn" class="send-btn">
+                <i class="ri-send-plane-2-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -3034,54 +3163,156 @@
         width: 24rem !important;
         height: 40rem !important;
       }
+      
+      /* 增强版对话弹窗样式 */
+      .chat-popup-overlay {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 400px;
+        height: 600px;
+        z-index: 10000;
+        display: none; /* 默认隐藏 */
+        flex-direction: column;
+        transition: all 0.3s ease;
+      }
+      .chat-popup-overlay.active {
+        display: flex;
+        animation: slideUp 0.3s ease;
+      }
+      @keyframes slideUp {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
     </style>
     
     <!-- 全局模块路由脚本 -->
     <script>
       /**
-       * 全局模块路由处理函数
-       * 处理侧边栏跳转、内部链接跳转以及对应的 UI 状态同步
+       * 全局模块路由处理系统
+       * 支持显示/隐藏不同模块 (SPA 体验)
        */
+      const router = {
+        // 模块映射表
+        routes: [
+          'starlight-overview', 'trend-insights',
+          'growth-guidance', 'daily-training',
+          'science-class', 'recovery-notes', 'parent-station', 'resources-download',
+          'appointment-companion', 'guardian-team',
+          'about-intro', 'about-contact', 'about-join',
+          'assistant', 'user-center' // 增加 user-center
+        ],
+
+        init() {
+          // 初始化时先隐藏所有 content-section
+          document.querySelectorAll('.content-section').forEach(sec => sec.style.display = 'none');
+          
+          // 监听 hash 变化
+          window.addEventListener('hashchange', () => this.handleRoute());
+          
+          // 初始加载触发一次
+          this.handleRoute();
+          
+          // 侧边栏子菜单点击不触发跳转修复
+          this.fixMenuClicks();
+        },
+
+        handleRoute() {
+          let hash = window.location.hash.replace('#', '');
+          if (!hash || !this.routes.includes(hash)) {
+            hash = 'starlight-overview'; // 默认路由
+          }
+
+          console.log('Routing to section:', hash);
+          this.showSection(hash);
+          this.syncSidebar(hash);
+        },
+
+        showSection(id) {
+          const sections = document.querySelectorAll('.content-section');
+          let found = false;
+          sections.forEach(sec => {
+            if (sec.id === id) {
+              sec.classList.remove('inactive');
+              sec.classList.add('active');
+              sec.style.display = 'block';
+              found = true;
+            } else {
+              sec.classList.remove('active');
+              sec.classList.add('inactive');
+              sec.style.display = 'none';
+            }
+          });
+          
+          if (!found && sections.length > 0) {
+             sections[0].style.display = 'block';
+          }
+          
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        },
+
+        syncSidebar(id) {
+          const navLinks = document.querySelectorAll('.sidebar-menu a, .submenu-item a');
+          navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === '#' + id) {
+              link.classList.add('active');
+              
+              // 自动展开父级菜单
+              const parentMenuItem = link.closest('.menu-item');
+              if (parentMenuItem && !parentMenuItem.classList.contains('open')) {
+                 const menuLink = parentMenuItem.querySelector('.menu-link');
+                 if (menuLink && typeof window.toggleSubmenu === 'function') {
+                    window.toggleSubmenu(menuLink);
+                 }
+              }
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        },
+
+        fixMenuClicks() {
+          // 确保所有带 href 的链接即使没有 onclick 也能正常激活
+          document.querySelectorAll('.sidebar-menu a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+              const id = link.getAttribute('href').replace('#', '');
+              if (this.routes.includes(id)) {
+                // hashchange 会处理显示逻辑
+              }
+            });
+          });
+        }
+      };
+
+      // 覆盖原有的 setActive 以适配 router
       window.setActive = function(element) {
         if (!element) return;
+        const href = element.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          const id = href.substring(1);
+          window.location.hash = id;
+        }
         
-        // 1. 处理侧边栏链接的激活状态
-        const navLinks = document.querySelectorAll('.sidebar-menu a, .submenu-item a');
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.style) {
-            link.style.backgroundColor = '';
-            link.style.color = '';
-          }
-        });
-        
-        element.classList.add('active');
-        
-        // 2. 如果是侧边栏内部平滑滚动（针对移动端自动收起）
+        // 移动端收起侧边栏
         const sidebar = document.getElementById('sidebar');
         const overlay = document.querySelector('.mobile-overlay');
         if (sidebar && sidebar.classList.contains('active')) {
           sidebar.classList.remove('active');
           overlay.classList.remove('active');
         }
-
-        // 3. 处理特定的跳转逻辑（如星语助手、家长加油站等）
-        const targetId = element.getAttribute('href');
-        console.log('Routing to:', targetId);
-        
-        // 可以在这里根据不同模块 targetId 触发特定的初始化或上报逻辑
       };
 
-      // 页面加载完成后检查当前 URL Hash 并同步状态
-      window.addEventListener('load', () => {
-        const hash = window.location.hash;
-        if (hash) {
-          const activeLink = document.querySelector(`a[href="${hash}"]`);
-          if (activeLink && typeof window.setActive === 'function') {
-            window.setActive(activeLink);
-          }
+      // 星语助手弹窗切换
+      window.toggleChatPopup = function() {
+        const overlay = document.getElementById('chatPopupOverlay');
+        if (overlay) {
+          overlay.classList.toggle('active');
         }
-      });
+      };
+
+      // 启动路由
+      window.addEventListener('DOMContentLoaded', () => router.init());
     </script>
 
     <!-- Core Scripts -->
@@ -3089,5 +3320,6 @@
     <script src="JS/floating-assistant.js"></script>
     <script src="JS/login.js"></script>
     <script src="JS/sidebar.js"></script>
+    <script src="JS/ai-assistant-dialog-enhanced.js"></script>
   </body>
 </html>
