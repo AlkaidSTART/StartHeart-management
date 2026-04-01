@@ -257,18 +257,18 @@
       </aside>
 
       <!-- Main Content -->
-      <main class="main-content" id="main-content" style="flex: 1; overflow-y: auto; padding: 40px; background-color: var(--background-color);">
+      <main class="main-content" id="main-content" style="flex: 1; overflow: hidden; padding: 20px; background-color: var(--background-color); display: flex; flex-direction: column;">
         <!-- Header Section -->
-        <header class="main-header" style="margin-bottom: 40px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;">
-          <h2 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 10px;">欢迎来到星心守护</h2>
-          <p style="font-size: 1.1rem; color: var(--text-light);">专业的儿童康复服务平台，陪伴孩子健康成长</p>
+        <header class="main-header" style="margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; flex-shrink: 0;">
+          <h2 style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 4px;">欢迎来到星心守护</h2>
+          <p style="font-size: 0.9rem; color: var(--text-light);">专业的儿童康复服务平台，陪伴孩子健康成长</p>
         </header>
 
         <!-- 1. 数据总览模块 -->
-        <section id="starlight-overview" class="content-section" style="max-width: 1200px; margin: 0 auto;">
-          <div class="section-header" style="margin-bottom: 30px;">
-            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-star-line" style="color: var(--primary-color);"></i> 星光总览</h3>
-            <p style="color: var(--text-light);">全面了解孩子的成长数据与康复进展</p>
+        <section id="starlight-overview" class="content-section" style="max-width: 1200px; margin: 0 auto; flex: 1; overflow-y: auto; width: 100%;">
+          <div class="section-header" style="margin-bottom: 16px;">
+            <h3 style="font-size: 1.1rem; display: flex; align-items: center; gap: 8px;"><i class="ri-star-line" style="color: var(--primary-color);"></i> 星光总览</h3>
+            <p style="color: var(--text-light); font-size: 0.85rem;">全面了解孩子的成长数据与康复进展</p>
           </div>
 
           <!-- 数据总览增强容器 -->
@@ -779,225 +779,228 @@
         </section>
 
         <!-- 2.2 日常训练 -->
-        <section id="daily-training" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
-          <div class="section-header" style="margin-bottom: 30px;">
-            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-heart-pulse-line" style="color: var(--primary-color);"></i> 日常训练</h3>
-            <p style="color: var(--text-light);">科学训练计划，助力能力发展</p>
+        <section id="daily-training" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
+          <div class="section-header" style="margin-bottom: 20px; flex-shrink: 0;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;"><i class="ri-heart-pulse-line" style="color: var(--primary-color);"></i> 日常训练</h3>
+            <p style="color: var(--text-light); font-size: 0.9rem;">科学训练计划，助力能力发展</p>
           </div>
 
-          <div class="intervention-container">
+          <div class="intervention-container" style="display: flex; flex-direction: column; flex: 1; overflow: hidden;">
             <!-- 训练导航 -->
-            <div class="intervention-nav">
-              <div class="nav-pills">
-                <button class="pill-btn active" data-tab="self-care">
+            <div class="intervention-nav" style="margin-bottom: 15px; flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap;">
+              <div class="nav-pills" style="display: flex; gap: 8px;">
+                <button class="pill-btn active" data-tab="self-care" onclick="switchTrainingTab('self-care')">
                   生活自理
                 </button>
-                <button class="pill-btn" data-tab="social">社交技能</button>
-                <button class="pill-btn" data-tab="language">语言能力</button>
-                <button class="pill-btn" data-tab="sensory">感统训练</button>
+                <button class="pill-btn" data-tab="social" onclick="switchTrainingTab('social')">社交技能</button>
+                <button class="pill-btn" data-tab="language" onclick="switchTrainingTab('language')">语言能力</button>
+                <button class="pill-btn" data-tab="sensory" onclick="switchTrainingTab('sensory')">感统训练</button>
               </div>
-              <div class="intervention-filters">
-                <select class="age-filter">
-                  <option>选择年龄段</option>
-                  <option>2-4岁</option>
-                  <option>4-6岁</option>
-                  <option>6-8岁</option>
-                  <option>8岁+</option>
+              <div class="intervention-filters" style="display: flex; gap: 10px;">
+                <select class="age-filter" onchange="filterTrainingByAge(this.value)" style="padding: 6px 12px; border-radius: 20px; border: 1px solid #eee; outline: none; font-size: 0.9rem;">
+                  <option value="all">全部年龄段</option>
+                  <option value="2-4">2-4岁</option>
+                  <option value="4-6">4-6岁</option>
+                  <option value="6-8">6-8岁</option>
+                  <option value="8+">8岁+</option>
+                </select>
+                <select class="difficulty-filter" onchange="filterByDifficulty(this.value)" style="padding: 6px 12px; border-radius: 20px; border: 1px solid #eee; outline: none; font-size: 0.9rem;">
+                  <option value="all">全部难度</option>
+                  <option value="1">入门级</option>
+                  <option value="2">进阶级</option>
+                  <option value="3">挑战级</option>
                 </select>
               </div>
             </div>
 
-            <!-- 生活自理训练 -->
-            <div class="intervention-tab active" id="self-care">
-              <div class="intervention-grid">
-                <div class="intervention-card-enhanced">
-                  <div class="card-header">
-                    <span class="card-icon"><i class="ri-t-shirt-line"></i></span>
-                    <span class="card-badge">基础</span>
+            <!-- 滚动内容区 -->
+            <div id="training-content-scroll" style="flex: 1; overflow-y: auto; padding-right: 5px;">
+              <!-- 生活自理训练 -->
+              <div class="intervention-tab active" id="self-care">
+                <div class="intervention-grid">
+                  <div class="intervention-card-enhanced" data-age="2-4,4-6" data-difficulty="1">
+                    <div class="card-header">
+                      <span class="card-icon"><i class="ri-t-shirt-line"></i></span>
+                      <span class="card-badge">基础</span>
+                    </div>
+                    <h3>穿衣训练</h3>
+                    <p>学习识别衣物前后、穿脱顺序，培养独立穿衣能力</p>
+                    <div class="card-features">
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">认识衣物标签位置</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">练习穿脱套头衫</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">学习系扣子、拉拉链</span>
+                      </div>
+                    </div>
+                    <div class="card-meta">
+                      <div class="meta-item">
+                        <span class="meta-label">难度</span>
+                        <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
+                      </div>
+                      <div class="meta-item">
+                        <span class="meta-label">预计时间</span>
+                        <span class="meta-value">15-20分钟</span>
+                      </div>
+                    </div>
+                    <div class="card-actions">
+                      <button class="primary-btn" onclick="showTrainingGuide('dressing')">开始训练</button>
+                    </div>
                   </div>
-                  <h3>穿衣训练</h3>
-                  <p>学习识别衣物前后、穿脱顺序，培养独立穿衣能力</p>
-                  <div class="card-features">
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">认识衣物标签位置</span>
-                    </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">练习穿脱套头衫</span>
-                    </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">学习系扣子、拉拉链</span>
-                    </div>
-                  </div>
-                  <div class="card-meta">
-                    <div class="meta-item">
-                      <span class="meta-label">难度</span>
-                      <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
-                    </div>
-                    <div class="meta-item">
-                      <span class="meta-label">预计时间</span>
-                      <span class="meta-value">15-20分钟</span>
-                    </div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="primary-btn" onclick="showTrainingGuide('dressing')">开始训练</button>
-                    <button class="secondary-btn" onclick="showTrainingDetail('dressing')">查看详情</button>
-                  </div>
-                </div>
 
-                <div class="intervention-card-enhanced">
-                  <div class="card-header">
-                    <span class="card-icon"><i class="ri-restaurant-line"></i></span>
-                    <span class="card-badge">基础</span>
+                  <div class="intervention-card-enhanced" data-age="2-4,4-6" data-difficulty="1">
+                    <div class="card-header">
+                      <span class="card-icon"><i class="ri-restaurant-line"></i></span>
+                      <span class="card-badge">基础</span>
+                    </div>
+                    <h3>独立进餐</h3>
+                    <p>培养正确使用餐具、良好进餐习惯和餐桌礼仪</p>
+                    <div class="card-features">
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">正确使用勺子、筷子</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">保持桌面整洁</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">学习咀嚼和吞咽</span>
+                      </div>
+                    </div>
+                    <div class="card-meta">
+                      <div class="meta-item">
+                        <span class="meta-label">难度</span>
+                        <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
+                      </div>
+                      <div class="meta-item">
+                        <span class="meta-label">预计时间</span>
+                        <span class="meta-value">20-30分钟</span>
+                      </div>
+                    </div>
+                    <div class="card-actions">
+                      <button class="primary-btn" onclick="showTrainingGuide('eating')">开始训练</button>
+                    </div>
                   </div>
-                  <h3>独立进餐</h3>
-                  <p>培养正确使用餐具、良好进餐习惯和餐桌礼仪</p>
-                  <div class="card-features">
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">正确使用勺子、筷子</span>
-                    </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">保持桌面整洁</span>
-                    </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">学习咀嚼和吞咽</span>
-                    </div>
-                  </div>
-                  <div class="card-meta">
-                    <div class="meta-item">
-                      <span class="meta-label">难度</span>
-                      <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
-                    </div>
-                    <div class="meta-item">
-                      <span class="meta-label">预计时间</span>
-                      <span class="meta-value">20-30分钟</span>
-                    </div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="primary-btn" onclick="showTrainingGuide('eating')">开始训练</button>
-                    <button class="secondary-btn" onclick="showTrainingDetail('eating')">查看详情</button>
-                  </div>
-                </div>
 
-                <div class="intervention-card-enhanced">
-                  <div class="card-header">
-                    <span class="card-icon"><i class="ri-brush-line"></i></span>
-                    <span class="card-badge">进阶</span>
+                  <div class="intervention-card-enhanced" data-age="4-6,6-8" data-difficulty="2">
+                    <div class="card-header">
+                      <span class="card-icon"><i class="ri-brush-line"></i></span>
+                      <span class="card-badge">进阶</span>
+                    </div>
+                    <h3>洗漱整理</h3>
+                    <p>学习刷牙、洗脸、洗手等个人卫生习惯</p>
+                    <div class="card-features">
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">正确刷牙步骤</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">七步洗手法</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">整理个人用品</span>
+                      </div>
+                    </div>
+                    <div class="card-meta">
+                      <div class="meta-item">
+                        <span class="meta-label">难度</span>
+                        <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
+                      </div>
+                      <div class="meta-item">
+                        <span class="meta-label">预计时间</span>
+                        <span class="meta-value">10-15分钟</span>
+                      </div>
+                    </div>
+                    <div class="card-actions">
+                      <button class="primary-btn" onclick="showTrainingGuide('washing')">开始训练</button>
+                    </div>
                   </div>
-                  <h3>洗漱整理</h3>
-                  <p>学习刷牙、洗脸、洗手等个人卫生习惯</p>
-                  <div class="card-features">
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">正确刷牙步骤</span>
-                    </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">七步洗手法</span>
-                    </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">整理个人用品</span>
-                    </div>
-                  </div>
-                  <div class="card-meta">
-                    <div class="meta-item">
-                      <span class="meta-label">难度</span>
-                      <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
-                    </div>
-                    <div class="meta-item">
-                      <span class="meta-label">预计时间</span>
-                      <span class="meta-value">10-15分钟</span>
-                    </div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="primary-btn" onclick="showTrainingGuide('washing')">开始训练</button>
-                    <button class="secondary-btn" onclick="showTrainingDetail('washing')">查看详情</button>
-                  </div>
-                </div>
 
-                <div class="intervention-card-enhanced">
-                  <div class="card-header">
-                    <span class="card-icon"><i class="ri-hotel-bed-line"></i></span>
-                    <span class="card-badge">进阶</span>
-                  </div>
-                  <h3>整理床铺</h3>
-                  <p>学习叠被子、整理床铺，培养生活秩序感</p>
-                  <div class="card-features">
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">认识床铺结构</span>
+                  <div class="intervention-card-enhanced" data-age="6-8,8+" data-difficulty="3">
+                    <div class="card-header">
+                      <span class="card-icon"><i class="ri-hotel-bed-line"></i></span>
+                      <span class="card-badge">挑战</span>
                     </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">学习叠被子技巧</span>
+                    <h3>整理床铺</h3>
+                    <p>学习叠被子、整理床铺，培养生活秩序感</p>
+                    <div class="card-features">
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">认识床铺结构</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">学习叠被子技巧</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">整理枕头和床单</span>
+                      </div>
                     </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">整理枕头和床单</span>
+                    <div class="card-meta">
+                      <div class="meta-item">
+                        <span class="meta-label">难度</span>
+                        <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
+                      </div>
+                      <div class="meta-item">
+                        <span class="meta-label">预计时间</span>
+                        <span class="meta-value">10-15分钟</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="card-meta">
-                    <div class="meta-item">
-                      <span class="meta-label">难度</span>
-                      <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
+                    <div class="card-actions">
+                      <button class="primary-btn" onclick="showTrainingGuide('bedMaking')">开始训练</button>
                     </div>
-                    <div class="meta-item">
-                      <span class="meta-label">预计时间</span>
-                      <span class="meta-value">10-15分钟</span>
-                    </div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="primary-btn" onclick="showTrainingGuide('bedMaking')">开始训练</button>
-                    <button class="secondary-btn" onclick="showTrainingDetail('bedMaking')">查看详情</button>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- 社交技能训练 -->
-            <div class="intervention-tab" id="social">
-              <div class="intervention-grid">
-                <div class="intervention-card-enhanced">
-                  <div class="card-header">
-                    <span class="card-icon"><i class="ri-eye-line"></i></span>
-                    <span class="card-badge">基础</span>
-                  </div>
-                  <h3>眼神交流训练</h3>
-                  <p>培养与他人进行眼神接触的能力，建立社交连接</p>
-                  <div class="card-features">
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">镜子对视练习</span>
+              <!-- 社交技能训练 -->
+              <div class="intervention-tab" id="social" style="display: none;">
+                <div class="intervention-grid">
+                  <div class="intervention-card-enhanced" data-age="2-4,4-6" data-difficulty="1">
+                    <div class="card-header">
+                      <span class="card-icon"><i class="ri-eye-line"></i></span>
+                      <span class="card-badge">基础</span>
                     </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">游戏互动中对视</span>
+                    <h3>眼神交流训练</h3>
+                    <p>培养与他人进行眼神接触的能力，建立社交连接</p>
+                    <div class="card-features">
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">镜子对视练习</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">游戏互动中对视</span>
+                      </div>
+                      <div class="feature-item">
+                        <span class="feature-icon"><i class="ri-check-line"></i></span>
+                        <span class="feature-label">日常对话眼神训练</span>
+                      </div>
                     </div>
-                    <div class="feature-item">
-                      <span class="feature-icon"><i class="ri-check-line"></i></span>
-                      <span class="feature-label">日常对话眼神训练</span>
+                    <div class="card-meta">
+                      <div class="meta-item">
+                        <span class="meta-label">难度</span>
+                        <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
+                      </div>
+                      <div class="meta-item">
+                        <span class="meta-label">预计时间</span>
+                        <span class="meta-value">10-15分钟</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="card-meta">
-                    <div class="meta-item">
-                      <span class="meta-label">难度</span>
-                      <span class="meta-value"><i class="ri-star-fill"></i><i class="ri-star-fill"></i><i class="ri-star-fill"></i></span>
+                    <div class="card-actions">
+                      <button class="primary-btn" onclick="showTrainingGuide('eyeContact')">开始训练</button>
                     </div>
-                    <div class="meta-item">
-                      <span class="meta-label">预计时间</span>
-                      <span class="meta-value">10-15分钟</span>
-                    </div>
-                  </div>
-                  <div class="card-actions">
-                    <button class="primary-btn" onclick="showTrainingGuide('eyeContact')">开始训练</button>
-                    <button class="secondary-btn" onclick="showTrainingDetail('eyeContact')">查看详情</button>
-                  </div>
                 </div>
 
                 <div class="intervention-card-enhanced">
@@ -1423,210 +1426,222 @@
 
         <!-- 3. 知识库 -->
         <!-- 3.1 科普小课堂 -->
-        <section id="science-class" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
-          <div class="section-header" style="margin-bottom: 30px;">
-            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-graduation-cap-line" style="color: var(--primary-color);"></i> 科普小课堂</h3>
-            <p style="color: var(--text-light);">系统学习自闭症知识，建立科学康复观念</p>
+        <section id="science-class" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
+          <div class="section-header" style="margin-bottom: 20px; flex-shrink: 0;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;"><i class="ri-graduation-cap-line" style="color: var(--primary-color);"></i> 科普小课堂</h3>
+            <p style="color: var(--text-light); font-size: 0.9rem;">系统学习自闭症知识，建立科学康复观念</p>
           </div>
-          <div class="knowledge-container">
-            <!-- 核心概念模块 -->
-            <div class="method-category">
-              <h3><i class="ri-lightbulb-line"></i> 核心概念</h3>
-              <div class="knowledge-grid">
-                <div class="knowledge-card">
-                  <span class="card-icon"><i class="ri-question-line"></i></span>
-                  <h3>什么是自闭症谱系障碍</h3>
-                <p>
-                  全面解读自闭症谱系障碍的定义、特征及诊断标准，帮助家长建立科学认知。
-                </p>
-                <div class="card-meta">
-                  <span class="difficulty">入门级</span>
-                  <span class="read-time"><i class="ri-time-line"></i> 8分钟阅读</span>
-                </div>
-                <button class="card-btn" onclick="showArticle('whatIsAutism')">阅读全文</button>
-              </div>
 
-              <div class="knowledge-card">
-                <span class="card-icon"><i class="ri-question-line"></i></span>
-                <h3>自闭症的成因与机制</h3>
-                <p>深入探讨自闭症的遗传因素、神经生物学机制及环境因素的影响。</p>
-                <div class="card-meta">
-                  <span class="difficulty">进阶级</span>
-                  <span class="read-time"><i class="ri-time-line"></i> 12分钟阅读</span>
-                </div>
-                <button class="card-btn" onclick="showArticle('causes')">阅读全文</button>
-              </div>
-
-              <div class="knowledge-card">
-                <span class="card-icon"><i class="ri-search-line"></i></span>
-                <h3>早期筛查与诊断</h3>
-                <p>
-                  了解自闭症早期预警信号、筛查工具及专业诊断流程，把握黄金干预期。
-                </p>
-                <div class="card-meta">
-                  <span class="difficulty">入门级</span>
-                  <span class="read-time"><i class="ri-time-line"></i> 10分钟阅读</span>
-                </div>
-                <button class="card-btn" onclick="showArticle('earlyScreening')">阅读全文</button>
-              </div>
-
-              <div class="knowledge-card">
-                <span class="card-icon"><i class="ri-hand-heart-line"></i></span>
-                <h3>常见共患病</h3>
-                <p>
-                  介绍自闭症常见的共患病如ADHD、焦虑症、癫痫等，以及应对策略。
-                </p>
-                <div class="card-meta">
-                  <span class="difficulty">进阶级</span>
-                  <span class="read-time"><i class="ri-time-line"></i> 15分钟阅读</span>
-                </div>
-                <button class="card-btn" onclick="showArticle('comorbidity')">阅读全文</button>
-              </div>
+          <div class="knowledge-nav" style="margin-bottom: 15px; flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <div class="nav-tabs" style="display: flex; gap: 10px;">
+              <button class="pill-btn active" onclick="filterKnowledge('all', this)">全部</button>
+              <button class="pill-btn" onclick="filterKnowledge('concept', this)">核心概念</button>
+              <button class="pill-btn" onclick="filterKnowledge('myth', this)">误区辟谣</button>
+            </div>
+            <div class="search-box" style="position: relative; width: 250px;">
+              <input type="text" placeholder="搜索知识点..." oninput="searchKnowledge(this.value)" style="width: 100%; padding: 8px 15px 8px 35px; border-radius: 20px; border: 1px solid #eee; font-size: 0.9rem; outline: none;">
+              <i class="ri-search-line" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #999;"></i>
             </div>
           </div>
 
-          <!-- 误区辟谣专区 -->
-          <div class="method-category">
-            <h3><i class="ri-error-warning-line"></i> 误区辟谣专区</h3>
-            <div class="knowledge-grid">
-              <div class="knowledge-card" style="border-left-color: #ff6b6b">
-                <span class="card-icon"><i class="ri-syringe-line"></i></span>
-                <h3>疫苗导致自闭症？</h3>
-                <p>
-                  <strong>谣言！</strong>
-                  大量科学研究已证实疫苗与自闭症之间没有因果关系。了解真相，拒绝恐慌。
-                </p>
-                <div class="card-meta">
-                  <span class="difficulty" style="background: #ff6b6b">辟谣</span>
-                  <span class="read-time"><i class="ri-time-line"></i> 5分钟阅读</span>
+          <div class="knowledge-container" style="flex: 1; overflow-y: auto; padding-right: 5px;">
+            <!-- 核心概念模块 -->
+            <div class="method-category" data-cat="concept">
+              <h3 style="font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;"><i class="ri-lightbulb-line" style="color: var(--primary-color);"></i> 核心概念</h3>
+              <div class="knowledge-grid">
+                <div class="knowledge-card" data-title="什么是自闭症谱系障碍">
+                  <span class="card-icon"><i class="ri-question-line"></i></span>
+                  <h3>什么是自闭症谱系障碍</h3>
+                  <p>全面解读自闭症谱系障碍的定义、特征及诊断标准，帮助家长建立科学认知。</p>
+                  <div class="card-meta">
+                    <span class="difficulty">入门级</span>
+                    <span class="read-time"><i class="ri-time-line"></i> 8分钟阅读</span>
+                  </div>
+                  <button class="card-btn" onclick="showArticle('whatIsAutism')">阅读全文</button>
                 </div>
-                <button class="card-btn" onclick="showArticle('vaccineMyth')">了解真相</button>
-              </div>
 
-              <div class="knowledge-card" style="border-left-color: #ff6b6b">
-                <span class="card-icon"><i class="ri-hospital-line"></i></span>
-                <h3>自闭症可以治愈？</h3>
-                <p>
-                  <strong>谣言！</strong>
-                  自闭症不是疾病，而是一种神经发育差异。科学的干预可以帮助提升能力，但不存在"治愈"。
-                </p>
-                <div class="card-meta">
-                  <span class="difficulty" style="background: #ff6b6b">辟谣</span>
-                  <span class="read-time"><i class="ri-time-line"></i> 6分钟阅读</span>
+                <div class="knowledge-card" data-title="自闭症的成因与机制">
+                  <span class="card-icon"><i class="ri-question-line"></i></span>
+                  <h3>自闭症的成因与机制</h3>
+                  <p>深入探讨自闭症的遗传因素、神经生物学机制及环境因素的影响。</p>
+                  <div class="card-meta">
+                    <span class="difficulty">进阶级</span>
+                    <span class="read-time"><i class="ri-time-line"></i> 12分钟阅读</span>
+                  </div>
+                  <button class="card-btn" onclick="showArticle('causes')">阅读全文</button>
                 </div>
-                <button class="card-btn" onclick="showArticle('cureMyth')">了解真相</button>
-              </div>
 
-              <div class="knowledge-card" style="border-left-color: #ff6b6b">
-                <span class="card-icon"><i class="ri-heart-line"></i></span>
-                <h3>自闭症患者没有感情？</h3>
-                <p>
-                  <strong>谣言！</strong>
-                  自闭症患者同样有丰富的情感，只是表达方式可能不同。了解他们的情感世界。
-                </p>
-                <div class="card-meta">
-                  <span class="difficulty" style="background: #ff6b6b">辟谣</span>
-                  <span class="read-time"><i class="ri-time-line"></i> 7分钟阅读</span>
+                <div class="knowledge-card" data-title="早期筛查与诊断">
+                  <span class="card-icon"><i class="ri-search-line"></i></span>
+                  <h3>早期筛查与诊断</h3>
+                  <p>了解自闭症早期预警信号、筛查工具及专业诊断流程，把握黄金干预期。</p>
+                  <div class="card-meta">
+                    <span class="difficulty">入门级</span>
+                    <span class="read-time"><i class="ri-time-line"></i> 10分钟阅读</span>
+                  </div>
+                  <button class="card-btn" onclick="showArticle('earlyScreening')">阅读全文</button>
                 </div>
-                <button class="card-btn" onclick="showArticle('emotionMyth')">了解真相</button>
+
+                <div class="knowledge-card" data-title="常见共患病">
+                  <span class="card-icon"><i class="ri-hand-heart-line"></i></span>
+                  <h3>常见共患病</h3>
+                  <p>介绍自闭症常见的共患病如ADHD、焦虑症、癫痫等，以及应对策略。</p>
+                  <div class="card-meta">
+                    <span class="difficulty">进阶级</span>
+                    <span class="read-time"><i class="ri-time-line"></i> 15分钟阅读</span>
+                  </div>
+                  <button class="card-btn" onclick="showArticle('comorbidity')">阅读全文</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 误区辟谣专区 -->
+            <div class="method-category" data-cat="myth" style="margin-top: 30px;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;"><i class="ri-error-warning-line" style="color: #ff6b6b;"></i> 误区辟谣专区</h3>
+              <div class="knowledge-grid">
+                <div class="knowledge-card" style="border-left-color: #ff6b6b" data-title="疫苗导致自闭症">
+                  <span class="card-icon"><i class="ri-syringe-line"></i></span>
+                  <h3>疫苗导致自闭症？</h3>
+                  <p><strong>谣言！</strong>大量科学研究已证实疫苗与自闭症之间没有因果关系。了解真相，拒绝恐慌。</p>
+                  <div class="card-meta">
+                    <span class="difficulty" style="background: #ff6b6b">辟谣</span>
+                    <span class="read-time"><i class="ri-time-line"></i> 5分钟阅读</span>
+                  </div>
+                  <button class="card-btn" onclick="showArticle('vaccineMyth')">了解真相</button>
+                </div>
+
+                <div class="knowledge-card" style="border-left-color: #ff6b6b" data-title="自闭症可以治愈">
+                  <span class="card-icon"><i class="ri-hospital-line"></i></span>
+                  <h3>自闭症可以治愈？</h3>
+                  <p><strong>谣言！</strong>自闭症不是疾病，而是一种神经发育差异。科学的干预可以帮助提升能力。</p>
+                  <div class="card-meta">
+                    <span class="difficulty" style="background: #ff6b6b">辟谣</span>
+                    <span class="read-time"><i class="ri-time-line"></i> 6分钟阅读</span>
+                  </div>
+                  <button class="card-btn" onclick="showArticle('cureMyth')">了解真相</button>
+                </div>
+
+                <div class="knowledge-card" style="border-left-color: #ff6b6b" data-title="自闭症患者没有感情">
+                  <span class="card-icon"><i class="ri-heart-line"></i></span>
+                  <h3>自闭症患者没有感情？</h3>
+                  <p><strong>谣言！</strong>自闭症患者同样有丰富的情感，只是表达方式可能不同。了解他们的情感世界。</p>
+                  <div class="card-meta">
+                    <span class="difficulty" style="background: #ff6b6b">辟谣</span>
+                    <span class="read-time"><i class="ri-time-line"></i> 7分钟阅读</span>
+                  </div>
+                  <button class="card-btn" onclick="showArticle('emotionMyth')">了解真相</button>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         <!-- 3.2 康复手记 -->
-        <section id="recovery-notes" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
-          <div class="section-header" style="margin-bottom: 30px;">
-            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-file-list-line" style="color: var(--primary-color);"></i> 康复手记</h3>
-            <p style="color: var(--text-light);">记录孩子的康复历程与心得，分享真实的成长故事</p>
+        <section id="recovery-notes" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
+          <div class="section-header" style="margin-bottom: 20px; flex-shrink: 0;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;"><i class="ri-file-list-line" style="color: var(--primary-color);"></i> 康复手记</h3>
+            <p style="color: var(--text-light); font-size: 0.9rem;">记录孩子的康复历程与心得，分享真实的成长故事</p>
           </div>
 
-          <!-- 搜索栏 -->
-          <div class="knowledge-nav">
-            <div class="nav-tabs">
-              <button class="tab-btn active">全部案例</button>
-              <button class="tab-btn">语言发展</button>
-              <button class="tab-btn">感觉统合</button>
-              <button class="tab-btn">融合教育</button>
+          <div class="knowledge-nav" style="margin-bottom: 15px; flex-shrink: 0; display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+            <div class="nav-tabs" style="display: flex; gap: 10px;">
+              <button class="pill-btn active" data-cate="all" onclick="filterRecovery('all', this)">全部案例</button>
+              <button class="pill-btn" data-cate="language" onclick="filterRecovery('language', this)">语言发展</button>
+              <button class="pill-btn" data-cate="sensory" onclick="filterRecovery('sensory', this)">感觉统合</button>
+              <button class="pill-btn" data-cate="fusion" onclick="filterRecovery('fusion', this)">融合教育</button>
             </div>
-            <div class="knowledge-search">
-              <input
-                type="text"
-                class="knowledge-search-input"
-                placeholder="搜索康复案例..."
-              />
-              <button class="knowledge-search-btn"><i class="ri-search-line"></i></button>
+            <div class="search-box" style="position: relative; width: 250px;">
+              <input type="text" placeholder="搜索手记内容..." oninput="searchRecovery(this.value)" style="width: 100%; padding: 8px 15px 8px 35px; border-radius: 20px; border: 1px solid #eee; font-size: 0.9rem; outline: none;">
+              <i class="ri-search-line" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #999;"></i>
             </div>
           </div>
 
-          <!-- 康复案例展示 -->
-          <div class="method-category">
-            <h3><i class="ri-health-book-line"></i> 康复案例展示</h3>
-            <div class="method-grid">
-              <div class="method-card">
-                <div class="method-header">
-                  <h4><i class="ri-chat-1-line"></i> 小明的故事：从无语言到简单对话</h4>
-                  <span class="evidence-level">语言发展</span>
+          <div class="recovery-container" style="flex: 1; overflow-y: auto; padding-right: 5px;">
+            <div class="recovery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+              <!-- 案例 1 -->
+              <div class="knowledge-card recovery-card" data-cate="language" data-title="5岁男孩从无语言到主动表达的转变">
+                <div class="card-tag" style="position: absolute; top: 15px; right: 15px; background: rgba(var(--primary-rgb), 0.1); color: var(--primary-color); padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">语言发展</div>
+                <span class="card-icon"><i class="ri-user-smile-line"></i></span>
+                <h3>5岁男孩从无语言到主动表达</h3>
+                <p>通过为期6个月的绘本互动与强化训练，孩子开始尝试使用短句表达需求。</p>
+                <div class="card-meta">
+                  <span class="date"><i class="ri-calendar-line"></i> 2026-03-20</span>
+                  <span class="author"><i class="ri-user-follow-line"></i> 林老师</span>
                 </div>
-                <p>
-                  小明3岁时被诊断为自闭症，完全没有语言能力。经过2年的系统干预，现在能够进行简单的日常对话...
-                </p>
-                <div class="method-tags">
-                  <span class="tag">语言训练</span>
-                  <span class="tag">ABA</span>
-                  <span class="tag">2年历程</span>
-                </div>
-                <div class="card-meta" style="margin-bottom: 15px">
-                  <span><i class="ri-calendar-line"></i> 干预时间：2年</span>
-                  <span><i class="ri-focus-3-line"></i> 关键进展：开口说话</span>
-                </div>
-                <button class="method-btn" onclick="showCase('xiaoming')">查看完整案例</button>
+                <button class="card-btn" onclick="showArticle('recovery_case_1')">查看详情</button>
               </div>
 
-              <div class="method-card">
-                <div class="method-header">
-                  <h4><i class="ri-run-line"></i> 小红的进步：感觉统合训练成果</h4>
-                  <span class="evidence-level">感觉统合</span>
+              <!-- 案例 2 -->
+              <div class="knowledge-card recovery-card" data-cate="sensory" data-title="感统训练如何改善孩子的焦虑情绪">
+                <div class="card-tag" style="position: absolute; top: 15px; right: 15px; background: rgba(var(--primary-rgb), 0.1); color: var(--primary-color); padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">感觉统合</div>
+                <span class="card-icon"><i class="ri-pulse-line"></i></span>
+                <h3>感统训练改善孩子焦虑情绪</h3>
+                <p>记录了亮亮在触觉脱敏和本体觉训练后，对嘈杂环境的耐受力显著提升的过程。</p>
+                <div class="card-meta">
+                  <span class="date"><i class="ri-calendar-line"></i> 2026-03-15</span>
+                  <span class="author"><i class="ri-user-follow-line"></i> 王康复师</span>
                 </div>
-                <p>
-                  小红对触觉和声音极度敏感，经常情绪崩溃。通过6个月的感觉统合训练，她的感官调节能力显著提升...
-                </p>
-                <div class="method-tags">
-                  <span class="tag">感统训练</span>
-                  <span class="tag">情绪管理</span>
-                  <span class="tag">6个月</span>
-                </div>
-                <div class="card-meta" style="margin-bottom: 15px">
-                  <span><i class="ri-calendar-line"></i> 干预时间：6个月</span>
-                  <span><i class="ri-focus-3-line"></i> 关键进展：情绪稳定</span>
-                </div>
-                <button class="method-btn" onclick="showCase('xiaohong')">查看完整案例</button>
+                <button class="card-btn" onclick="showArticle('recovery_case_2')">查看详情</button>
               </div>
 
-              <div class="method-card">
-                <div class="method-header">
-                  <h4><i class="ri-school-line"></i> 小华的融合教育之路</h4>
-                  <span class="evidence-level">融合教育</span>
+              <!-- 案例 3 -->
+              <div class="knowledge-card recovery-card" data-cate="fusion" data-title="走进普校：融合教育的第一步">
+                <div class="card-tag" style="position: absolute; top: 15px; right: 15px; background: rgba(var(--primary-rgb), 0.1); color: var(--primary-color); padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">融合教育</div>
+                <span class="card-icon"><i class="ri-community-line"></i></span>
+                <h3>走进普校：融合教育的第一步</h3>
+                <p>分享了作为影子公司如何辅助孩子适应学校规则，并与普通同伴建立初步社交。</p>
+                <div class="card-meta">
+                  <span class="date"><i class="ri-calendar-line"></i> 2026-03-10</span>
+                  <span class="author"><i class="ri-user-follow-line"></i> 晨晨妈妈</span>
                 </div>
-                <p>
-                  小华从特教班逐步过渡到普通幼儿园，现在已经能够和同龄孩子一起上课、游戏，建立了友谊...
-                </p>
-                <div class="method-tags">
-                  <span class="tag">融合教育</span>
-                  <span class="tag">社交技能</span>
-                  <span class="tag">3年历程</span>
+                <button class="card-btn" onclick="showArticle('recovery_case_3')">查看详情</button>
+              </div>
+            </div>
+
+            <!-- 整合经典康复案例展示 -->
+            <div class="method-category" style="margin-top: 30px; border-top: 1px dashed #eee; padding-top: 20px;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;"><i class="ri-health-book-line" style="color: var(--primary-color);"></i> 经典案例展示库</h3>
+              <div class="recovery-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                <div class="knowledge-card recovery-card" style="border-left: 4px solid var(--primary-color);" data-cate="language" data-title="小明的故事：从无语言到简单对话">
+                  <span class="card-icon" style="background: rgba(var(--primary-rgb), 0.1); color: var(--primary-color);"><i class="ri-chat-1-line"></i></span>
+                  <h3>小明的故事：从无语言到简单对话</h3>
+                  <p>小明3岁时被诊断为自闭症，完全没有语言能力。经过2年的系统干预，现在能够进行简单的日常对话...</p>
+                  <div class="card-meta">
+                    <span class="date"><i class="ri-calendar-line"></i> 干预时长: 2年</span>
+                    <span class="author"><i class="ri-user-star-line"></i> 专家案例</span>
+                  </div>
+                  <button class="card-btn" onclick="showCase('xiaoming')">查看完整深度分析</button>
                 </div>
-                <div class="card-meta" style="margin-bottom: 15px">
-                  <span><i class="ri-calendar-line"></i> 干预时间：3年</span>
-                  <span><i class="ri-focus-3-line"></i> 关键进展：成功融合</span>
+
+                <div class="knowledge-card recovery-card" style="border-left: 4px solid var(--primary-color);" data-cate="sensory" data-title="小红的进步：感觉统合训练成果">
+                  <span class="card-icon" style="background: rgba(var(--primary-rgb), 0.1); color: var(--primary-color);"><i class="ri-run-line"></i></span>
+                  <h3>小红的进步：感觉统合训练成果</h3>
+                  <p>小红对触觉和声音极度敏感，经常情绪崩溃。通过6个月的感觉统合训练，她的感官调节能力显著提升...</p>
+                  <div class="card-meta">
+                    <span class="date"><i class="ri-calendar-line"></i> 干预时长: 6个月</span>
+                    <span class="author"><i class="ri-user-star-line"></i> 专家案例</span>
+                  </div>
+                  <button class="card-btn" onclick="showCase('xiaohong')">查看完整深度分析</button>
                 </div>
-                <button class="method-btn" onclick="showCase('xiaohua')">查看完整案例</button>
+
+                <div class="knowledge-card recovery-card" style="border-left: 4px solid var(--primary-color);" data-cate="fusion" data-title="小华的融合教育之路">
+                  <span class="card-icon" style="background: rgba(var(--primary-rgb), 0.1); color: var(--primary-color);"><i class="ri-school-line"></i></span>
+                  <h3>小华的融合教育之路</h3>
+                  <p>小华从特教班逐步过渡到普通幼儿园，现在已经能够和同龄孩子一起上课、游戏，建立了友谊...</p>
+                  <div class="card-meta">
+                    <span class="date"><i class="ri-calendar-line"></i> 干预时长: 3年</span>
+                    <span class="author"><i class="ri-user-star-line"></i> 专家案例</span>
+                  </div>
+                  <button class="card-btn" onclick="showCase('xiaohua')">查看完整深度分析</button>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- 经验分享板块 -->
-          <div class="method-category">
+          <!-- 康复案例展示 (原位置，现已移除，合并至康复手记模块) -->
+          
+          <!-- 经验分享板块 (原位置，也建议合并或单独处理) -->
+          <div class="method-category" style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
             <h3><i class="ri-chat-3-line"></i> 经验分享</h3>
             <div class="knowledge-grid">
               <div class="knowledge-card">
@@ -2348,18 +2363,25 @@
             </div>
 
             <!-- 预约进度查询 -->
-            <div class="appointment-progress-section">
-              <h4 class="section-subtitle"><i class="ri-search-line"></i> 预约进度查询</h4>
-              <div class="progress-query-box">
+            <div class="appointment-progress-section" style="margin-top: 30px; background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #eee;">
+              <h4 class="section-subtitle" style="margin-bottom: 20px; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;"><i class="ri-search-line" style="color: var(--primary-color);"></i> 预约进度查询</h4>
+              <div class="progress-query-box" style="display: flex; gap: 10px; margin-bottom: 20px;">
                 <input
                   type="text"
-                  placeholder="请输入预约编号或手机号码查询"
+                  id="appointmentQueryInput"
+                  placeholder="请输入手机号码查询 (尝试: 13800138000)"
                   class="query-input"
+                  style="flex: 1; padding: 10px 15px; border-radius: 8px; border: 1px solid #ddd; outline: none;"
                 />
-                <button class="query-btn">查询</button>
+                <button class="query-btn" onclick="queryAppointmentProgress()" style="padding: 10px 25px; background: var(--primary-color); color: #fff; border: none; border-radius: 8px; cursor: pointer;">查询</button>
               </div>
-              <div class="progress-placeholder">
-                <p>输入预约信息后，可在此处查看预约状态和进度</p>
+              
+              <div id="appointmentQueryResult" class="progress-result-container" style="display: none;">
+                <!-- 结果将由 JS 渲染 -->
+              </div>
+
+              <div id="appointmentQueryPlaceholder" class="progress-placeholder" style="text-align: center; padding: 30px; color: #999; border: 2px dashed #f0f0f0; border-radius: 8px;">
+                <p>输入预约手机号后，可在此处查看预约状态和进度</p>
               </div>
             </div>
 
@@ -2657,95 +2679,60 @@
 
         <!-- 5. 关于我们模块 -->
         <!-- 5.1 星心简介 -->
-        <section id="about-intro" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
-          <div class="section-header" style="margin-bottom: 30px;">
-            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-shining-line" style="color: var(--primary-color);"></i> 星心简介</h3>
-            <p style="color: var(--text-light);">了解星心守护的故事与使命</p>
+        <section id="about-intro" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
+          <div class="section-header" style="margin-bottom: 20px; flex-shrink: 0;">
+            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;"><i class="ri-shining-line" style="color: var(--primary-color);"></i> 星心简介</h3>
+            <p style="color: var(--text-light); font-size: 0.9rem;">了解星心守护的故事与使命</p>
           </div>
-          <div class="about-intro-content">
-            <!-- 机构介绍 -->
-            <div class="intro-card">
-              <div class="intro-icon"><i class="ri-building-line"></i></div>
-              <div class="intro-text">
-                <h4>机构介绍</h4>
-                <p>
-                  星心自闭症支持系统成立于<strong>2026年</strong>，是一家专注于为自闭症儿童及其家庭提供专业支持服务的机构。自成立以来，我们始终秉持着专业、爱心、责任的理念，已服务超过<strong>1000个家庭</strong>，帮助无数孩子获得更好的成长与发展机会。
-                </p>
-              </div>
-            </div>
-            <!-- 成立初衷 -->
-            <div class="intro-card">
-              <div class="intro-icon"><i class="ri-heart-fill"></i></div>
-              <div class="intro-text">
-                <h4>成立初衷</h4>
-                <p>
-                  创始人曾是一名特殊教育工作者，在多年的工作中，亲眼目睹了自闭症家庭面临的种种困境与挑战。许多家庭因为缺乏专业指导和资源支持，在康复路上艰难前行。正是这些经历，让我们决心创建一个专业、温暖的支持平台，用我们的专业知识和真挚爱心，帮助更多家庭走出困境，看到希望。
-                </p>
-              </div>
-            </div>
-            <!-- 使命愿景 -->
-            <div class="mission-vision-grid">
-              <div class="mv-card mission">
-                <div class="mv-icon"><i class="ri-focus-3-line"></i></div>
-                <h4>我们的使命</h4>
-                <p>让每个自闭症儿童都能获得专业的干预支持，拥有平等发展的机会</p>
-              </div>
-              <div class="mv-card vision">
-                <div class="mv-icon"><i class="ri-star-line"></i></div>
-                <h4>我们的愿景</h4>
-                <p>
-                  成为最值得信赖的自闭症支持平台，让每一个星星的孩子都能闪耀光芒
-                </p>
-              </div>
-              <div class="mv-card values">
-                <div class="mv-icon"><i class="ri-vip-diamond-line"></i></div>
-                <h4>核心价值观</h4>
-                <div class="values-tags">
-                  <span class="value-tag">尊重</span>
-                  <span class="value-tag">陪伴</span>
-                  <span class="value-tag">科学</span>
-                  <span class="value-tag">温暖</span>
+          
+          <div class="about-scroll-container" style="flex: 1; overflow-y: auto; padding-right: 5px;">
+            <div class="about-intro-content">
+              <!-- 机构介绍 -->
+              <div class="intro-card" style="margin-bottom: 20px;">
+                <div class="intro-icon"><i class="ri-building-line"></i></div>
+                <div class="intro-text">
+                  <h4 style="margin-bottom: 8px;">机构介绍</h4>
+                  <p style="font-size: 0.95rem; line-height: 1.6;">
+                    星心自闭症支持系统成立于<strong>2026年</strong>，是一家专注于为自闭症儿童及其家庭提供专业支持服务的机构。已服务超过<strong>1000个家庭</strong>，帮助无数孩子获得更好的成长与发展机会。
+                  </p>
                 </div>
               </div>
-            </div>
+              
+              <!-- 使命愿景 -->
+              <div class="mission-vision-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                <div class="mv-card mission" style="padding: 15px;">
+                  <div class="mv-icon" style="font-size: 1.5rem; margin-bottom: 10px;"><i class="ri-focus-3-line"></i></div>
+                  <h4 style="font-size: 1.1rem; margin-bottom: 8px;">我们的使命</h4>
+                  <p style="font-size: 0.9rem;">让每个自闭症儿童都能获得专业的干预支持，拥有平等发展的机会</p>
+                </div>
+                <div class="mv-card vision" style="padding: 15px;">
+                  <div class="mv-icon" style="font-size: 1.5rem; margin-bottom: 10px;"><i class="ri-star-line"></i></div>
+                  <h4 style="font-size: 1.1rem; margin-bottom: 8px;">我们的愿景</h4>
+                  <p style="font-size: 0.9rem;">成为最值得信赖的支持平台，让每一个星星的孩子都能闪耀光芒</p>
+                </div>
+              </div>
 
-            <!-- 守护理念整合进简介 -->
-            <div class="about-values-content" style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 40px;">
-              <div class="section-header" style="text-align: left; margin-bottom: 30px;">
-                <h3 style="font-size: 1.5rem;"><i class="ri-heart-3-line"></i> 守护理念</h3>
-                <p>我们的服务理念与价值观</p>
-              </div>
-              <!-- 四大核心价值观 -->
-              <div class="values-grid">
-                <div class="value-card">
-                  <div class="value-icon"><i class="ri-hand-heart-line"></i></div>
-                  <h4>尊重</h4>
-                  <p>
-                    尊重每个孩子的独特性，接纳他们的不同。我们相信每个孩子都是独一无二的星星，都有自己的光芒。
-                  </p>
+              <!-- 守护理念 -->
+              <div class="about-values-content" style="border-top: 1px solid #eee; padding-top: 25px;">
+                <div class="section-header" style="text-align: left; margin-bottom: 15px;">
+                  <h4 style="font-size: 1.2rem; display: flex; align-items: center; gap: 8px;"><i class="ri-heart-3-line" style="color: #ff6b6b;"></i> 守护理念</h4>
                 </div>
-                <div class="value-card">
-                  <div class="value-icon"><i class="ri-heart-line"></i></div>
-                  <h4>陪伴</h4>
-                  <p>
-                    全程陪伴每个家庭，不让他们孤单前行。从评估到干预，从训练到成长，我们始终在您身边。
-                  </p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon"><i class="ri-heart-3-line"></i></div>
-                  <h4>科学</h4>
-                  <p>
-                    基于循证医学，采用科学有效的干预方法。我们的每一个方案都有据可依，确保孩子获得最好的支持。
-                  </p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon"><i class="ri-star-line"></i></div>
-                  <h4>温暖</h4>
-                  <p>
-                    用爱心和耐心，创造温暖的支持环境。在这里，每一个家庭都能感受到家的温暖和关怀。
-                  </p>
+                <div class="values-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                  <div class="value-card" style="padding: 12px; border-radius: 12px; border: 1px solid #f0f0f0;">
+                    <div class="value-icon" style="font-size: 1.2rem; margin-bottom: 5px;"><i class="ri-hand-heart-line"></i></div>
+                    <h5 style="margin-bottom: 5px;">尊重</h5>
+                    <p style="font-size: 0.85rem; color: #666;">尊重每个孩子的独特性，接纳他们的不同，相信每个孩子的光芒。</p>
+                  </div>
+                  <div class="value-card" style="padding: 12px; border-radius: 12px; border: 1px solid #f0f0f0;">
+                    <div class="value-icon" style="font-size: 1.2rem; margin-bottom: 5px;"><i class="ri-heart-line"></i></div>
+                    <h5 style="margin-bottom: 5px;">陪伴</h5>
+                    <p style="font-size: 0.85rem; color: #666;">全程陪伴每个家庭，从评估到干预，我们始终在您身边。</p>
+                  </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
               
               <!-- 服务承诺 -->
               <div class="service-promise" style="margin-top: 30px;">
@@ -2976,71 +2963,71 @@
         </section>
 
         <!-- 星语助手模块 -->
-        <section id="assistant" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-robot-line"></i> 星语助手</h3>
-            <p>AI智能助手，24小时陪伴支持</p>
+        <section id="assistant" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; height: 100%; display: flex; flex-direction: column;">
+          <div class="section-header" style="margin-bottom: 12px; flex-shrink: 0;">
+            <h3 style="font-size: 1.1rem; display: flex; align-items: center; gap: 8px;"><i class="ri-robot-line" style="color: var(--primary-color);"></i> 星语助手</h3>
+            <p style="color: var(--text-light); font-size: 0.85rem;">AI智能助手，24小时陪伴支持</p>
           </div>
 
           <!-- Dify 聊天对话框 -->
-          <div class="assistant-iframe-container" style="width: 100%; height: 750px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 30px;">
+          <div class="assistant-iframe-container" style="width: 100%; flex: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 12px;">
             <iframe
               src="https://udify.app/chatbot/EmUprlFna2N9LIv7"
-              style="width: 100%; height: 100%; min-height: 700px"
+              style="width: 100%; height: 100%;"
               frameborder="0"
               allow="microphone">
             </iframe>
           </div>
 
           <!-- 功能介绍 -->
-          <div class="assistant-features">
-            <div class="feature-card">
-              <div class="feature-icon"><i class="ri-lightbulb-line"></i></div>
-              <h4>智能问答</h4>
-              <p>科普、训练、情绪问题快速解答</p>
+          <div class="assistant-features" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; flex-shrink: 0;">
+            <div class="feature-card" style="padding: 10px; text-align: center; background: white; border-radius: 8px; border: 1px solid #eee;">
+              <div class="feature-icon" style="margin-bottom: 4px; color: var(--primary-color);"><i class="ri-lightbulb-line"></i></div>
+              <h4 style="margin-bottom: 2px; font-size: 0.9rem;">智能问答</h4>
+              <p style="font-size: 0.75rem; margin: 0; color: #888;">专业知识解答</p>
             </div>
-            <div class="feature-card">
-              <div class="feature-icon"><i class="ri-chat-3-line"></i></div>
-              <h4>快捷咨询</h4>
-              <p>全程陪伴，随时解答疑问</p>
+            <div class="feature-card" style="padding: 10px; text-align: center; background: white; border-radius: 8px; border: 1px solid #eee;">
+              <div class="feature-icon" style="margin-bottom: 4px; color: var(--primary-color);"><i class="ri-chat-3-line"></i></div>
+              <h4 style="margin-bottom: 2px; font-size: 0.9rem;">快捷咨询</h4>
+              <p style="font-size: 0.75rem; margin: 0; color: #888;">全天候陪伴</p>
             </div>
-            <div class="feature-card">
-              <div class="feature-icon"><i class="ri-focus-3-line"></i></div>
-              <h4>个性化建议</h4>
-              <p>基于孩子情况提供建议</p>
+            <div class="feature-card" style="padding: 10px; text-align: center; background: white; border-radius: 8px; border: 1px solid #eee;">
+              <div class="feature-icon" style="margin-bottom: 4px; color: var(--primary-color);"><i class="ri-focus-3-line"></i></div>
+              <h4 style="margin-bottom: 2px; font-size: 0.9rem;">个性建议</h4>
+              <p style="font-size: 0.75rem; margin: 0; color: #888;">专属康复建议</p>
             </div>
           </div>
         </section>
 
         <!-- 个人中心模块 -->
-        <section id="user-center" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none;">
-          <div class="section-header" style="margin-bottom: 30px;">
-            <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px;"><i class="ri-user-settings-line" style="color: var(--primary-color);"></i> 个人中心</h3>
-            <p style="color: var(--text-light);">管理您的账号信息与康复档案</p>
+        <section id="user-center" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex: 1; display: flex; flex-direction: column;">
+          <div class="section-header" style="margin-bottom: 16px; flex-shrink: 0;">
+            <h3 style="font-size: 1.1rem; display: flex; align-items: center; gap: 8px;"><i class="ri-user-settings-line" style="color: var(--primary-color);"></i> 个人中心</h3>
+            <p style="color: var(--text-light); font-size: 0.85rem;">管理您的账号信息与康复档案</p>
           </div>
-          <div class="user-center-content" style="background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-            <div class="user-profile-header" style="display: flex; align-items: center; gap: 20px; border-bottom: 1px solid #eee; padding-bottom: 20px; margin-bottom: 30px;">
-              <img src="assets/1.jpg" alt="用户头像" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+          <div class="user-center-content" style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); flex: 1; overflow-y: auto;">
+            <div class="user-profile-header" style="display: flex; align-items: center; gap: 16px; border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 16px;">
+              <img src="assets/1.jpg" alt="用户头像" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover;">
               <div class="user-main-info">
-                <h4 style="margin: 0; font-size: 1.5rem;">家长用户 <span style="font-size: 0.8rem; background: #e3f2fd; color: #1976d2; padding: 2px 8px; border-radius: 4px; vertical-align: middle;">VIP会员</span></h4>
-                <p style="color: #666; margin: 5px 0 0;">ID: SH88001 | 注册时间: 2024-01-15</p>
+                <h4 style="margin: 0; font-size: 1.1rem;">家长用户 <span style="font-size: 0.7rem; background: #e3f2fd; color: #1976d2; padding: 1px 6px; border-radius: 4px; vertical-align: middle;">VIP会员</span></h4>
+                <p style="color: #666; margin: 2px 0 0; font-size: 0.8rem;">ID: SH88001 | 注册时间: 2024-01-15</p>
               </div>
             </div>
-            <div class="user-settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-              <div class="setting-item" style="padding: 20px; border: 1px solid #eee; border-radius: 8px; cursor: pointer;">
-                <i class="ri-shield-user-line" style="font-size: 1.5rem; color: #3b71ca;"></i>
-                <h5 style="margin: 10px 0 5px;">账户安全</h5>
-                <p style="font-size: 0.9rem; color: #888;">修改密码、手机绑定、注销账号</p>
+            <div class="user-settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+              <div class="setting-item" style="padding: 12px; border: 1px solid #eee; border-radius: 8px; cursor: pointer; background: #fcfcfc;">
+                <i class="ri-shield-user-line" style="font-size: 1.1rem; color: #3b71ca;"></i>
+                <h5 style="margin: 6px 0 2px; font-size: 0.95rem;">账户安全</h5>
+                <p style="font-size: 0.75rem; color: #888; margin: 0;">修改密码、手机、注销</p>
               </div>
-              <div class="setting-item" style="padding: 20px; border: 1px solid #eee; border-radius: 8px; cursor: pointer;">
-                <i class="ri-file-list-3-line" style="font-size: 1.5rem; color: #3b71ca;"></i>
-                <h5 style="margin: 10px 0 5px;">我的预约</h5>
-                <p style="font-size: 0.9rem; color: #888;">查看正在进行的与历史预约情况</p>
+              <div class="setting-item" style="padding: 12px; border: 1px solid #eee; border-radius: 8px; cursor: pointer; background: #fcfcfc;">
+                <i class="ri-file-list-3-line" style="font-size: 1.1rem; color: #3b71ca;"></i>
+                <h5 style="margin: 6px 0 2px; font-size: 0.95rem;">我的预约</h5>
+                <p style="font-size: 0.75rem; color: #888; margin: 0;">查看进行中与历史预约</p>
               </div>
-              <div class="setting-item" style="padding: 20px; border: 1px solid #eee; border-radius: 8px; cursor: pointer;">
-                <i class="ri-heart-pulse-line" style="font-size: 1.5rem; color: #3b71ca;"></i>
-                <h5 style="margin: 10px 0 5px;">健康档案</h5>
-                <p style="font-size: 0.9rem; color: #888;">管理孩子的评估报告与干预记录</p>
+              <div class="setting-item" style="padding: 12px; border: 1px solid #eee; border-radius: 8px; cursor: pointer; background: #fcfcfc;">
+                <i class="ri-heart-pulse-line" style="font-size: 1.1rem; color: #3b71ca;"></i>
+                <h5 style="margin: 6px 0 2px; font-size: 0.95rem;">健康档案</h5>
+                <p style="font-size: 0.75rem; color: #888; margin: 0;">管理评估报告与记录</p>
               </div>
               <div class="setting-item" style="padding: 20px; border: 1px solid #eee; border-radius: 8px; cursor: pointer;">
                 <i class="ri-notification-3-line" style="font-size: 1.5rem; color: #3b71ca;"></i>
@@ -3312,7 +3299,237 @@
       };
 
       // 启动路由
-      window.addEventListener('DOMContentLoaded', () => router.init());
+      window.addEventListener('DOMContentLoaded', () => {
+        router.init();
+        if (typeof initTrainingModule === 'function') {
+           initTrainingModule(); // 初始化日常训练模块
+        }
+      });
+    </script>
+
+    <!-- 业务逻辑脚本 -->
+    <script>
+      /**
+       * 日常训练模块逻辑
+       */
+      window.switchTrainingTab = function(tabId, btn) {
+        // 1. 切换按钮状态 (Pill 按钮)
+        // 注意：这里需要支持多个页签切换。目前按钮是放在父容器中的。
+        if (btn) {
+          const parent = btn.parentElement;
+          parent.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        } else {
+          // 根据 tabId 兜底修正按钮状态
+          document.querySelectorAll('#daily-training .pill-btn').forEach(b => {
+             b.classList.toggle('active', b.getAttribute('onclick') && b.getAttribute('onclick').includes(tabId));
+          });
+        }
+        
+        // 2. 隐藏所有 Tab 内容
+        const allTabs = document.querySelectorAll('#daily-training .intervention-tab');
+        allTabs.forEach(tab => {
+          tab.style.display = 'none';
+          tab.classList.remove('active');
+        });
+        
+        // 3. 显示当前选中的 Tab
+        const activeTab = document.getElementById(tabId);
+        if (activeTab) {
+          activeTab.style.display = 'block';
+          activeTab.classList.add('active');
+          console.log('Switched to training tab:', tabId);
+        }
+        
+        // 4. 重置滤镜并应用到新显示的Tab
+        applyTrainingFilters();
+      };
+
+      /**
+       * 初始化日常训练模块
+       */
+      function initTrainingModule() {
+        const defaultTab = 'daily-life'; // 默认显示生活技能
+        const firstBtn = document.querySelector(`#daily-training .pill-btn[onclick*="${defaultTab}"]`);
+        window.switchTrainingTab(defaultTab, firstBtn);
+      }
+
+      window.filterTrainingByAge = function(age) {
+        applyTrainingFilters();
+      };
+
+      window.filterByDifficulty = function(level) {
+        applyTrainingFilters();
+      };
+
+      function applyTrainingFilters() {
+        const age = document.querySelector('#daily-training .age-filter').value;
+        const difficulty = document.querySelector('#daily-training .difficulty-filter').value;
+        const activeTab = document.querySelector('#daily-training .intervention-tab.active');
+        
+        if (!activeTab) return;
+        
+        const cards = activeTab.querySelectorAll('.intervention-card-enhanced');
+        cards.forEach(card => {
+          const cardAge = card.dataset.age || '';
+          const cardDiff = card.dataset.difficulty || '';
+          
+          const ageMatch = age === 'all' || cardAge.includes(age);
+          const diffMatch = difficulty === 'all' || cardDiff === difficulty;
+          
+          card.style.display = (ageMatch && diffMatch) ? 'flex' : 'none';
+        });
+      }
+
+      window.showTrainingGuide = function(type) {
+        alert('正在进入' + type + '训练引导模式...');
+        // 实际应用中会跳转到具体的训练演示页面或交互
+      };
+
+      /**
+       * 科普小课堂逻辑
+       */
+      window.filterKnowledge = function(cat, btn) {
+        // 按钮状态
+        if (btn) {
+          document.querySelectorAll('#science-class .pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+        
+        // 显隐分类
+        document.querySelectorAll('#science-class .method-category').forEach(group => {
+          if (cat === 'all') {
+            group.style.display = 'block';
+          } else {
+            group.style.display = group.dataset.cat === cat ? 'block' : 'none';
+          }
+        });
+      };
+
+      window.searchKnowledge = function(query) {
+        query = query.toLowerCase().trim();
+        const cards = document.querySelectorAll('#science-class .knowledge-card');
+        
+        cards.forEach(card => {
+          const title = card.dataset.title.toLowerCase();
+          const desc = card.querySelector('p').textContent.toLowerCase();
+          const isMatch = title.includes(query) || desc.includes(query);
+          card.style.display = isMatch ? 'flex' : 'none';
+        });
+        
+        // 隐藏没有内容的分类
+        document.querySelectorAll('#science-class .method-category').forEach(group => {
+          const visibleCards = Array.from(group.querySelectorAll('.knowledge-card')).filter(c => c.style.display !== 'none');
+          group.style.display = visibleCards.length > 0 ? 'block' : 'none';
+        });
+      };
+
+      window.showArticle = function(id) {
+        // 尝试调用 scripts.js 中的原函数，如果不存在则回退到 alert
+        if (typeof showArticle === 'function') {
+          showArticle(id);
+        } else {
+          alert('正在加载内容：' + id);
+        }
+      };
+
+      /**
+       * 康复手记模块逻辑
+       */
+      window.filterRecovery = function(cate, btn) {
+        // 按钮状态
+        if (btn) {
+          document.querySelectorAll('#recovery-notes .pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+        
+        // 过滤卡片
+        const cards = document.querySelectorAll('#recovery-notes .recovery-card');
+        cards.forEach(card => {
+          if (cate === 'all') {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = card.dataset.cate === cate ? 'flex' : 'none';
+          }
+        });
+      };
+
+      window.searchRecovery = function(query) {
+        query = query.toLowerCase().trim();
+        const cards = document.querySelectorAll('#recovery-notes .recovery-card');
+        
+        cards.forEach(card => {
+          const title = card.dataset.title.toLowerCase();
+          const desc = card.querySelector('p').textContent.toLowerCase();
+          const isMatch = title.includes(query) || desc.includes(query);
+          card.style.display = isMatch ? 'flex' : 'none';
+        });
+      };
+
+      /**
+       * 预约查询逻辑 (Mock)
+       */
+      const mockAppointments = [
+        { id: 'APT001', phone: '13800138000', type: '专家物理评估', date: '2026-04-10', time: '14:30', status: '待确认', teacher: '林老师' },
+        { id: 'APT002', phone: '13912345678', type: '感统训练体验', date: '2026-04-05', time: '10:00', status: '进行中', teacher: '王康复师' },
+        { id: 'APT003', phone: '13888888888', type: '语言发展评估', date: '2026-03-25', time: '15:00', status: '已完成', teacher: '张专家' }
+      ];
+
+      window.queryAppointmentProgress = function() {
+        const phone = document.getElementById('appointmentQueryInput').value.trim();
+        const resultContainer = document.getElementById('appointmentQueryResult');
+        const placeholder = document.getElementById('appointmentQueryPlaceholder');
+        
+        if (!phone) {
+          alert('请输入查询号码');
+          return;
+        }
+
+        const matches = mockAppointments.filter(apt => apt.phone === phone);
+        
+        if (matches.length > 0) {
+          placeholder.style.display = 'none';
+          resultContainer.style.display = 'block';
+          
+          let html = '<div style="display: grid; gap: 15px;">';
+          matches.forEach(apt => {
+            const statusColor = apt.status === '待确认' ? '#f39c12' : (apt.status === '进行中' ? '#27ae60' : '#7f8c8d');
+            html += `
+              <div class="appointment-card-mock" style="border: 1px solid #eef2f7; padding: 15px; border-radius: 10px; background: #f8f9fa; border-left: 4px solid ${statusColor}; position: relative; overflow: hidden;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                  <strong style="color: #333;">${apt.type}</strong>
+                  <span style="background: ${statusColor}; color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 0.8rem;">${apt.status}</span>
+                </div>
+                <div style="font-size: 0.9rem; color: #666; display: flex; flex-direction: column; gap: 4px;">
+                  <span><i class="ri-number-1"></i> 单号: ${apt.id}</span>
+                  <span><i class="ri-calendar-line"></i> 时间: ${apt.date} ${apt.time}</span>
+                  <span><i class="ri-user-heart-line"></i> 负责: ${apt.teacher}</span>
+                </div>
+              </div>
+            `;
+          });
+          html += '</div>';
+          resultContainer.innerHTML = html;
+        } else {
+          placeholder.innerHTML = '<p style="color: #e74c3c;">未找到手机号相关的预约记录，请检查输入或重新提交预约。</p>';
+          placeholder.style.display = 'block';
+          resultContainer.style.display = 'none';
+        }
+      };
+
+      /**
+       * 模块隔离与单页紧致化检查器
+       * 功能：确保切换侧边栏时，只会激活对应的顶层 Section，
+       * 并且子 Section (如 4.1, 4.2) 在父模块被激活时，内部内容严格受限。
+       */
+      window.addEventListener('hashchange', () => {
+        const hash = window.location.hash || '#starlight-overview';
+        // 这一步由 route-store 处理显示隐藏，我们在此处做一些视觉上的强制重置
+        if (hash.includes('appointment')) {
+           // 确保预约界面的特定视图被重置
+           // document.getElementById('appointment-form').reset();
+        }
+      });
     </script>
 
     <!-- Core Scripts -->
