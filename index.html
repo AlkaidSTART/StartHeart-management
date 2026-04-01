@@ -2971,8 +2971,8 @@
           <!-- Dify 聊天对话框 -->
           <div class="assistant-iframe-container" style="width: 100%; height: 700px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 30px;">
             <iframe
-              src="https://udify.app/chatbot/YQo4jKSt7Hofm97Q"
-              style="width: 100%; height: 100%; border: none"
+              src="https://udify.app/chatbot/EmUprlFna2N9LIv7"
+              style="width: 100%; height: 100%; border: none; min-height: 700px"
               allow="microphone">
             </iframe>
           </div>
@@ -3035,6 +3035,54 @@
         height: 40rem !important;
       }
     </style>
+    
+    <!-- 全局模块路由脚本 -->
+    <script>
+      /**
+       * 全局模块路由处理函数
+       * 处理侧边栏跳转、内部链接跳转以及对应的 UI 状态同步
+       */
+      window.setActive = function(element) {
+        if (!element) return;
+        
+        // 1. 处理侧边栏链接的激活状态
+        const navLinks = document.querySelectorAll('.sidebar-menu a, .submenu-item a');
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.style) {
+            link.style.backgroundColor = '';
+            link.style.color = '';
+          }
+        });
+        
+        element.classList.add('active');
+        
+        // 2. 如果是侧边栏内部平滑滚动（针对移动端自动收起）
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.querySelector('.mobile-overlay');
+        if (sidebar && sidebar.classList.contains('active')) {
+          sidebar.classList.remove('active');
+          overlay.classList.remove('active');
+        }
+
+        // 3. 处理特定的跳转逻辑（如星语助手、家长加油站等）
+        const targetId = element.getAttribute('href');
+        console.log('Routing to:', targetId);
+        
+        // 可以在这里根据不同模块 targetId 触发特定的初始化或上报逻辑
+      };
+
+      // 页面加载完成后检查当前 URL Hash 并同步状态
+      window.addEventListener('load', () => {
+        const hash = window.location.hash;
+        if (hash) {
+          const activeLink = document.querySelector(`a[href="${hash}"]`);
+          if (activeLink && typeof window.setActive === 'function') {
+            window.setActive(activeLink);
+          }
+        }
+      });
+    </script>
 
     <!-- Core Scripts -->
     <script src="JS/scripts.js"></script>
