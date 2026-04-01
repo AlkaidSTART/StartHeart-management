@@ -149,11 +149,6 @@
                   ><i class="ri-heart-pulse-line"></i> 日常训练</a
                 >
               </li>
-              <li class="submenu-item">
-                <a href="#behavior-companion" onclick="setActive(this)"
-                  ><i class="ri-heart-3-line"></i> 行为陪伴</a
-                >
-              </li>
             </ul>
           </li>
 
@@ -220,11 +215,6 @@
               <li class="submenu-item">
                 <a href="#about-intro" onclick="setActive(this)"
                   ><i class="ri-information-line"></i> 星心简介</a
-                >
-              </li>
-              <li class="submenu-item">
-                <a href="#about-values" onclick="setActive(this)"
-                  ><i class="ri-plant-line"></i> 守护理念</a
                 >
               </li>
               <li class="submenu-item">
@@ -1430,233 +1420,6 @@
           </div>
         </section>
 
-        <!-- 2.3 行为陪伴 -->
-        <section id="behavior-companion" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-hand-heart-line"></i> 行为陪伴</h3>
-            <p>专业陪伴指导，温暖孩子心灵</p>
-          </div>
-
-          <div class="intervention-container">
-            <!-- 情绪安抚方法 -->
-            <div class="intervention-toolkit">
-              <h3><span><i class="ri-heart-line"></i></span> 情绪安抚方法</h3>
-              <div class="toolkit-grid">
-                <div class="tool-item" style="border-color: #e3f2fd">
-                  <span class="tool-icon"><i class="ri-search-line"></i></span>
-                  <h4>识别情绪信号</h4>
-                  <p>
-                    观察身体语言、面部表情和行为变化，及时发现情绪早期信号
-                  </p>
-                  <button class="tool-btn" onclick="showBehaviorDetail('emotionRecognition')">学习技巧</button>
-                </div>
-                <div class="tool-item" style="border-color: #e8f5e9">
-                  <span class="tool-icon"><i class="ri-windy-line"></i></span>
-                  <h4>深呼吸法</h4>
-                  <p>引导孩子进行深呼吸练习，帮助平复情绪，缓解焦虑</p>
-                  <button class="tool-btn" onclick="showBehaviorDetail('deepBreathing')">学习技巧</button>
-                </div>
-                <div class="tool-item" style="border-color: #fff3e0">
-                  <span class="tool-icon"><i class="ri-emotion-happy-line"></i></span>
-                  <h4>拥抱安抚</h4>
-                  <p>适当的身体接触和拥抱，给予安全感和情感支持</p>
-                  <button class="tool-btn" onclick="showBehaviorDetail('hugComfort')">学习技巧</button>
-                </div>
-                <div class="tool-item" style="border-color: #f3e5f5">
-                 <span class="tool-icon"><i class="ri-question-line"></i></span>
-                  <h4>转移注意力</h4>
-                  <p>使用孩子感兴趣的事物转移注意力，缓解负面情绪</p>
-                  <button class="tool-btn" onclick="showBehaviorDetail('distraction')">学习技巧</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- 问题行为引导 -->
-            <div class="intervention-toolkit">
-              <h3><span><i class="ri-focus-3-line"></i></span> 问题行为引导</h3>
-              <div class="toolkit-grid">
-                <div class="tool-item">
-                  <span class="tool-icon"><i class="ri-emotion-unhappy-line"></i></span>
-                  <h4>发脾气应对</h4>
-                  <p>保持冷静，确保安全，等待情绪平复后再沟通，避免正面冲突</p>
-                  <button class="tool-btn" onclick="showBehaviorDetail('tantrum')">查看策略</button>
-                </div>
-                <div class="tool-item">
-                  <span class="tool-icon"><i class="ri-refresh-line"></i></span>
-                  <h4>刻板行为干预</h4>
-                  <p>理解行为功能，提供替代活动，逐步引导行为改变</p>
-                  <button class="tool-btn" onclick="showBehaviorDetail('stereotypy')">查看策略</button>
-                </div>
-                <div class="tool-item">
-                  <span class="tool-icon"><i class="ri-run-line"></i></span>
-                  <h4>逃避行为处理</h4>
-                  <p>分析逃避原因，调整任务难度，建立正向激励机制</p>
-                  <button class="tool-btn" onclick="showBehaviorDetail('escape')">查看策略</button>
-                </div>
-                <div class="tool-item">
-                  <span class="tool-icon"><i class="ri-star-fill"></i></span>
-                  <h4>正向行为支持</h4>
-                  <p>及时强化正向行为，使用奖励系统，培养良好习惯</p>
-                  <button class="tool-btn" onclick="showBehaviorDetail('positiveSupport')">查看策略</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- 家长沟通技巧 -->
-            <div class="personalized-recommendations">
-              <div class="recommendation-header">
-                <h3><i class="ri-chat-3-line"></i> 家长沟通技巧</h3>
-                <p>建立有效沟通，增进亲子关系</p>
-              </div>
-              <div class="recommendation-cards">
-                <div class="recommendation-card">
-                  <span class="rec-icon"><i class="ri-earphone-line"></i></span>
-                  <h4>积极倾听</h4>
-                  <p>耐心倾听孩子的表达，不打断、不评判，用肢体语言表达关注</p>
-                  <button class="rec-btn" onclick="showBehaviorDetail('activeListening')">了解更多</button>
-                </div>
-                <div class="recommendation-card">
-                  <span class="rec-icon"><i class="ri-image-line"></i></span>
-                  <h4>视觉辅助工具</h4>
-                  <p>使用图片、卡片、视觉时间表等工具，帮助孩子理解指令和预期</p>
-                  <button class="rec-btn" onclick="showBehaviorDetail('visualAid')">了解更多</button>
-                </div>
-                <div class="recommendation-card">
-                  <span class="rec-icon"><i class="ri-sparkling-line"></i></span>
-                  <h4>简洁明确指令</h4>
-                  <p>使用简单、具体的语言，一次一个指令，配合手势和表情</p>
-                  <button class="rec-btn" onclick="showBehaviorDetail('clearInstruction')">了解更多</button>
-                </div>
-                <div class="recommendation-card">
-                  <span class="rec-icon"><i class="ri-firework-line"></i></span>
-                  <h4>积极反馈</h4>
-                  <p>及时给予具体、真诚的表扬，强化孩子的正向行为</p>
-                  <button class="rec-btn" onclick="showBehaviorDetail('positiveFeedback')">了解更多</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- 陪伴心态建议 -->
-            <div class="success-stories">
-              <div class="stories-header">
-                <h3><i class="ri-rainbow-line"></i> 陪伴心态建议</h3>
-                <p>调整心态，与孩子共同成长</p>
-              </div>
-              <div class="stories-carousel">
-                <div class="story-card">
-                  <div
-                    class="story-avatar"
-                    style="
-                      background: linear-gradient(135deg, #ffe4e1, #ffc0cb);
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 2rem;
-                    "
-                  >
-                    <i class="ri-heart-fill"></i>
-                  </div>
-                  <div class="story-content">
-                    <h4>接纳与理解</h4>
-                    <p>
-                      接纳孩子的独特性，理解他们的世界。每个孩子都有自己的成长节奏，尊重差异，欣赏进步。
-                    </p>
-                    <div class="story-progress">
-                      <div class="progress-bar">
-                        <div class="progress-fill" style="width: 100%"></div>
-                      </div>
-                      <span>核心理念</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="story-card">
-                  <div
-                    class="story-avatar"
-                    style="
-                      background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 2rem;
-                    "
-                  >
-                    <i class="ri-time-line"></i>
-                  </div>
-                  <div class="story-content">
-                    <h4>耐心与坚持</h4>
-                    <p>
-                      康复是一个长期过程，需要耐心和坚持。相信每一次努力都在为孩子的未来铺路。
-                    </p>
-                    <div class="story-progress">
-                      <div class="progress-bar">
-                        <div class="progress-fill" style="width: 95%"></div>
-                      </div>
-                      <span>成功关键</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="story-card">
-                  <div
-                    class="story-avatar"
-                    style="
-                      background: linear-gradient(135deg, #f3e5f5, #e1bee7);
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 2rem;
-                    "
-                  >
-                    <i class="ri-flower-line"></i>
-                  </div>
-                  <div class="story-content">
-                    <h4>自我关怀</h4>
-                    <p>
-                      照顾好自己才能更好地照顾孩子。适当休息，寻求支持，保持积极心态。
-                    </p>
-                    <div class="story-progress">
-                      <div class="progress-bar">
-                        <div class="progress-fill" style="width: 90%"></div>
-                      </div>
-                      <span>重要提醒</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- 3. 知识库模块 -->
-        <!-- 3.1 科普小课堂 -->
-        <section id="science-class" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-book-open-line"></i> 科普小课堂</h3>
-            <p>专业的康复知识与科普内容，帮助您更好地了解自闭症谱系障碍</p>
-          </div>
-
-          <!-- 搜索栏 -->
-          <div class="knowledge-nav">
-            <div class="nav-tabs">
-              <button class="tab-btn active">全部文章</button>
-              <button class="tab-btn">基础科普</button>
-              <button class="tab-btn">误区辟谣</button>
-              <button class="tab-btn">专家讲座</button>
-            </div>
-            <div class="knowledge-search">
-              <input
-                type="text"
-                class="knowledge-search-input"
-                placeholder="搜索科普文章..."
-              />
-              <button class="knowledge-search-btn"><i class="ri-search-line"></i></button>
-            </div>
-          </div>
-
-          <!-- 基础科普文章 -->
-          <div class="method-category">
-            <h3><i class="ri-graduation-cap-line"></i> 自闭症基础科普</h3>
-            <div class="knowledge-grid">
-              <div class="knowledge-card">
                 <span class="card-icon"><i class="ri-question-line"></i></span>
                 <h3>什么是自闭症谱系障碍</h3>
                 <p>
@@ -2086,6 +1849,114 @@
                     <span class="resource-type">在线平台</span>
                   </div>
                   <a href="#" class="resource-link">查看详情 →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 行为陪伴整合进家长加油站 -->
+          <div class="behavior-companion-content" style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 40px;">
+            <div class="section-header" style="text-align: left; margin-bottom: 30px;">
+              <h3 style="font-size: 1.5rem;"><i class="ri-hand-heart-line"></i> 行为陪伴</h3>
+              <p>专业陪伴指导，温暖孩子心灵</p>
+            </div>
+            
+            <div class="intervention-container">
+              <!-- 情绪安抚方法 -->
+              <div class="intervention-toolkit">
+                <h3><span><i class="ri-heart-line"></i></span> 情绪安抚方法</h3>
+                <div class="toolkit-grid">
+                  <div class="tool-item" style="border-color: #e3f2fd">
+                    <span class="tool-icon"><i class="ri-search-line"></i></span>
+                    <h4>识别情绪信号</h4>
+                    <p>
+                      观察身体语言、面部表情和行为变化，及时发现情绪早期信号
+                    </p>
+                    <button class="tool-btn" onclick="showBehaviorDetail('emotionRecognition')">学习技巧</button>
+                  </div>
+                  <div class="tool-item" style="border-color: #e8f5e9">
+                    <span class="tool-icon"><i class="ri-windy-line"></i></span>
+                    <h4>深呼吸法</h4>
+                    <p>引导孩子进行深呼吸练习，帮助平复情绪，缓解焦虑</p>
+                    <button class="tool-btn" onclick="showBehaviorDetail('deepBreathing')">学习技巧</button>
+                  </div>
+                  <div class="tool-item" style="border-color: #fff3e0">
+                    <span class="tool-icon"><i class="ri-emotion-happy-line"></i></span>
+                    <h4>拥抱安抚</h4>
+                    <p>适当的身体接触和拥抱，给予安全感和情感支持</p>
+                    <button class="tool-btn" onclick="showBehaviorDetail('hugComfort')">学习技巧</button>
+                  </div>
+                  <div class="tool-item" style="border-color: #f3e5f5">
+                   <span class="tool-icon"><i class="ri-question-line"></i></span>
+                    <h4>转移注意力</h4>
+                    <p>使用孩子感兴趣的事物转移注意力，缓解负面情绪</p>
+                    <button class="tool-btn" onclick="showBehaviorDetail('distraction')">学习技巧</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 问题行为引导 -->
+              <div class="intervention-toolkit" style="margin-top: 30px;">
+                <h3><span><i class="ri-focus-3-line"></i></span> 问题行为引导</h3>
+                <div class="toolkit-grid">
+                  <div class="tool-item">
+                    <span class="tool-icon"><i class="ri-emotion-unhappy-line"></i></span>
+                    <h4>发脾气应对</h4>
+                    <p>保持冷静，确保安全，等待情绪平复后再沟通，避免正面冲突</p>
+                    <button class="tool-btn" onclick="showBehaviorDetail('tantrum')">查看策略</button>
+                  </div>
+                  <div class="tool-item">
+                    <span class="tool-icon"><i class="ri-refresh-line"></i></span>
+                    <h4>刻板行为干预</h4>
+                    <p>理解行为功能，提供替代活动，逐步引导行为改变</p>
+                    <button class="tool-btn" onclick="showBehaviorDetail('stereotypy')">查看策略</button>
+                  </div>
+                  <div class="tool-item">
+                    <span class="tool-icon"><i class="ri-run-line"></i></span>
+                    <h4>逃避行为处理</h4>
+                    <p>分析逃避原因，调整任务难度，建立正向激励机制</p>
+                    <button class="tool-btn" onclick="showBehaviorDetail('escape')">查看策略</button>
+                  </div>
+                  <div class="tool-item">
+                    <span class="tool-icon"><i class="ri-star-fill"></i></span>
+                    <h4>正向行为支持</h4>
+                    <p>及时强化正向行为，使用奖励系统，培养良好习惯</p>
+                    <button class="tool-btn" onclick="showBehaviorDetail('positiveSupport')">查看策略</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 家长沟通技巧 -->
+              <div class="personalized-recommendations" style="margin-top: 30px;">
+                <div class="recommendation-header">
+                  <h3><i class="ri-chat-3-line"></i> 家长沟通技巧</h3>
+                  <p>建立有效沟通，增进亲子关系</p>
+                </div>
+                <div class="recommendation-cards">
+                  <div class="recommendation-card">
+                    <span class="rec-icon"><i class="ri-earphone-line"></i></span>
+                    <h4>积极倾听</h4>
+                    <p>耐心倾听孩子的表达，不打断、不评判，用肢体语言表达关注</p>
+                    <button class="rec-btn" onclick="showBehaviorDetail('activeListening')">了解更多</button>
+                  </div>
+                  <div class="recommendation-card">
+                    <span class="rec-icon"><i class="ri-image-line"></i></span>
+                    <h4>视觉辅助工具</h4>
+                    <p>使用图片、卡片、视觉时间表等工具，帮助孩子理解指令和预期</p>
+                    <button class="rec-btn" onclick="showBehaviorDetail('visualAid')">了解更多</button>
+                  </div>
+                  <div class="recommendation-card">
+                    <span class="rec-icon"><i class="ri-sparkling-line"></i></span>
+                    <h4>简洁明确指令</h4>
+                    <p>使用简单、具体的语言，一次一个指令，配合手势和表情</p>
+                    <button class="rec-btn" onclick="showBehaviorDetail('clearInstruction')">了解更多</button>
+                  </div>
+                  <div class="recommendation-card">
+                    <span class="rec-icon"><i class="ri-firework-line"></i></span>
+                    <h4>积极反馈</h4>
+                    <p>及时给予具体、真诚的表扬，强化孩子的正向行为</p>
+                    <button class="rec-btn" onclick="showBehaviorDetail('positiveFeedback')">了解更多</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2823,77 +2694,69 @@
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        <!-- 5.2 守护理念 -->
-        <section id="about-values" class="content-section">
-          <div class="section-header">
-            <h3><i class="ri-heart-3-line"></i> 守护理念</h3>
-            <p>我们的服务理念与价值观</p>
-          </div>
-          <div class="about-values-content">
-            <!-- 四大核心价值观 -->
-            <div class="values-grid">
-              <div class="value-card">
-                <div class="value-icon"><i class="ri-hand-heart-line"></i></div>
-                <h4>尊重</h4>
-                <p>
-                  尊重每个孩子的独特性，接纳他们的不同。我们相信每个孩子都是独一无二的星星，都有自己的光芒。
-                </p>
+            <!-- 守护理念整合进简介 -->
+            <div class="about-values-content" style="margin-top: 40px; border-top: 1px solid var(--border-color); padding-top: 40px;">
+              <div class="section-header" style="text-align: left; margin-bottom: 30px;">
+                <h3 style="font-size: 1.5rem;"><i class="ri-heart-3-line"></i> 守护理念</h3>
+                <p>我们的服务理念与价值观</p>
               </div>
-              <div class="value-card">
-                <div class="value-icon"><i class="ri-heart-line"></i></div>
-                <h4>陪伴</h4>
-                <p>
-                  全程陪伴每个家庭，不让他们孤单前行。从评估到干预，从训练到成长，我们始终在您身边。
-                </p>
-              </div>
-              <div class="value-card">
-                <div class="value-icon"><i class="ri-heart-3-line"></i></div>
-                <h4>科学</h4>
-                <p>
-                  基于循证医学，采用科学有效的干预方法。我们的每一个方案都有据可依，确保孩子获得最好的支持。
-                </p>
-              </div>
-              <div class="value-card">
-                <div class="value-icon"><i class="ri-star-line"></i></div>
-                <h4>温暖</h4>
-                <p>
-                  用爱心和耐心，创造温暖的支持环境。在这里，每一个家庭都能感受到家的温暖和关怀。
-                </p>
-              </div>
-            </div>
-            <!-- 服务理念 -->
-            <div class="service-concept">
-              <h4><i class="ri-lightbulb-line"></i> 服务理念</h4>
-              <p>
-                我们坚信，<strong>早期干预</strong>和<strong>家庭参与</strong>是帮助自闭症儿童发展的关键。因此，我们不仅为孩子提供专业的康复训练，更注重对家长的指导与支持，帮助家庭建立科学的干预体系，让康复效果延伸到日常生活中。
-              </p>
-            </div>
-            <!-- 服务承诺 -->
-            <div class="service-promise">
-              <h4><i class="ri-hand-heart-line"></i> 服务承诺</h4>
-              <div class="promise-list">
-                <div class="promise-item">
-                  <span class="promise-check"><i class="ri-check-line"></i></span>
-                  <span>专业团队：所有康复师均持证上岗，定期接受专业培训</span>
+              <!-- 四大核心价值观 -->
+              <div class="values-grid">
+                <div class="value-card">
+                  <div class="value-icon"><i class="ri-hand-heart-line"></i></div>
+                  <h4>尊重</h4>
+                  <p>
+                    尊重每个孩子的独特性，接纳他们的不同。我们相信每个孩子都是独一无二的星星，都有自己的光芒。
+                  </p>
                 </div>
-                <div class="promise-item">
-                  <span class="promise-check"><i class="ri-check-line"></i></span>
-                  <span>个性化方案：根据每个孩子的特点，制定专属干预计划</span>
+                <div class="value-card">
+                  <div class="value-icon"><i class="ri-heart-line"></i></div>
+                  <h4>陪伴</h4>
+                  <p>
+                    全程陪伴每个家庭，不让他们孤单前行。从评估到干预，从训练到成长，我们始终在您身边。
+                  </p>
                 </div>
-                <div class="promise-item">
-                  <span class="promise-check"><i class="ri-check-line"></i></span>
-                  <span
-                    >透明沟通：定期反馈康复进展，让家长清楚了解孩子的情况</span
-                  >
+                <div class="value-card">
+                  <div class="value-icon"><i class="ri-heart-3-line"></i></div>
+                  <h4>科学</h4>
+                  <p>
+                    基于循证医学，采用科学有效的干预方法。我们的每一个方案都有据可依，确保孩子获得最好的支持。
+                  </p>
                 </div>
-                <div class="promise-item">
-                  <span class="promise-check"><i class="ri-check-line"></i></span>
-                  <span
-                    >持续支持：提供7×12小时在线咨询服务，随时解答家长疑问</span
-                  >
+                <div class="value-card">
+                  <div class="value-icon"><i class="ri-star-line"></i></div>
+                  <h4>温暖</h4>
+                  <p>
+                    用爱心和耐心，创造温暖的支持环境。在这里，每一个家庭都能感受到家的温暖和关怀。
+                  </p>
+                </div>
+              </div>
+              
+              <!-- 服务承诺 -->
+              <div class="service-promise" style="margin-top: 30px;">
+                <h4><i class="ri-hand-heart-line"></i> 服务承诺</h4>
+                <div class="promise-list">
+                  <div class="promise-item">
+                    <span class="promise-check"><i class="ri-check-line"></i></span>
+                    <span>专业团队：所有康复师均持证上岗，定期接受专业培训</span>
+                  </div>
+                  <div class="promise-item">
+                    <span class="promise-check"><i class="ri-check-line"></i></span>
+                    <span>个性化方案：根据每个孩子的特点，制定专属干预计划</span>
+                  </div>
+                  <div class="promise-item">
+                    <span class="promise-check"><i class="ri-check-line"></i></span>
+                    <span
+                      >透明沟通：定期反馈康复进展，让家长清楚了解孩子的情况</span
+                    >
+                  </div>
+                  <div class="promise-item">
+                    <span class="promise-check"><i class="ri-check-line"></i></span>
+                    <span
+                      >持续支持：提供7×12小时在线咨询服务，随时解答家长疑问</span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -3105,6 +2968,15 @@
             <p>AI智能助手，24小时陪伴支持</p>
           </div>
 
+          <!-- Dify 聊天对话框 -->
+          <div class="assistant-iframe-container" style="width: 100%; height: 700px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 30px;">
+            <iframe
+              src="https://udify.app/chatbot/YQo4jKSt7Hofm97Q"
+              style="width: 100%; height: 100%; border: none"
+              allow="microphone">
+            </iframe>
+          </div>
+
           <!-- 功能介绍 -->
           <div class="assistant-features">
             <div class="feature-card">
@@ -3121,26 +2993,6 @@
               <div class="feature-icon"><i class="ri-focus-3-line"></i></div>
               <h4>个性化建议</h4>
               <p>基于孩子情况提供建议</p>
-            </div>
-          </div>
-
-          <!-- AI助手入口（统一使用浮窗气泡） -->
-          <div class="assistant-chat-container">
-            <div class="chat-header">
-              <div class="chat-avatar">
-                <span><i class="ri-robot-line"></i></span>
-              </div>
-              <div class="chat-info">
-                <h4>星语助手</h4>
-                <span class="status-online">● 在线</span>
-              </div>
-            </div>
-
-            <div class="chat-iframe-wrapper" style="min-height: 240px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px;">
-              <div>
-                <p style="margin-bottom: 8px; font-weight: 600;">已启用浮窗聊天气泡</p>
-                <p style="color: #666;">点击右下角蓝色对话气泡即可开始与星语助手对话。</p>
-              </div>
             </div>
           </div>
         </section>
@@ -3165,7 +3017,18 @@
     <script src="https://udify.app/embed.min.js" id="EmUprlFna2N9LIv7" defer></script>
     <style>
       #dify-chatbot-bubble-button {
-        background-color: #1c64f2 !important;
+        background-color: transparent !important;
+        background-image: url('assets/people.jpg') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50% !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        border: 2px solid #fff !important;
+      }
+      #dify-chatbot-bubble-button svg {
+        display: none !important;
       }
       #dify-chatbot-bubble-window {
         width: 24rem !important;
