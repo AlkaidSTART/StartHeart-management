@@ -20,20 +20,48 @@ function updateSessionTimer() {}
  * @param {number} duration - 显示时长(毫秒)，默认3000ms
  */
 function showToast(message, type = 'info', duration = 3000) {
-    const existingToast = document.querySelector('.toast-notification');
-    if (existingToast) {
-        existingToast.remove();
-    }
+  const iconMap = {
+    success: '✓',
+    error: '✕',
+    info: 'i',
+    warning: '!'
+  };
 
-    const toast = document.createElement('div');
-    toast.className = `toast-notification toast-${type}`;
-    
-    const icons = {
-        success: '✓',
-        error: '✗',
-        info: 'ℹ',
-        warning: '⚠'
-    }
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.innerHTML = `
+    <span class="toast-icon">${iconMap[type] || iconMap.info}</span>
+    <div class="toast-content">
+    <div class="toast-title">系统提示</div>
+    <div class="toast-message">${message}</div>
+    </div>
+    <button class="toast-close" aria-label="关闭">×</button>
+  `;
+
+  container.appendChild(toast);
+
+  const closeBtn = toast.querySelector('.toast-close');
+  const closeToast = () => {
+    toast.classList.add('hiding');
+    setTimeout(() => {
+      if (toast.parentNode) {
+        toast.remove();
+      }
+      if (container && container.children.length === 0) {
+        container.remove();
+      }
+    }, 300);
+  };
+
+  closeBtn.addEventListener('click', closeToast);
+  setTimeout(closeToast, duration);
 };
 
 // 服务类型详情数据
@@ -847,6 +875,48 @@ const knowledgeArticles = {
       
       <p><strong>自闭症患者的声音：</strong></p>
       <p>许多自闭症成年人在自述中写道，他们一直都有丰富的内心世界和深刻的情感，只是不知道如何表达。理解这一点对于支持自闭症患者至关重要。</p>
+    `
+  },
+  recovery_case_1: {
+    title: "康复案例：语言表达突破",
+    content: `
+      <h4>康复案例：从单词到完整表达</h4>
+      <p><strong>阶段一（第1-4周）：</strong>通过图片交换和高频需求词训练，建立主动表达动机。</p>
+      <p><strong>阶段二（第5-10周）：</strong>引入双词短语与情境对话，配合家庭泛化训练。</p>
+      <p><strong>阶段三（第11-16周）：</strong>完成句式扩展，能在日常场景中独立表达需求与感受。</p>
+      <ul>
+        <li>核心方法：视觉支持 + 回合互动 + 即时强化</li>
+        <li>家庭要点：固定练习时段、统一提示词、记录进步曲线</li>
+        <li>当前结果：课堂参与度显著提升，沟通挫败行为明显下降</li>
+      </ul>
+    `
+  },
+  recovery_case_2: {
+    title: "康复案例：感觉统合改善",
+    content: `
+      <h4>康复案例：感官调节能力提升</h4>
+      <p>孩子在噪音、触觉与前庭刺激下容易情绪升级。团队采用分级暴露与感官饮食计划，联合家庭执行。</p>
+      <ul>
+        <li>每周 3 次结构化感统训练（平衡、深压、本体觉）</li>
+        <li>学校与家庭同步使用“情绪温度计”与“冷静角”</li>
+        <li>建立个体化触发清单，提前预警并替代干预</li>
+      </ul>
+      <p><strong>8 周后：</strong>噪音场景中的可耐受时长增加，崩溃频次下降，过渡任务完成度提升。</p>
+      <p><strong>家长反馈：</strong>“现在孩子能更快平复，家庭日常冲突明显减少。”</p>
+    `
+  },
+  recovery_case_3: {
+    title: "康复案例：融合教育适应",
+    content: `
+      <h4>康复案例：班级融合支持方案</h4>
+      <p>针对课堂规则理解弱、同伴互动少的问题，制定“课堂支持 + 社交小组 + 家校协同”三线方案。</p>
+      <ol>
+        <li>课堂：视觉流程卡、任务分段、座位与提示优化</li>
+        <li>社交：同伴结对、轮流游戏、情境脚本训练</li>
+        <li>家校：每周复盘会议，统一强化目标与反馈语言</li>
+      </ol>
+      <p><strong>阶段成效：</strong>课堂离座行为减少，主动问候与协作次数上升，作业完成率持续提高。</p>
+      <p><strong>后续建议：</strong>继续维持小步进阶与跨场景泛化，逐步撤除外部提示。</p>
     `
   }
 };

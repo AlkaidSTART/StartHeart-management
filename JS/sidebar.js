@@ -47,6 +47,10 @@ function initSidebar() {
 let isFloatingMenuOpen = false;
 
 function initFloatingButton() {
+  if (window.__floatingAssistantInitialized) {
+    return;
+  }
+
   const mainBtn = document.getElementById('starBtn');
   const menuItemsContainer = document.querySelector('.star-menu-items');
   const menuItems = document.querySelectorAll('.star-menu-item');
@@ -106,17 +110,16 @@ function initFloatingButton() {
     }
   });
 
-  window.handleAssistantClick = function(type) {
-    console.log('Assistant clicked:', type);
-    // 关闭悬浮菜单（如果打开）
-    if (isFloatingMenuOpen) {
-      mainBtn.click();
-    }
-    // 打开聊天弹窗
-    if (typeof toggleChatPopup === 'function') {
-      toggleChatPopup();
-    }
-  };
+  if (typeof window.handleAssistantClick !== 'function') {
+    window.handleAssistantClick = function() {
+      if (isFloatingMenuOpen) {
+        mainBtn.click();
+      }
+      if (typeof toggleChatPopup === 'function') {
+        toggleChatPopup(true);
+      }
+    };
+  }
 }
 
 // Scroll Spy for Sidebar

@@ -25,12 +25,44 @@ window.useRouteStore = createStore((set) => ({
   setRoute: (route) => set({ currentRoute: route })
 }));
 
+const FLEX_ROUTES = new Set([
+  'daily-training',
+  'science-class',
+  'recovery-notes',
+  'about-intro',
+  'assistant',
+  'user-center'
+]);
+
+function getDisplayMode(module) {
+  if (!module) return 'block';
+  if (module.dataset && module.dataset.display) {
+    return module.dataset.display;
+  }
+  return FLEX_ROUTES.has(module.id) ? 'flex' : 'block';
+}
+
+function closeMobileSidebarIfNeeded() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.querySelector('.mobile-overlay');
+  if (sidebar && sidebar.classList.contains('active')) {
+    sidebar.classList.remove('active');
+  }
+  if (overlay && overlay.classList.contains('active')) {
+    overlay.classList.remove('active');
+  }
+}
+
 // 定义全局 setActive 函数供 index.html 中 onclick 调用
 window.setActive = function(element) {
   const href = element.getAttribute("href");
   if (href && href.startsWith("#")) {
     const route = href.substring(1);
     window.useRouteStore.getState().setRoute(route);
+    if (window.location.hash !== `#${route}`) {
+      history.replaceState(null, '', `#${route}`);
+    }
+    closeMobileSidebarIfNeeded();
   }
 };
 
@@ -46,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let found = false;
     allModules.forEach((module) => {
       if (module.id === moduleId) {
-        module.style.display = "block";
+        module.style.display = getDisplayMode(module);
         module.classList.add("active");
         module.classList.remove("inactive");
         found = true;
@@ -59,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 如果未找到对应模块（兜底），默认显示第一个
     if (!found && allModules.length > 0) {
-      allModules[0].style.display = "block";
+      allModules[0].style.display = getDisplayMode(allModules[0]);
       allModules[0].classList.add("active");
       allModules[0].classList.remove("inactive");
     }
@@ -75,6 +107,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // 订阅路由状态变化
   window.useRouteStore.subscribe((state) => {
     showModule(state.currentRoute);
+    if (state.currentRoute && window.location.hash !== `#${state.currentRoute}`) {
+      history.replaceState(null, '', `#${state.currentRoute}`);
+    }
     
     // 更新导航 active 状态
     navLinks.forEach((l) => {
@@ -113,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         const moduleId = href.substring(1);
         window.useRouteStore.getState().setRoute(moduleId);
+        closeMobileSidebarIfNeeded();
         
         // 在移动端点击后自动收起侧边栏
         if (window.innerWidth <= 768 && typeof window.toggleSidebar === 'function') {

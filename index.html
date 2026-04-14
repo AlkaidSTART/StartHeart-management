@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="CSS/ai-assistant-dialog-enhanced.css" />
     <link rel="stylesheet" href="CSS/login.css" />
     <link rel="stylesheet" href="CSS/chat.css" />
+    <link rel="stylesheet" href="CSS/release-fixes.css" />
 
     <!-- Remix Icon (Modern, clean icon library) -->
     <link
@@ -779,7 +780,7 @@
         </section>
 
         <!-- 2.2 日常训练 -->
-        <section id="daily-training" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
+        <section id="daily-training" class="content-section" data-display="flex" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
           <div class="section-header" style="margin-bottom: 20px; flex-shrink: 0;">
             <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;"><i class="ri-heart-pulse-line" style="color: var(--primary-color);"></i> 日常训练</h3>
             <p style="color: var(--text-light); font-size: 0.9rem;">科学训练计划，助力能力发展</p>
@@ -1426,7 +1427,7 @@
 
         <!-- 3. 知识库 -->
         <!-- 3.1 科普小课堂 -->
-        <section id="science-class" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
+        <section id="science-class" class="content-section" data-display="flex" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
           <div class="section-header" style="margin-bottom: 20px; flex-shrink: 0;">
             <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;"><i class="ri-graduation-cap-line" style="color: var(--primary-color);"></i> 科普小课堂</h3>
             <p style="color: var(--text-light); font-size: 0.9rem;">系统学习自闭症知识，建立科学康复观念</p>
@@ -1537,7 +1538,7 @@
         </section>
 
         <!-- 3.2 康复手记 -->
-        <section id="recovery-notes" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
+        <section id="recovery-notes" class="content-section" data-display="flex" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
           <div class="section-header" style="margin-bottom: 20px; flex-shrink: 0;">
             <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;"><i class="ri-file-list-line" style="color: var(--primary-color);"></i> 康复手记</h3>
             <p style="color: var(--text-light); font-size: 0.9rem;">记录孩子的康复历程与心得，分享真实的成长故事</p>
@@ -2679,7 +2680,7 @@
 
         <!-- 5. 关于我们模块 -->
         <!-- 5.1 星心简介 -->
-        <section id="about-intro" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
+        <section id="about-intro" class="content-section" data-display="flex" style="max-width: 1200px; margin: 0 auto; display: none; flex-direction: column; height: 100%; overflow: hidden;">
           <div class="section-header" style="margin-bottom: 20px; flex-shrink: 0;">
             <h3 style="font-size: 1.5rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;"><i class="ri-shining-line" style="color: var(--primary-color);"></i> 星心简介</h3>
             <p style="color: var(--text-light); font-size: 0.9rem;">了解星心守护的故事与使命</p>
@@ -2730,12 +2731,9 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-              
+
               <!-- 服务承诺 -->
-              <div class="service-promise" style="margin-top: 30px;">
+              <div class="service-promise" style="margin-top: 20px;">
                 <h4><i class="ri-hand-heart-line"></i> 服务承诺</h4>
                 <div class="promise-list">
                   <div class="promise-item">
@@ -2748,15 +2746,11 @@
                   </div>
                   <div class="promise-item">
                     <span class="promise-check"><i class="ri-check-line"></i></span>
-                    <span
-                      >透明沟通：定期反馈康复进展，让家长清楚了解孩子的情况</span
-                    >
+                    <span>透明沟通：定期反馈康复进展，让家长清楚了解孩子的情况</span>
                   </div>
                   <div class="promise-item">
                     <span class="promise-check"><i class="ri-check-line"></i></span>
-                    <span
-                      >持续支持：提供7×12小时在线咨询服务，随时解答家长疑问</span
-                    >
+                    <span>持续支持：提供7×12小时在线咨询服务，随时解答家长疑问</span>
                   </div>
                 </div>
               </div>
@@ -2963,7 +2957,7 @@
         </section>
 
         <!-- 星语助手模块 -->
-        <section id="assistant" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; height: 100%; display: flex; flex-direction: column;">
+        <section id="assistant" class="content-section" data-display="flex" style="max-width: 1200px; margin: 0 auto; display: none; height: 100%; flex-direction: column;">
           <div class="section-header" style="margin-bottom: 12px; flex-shrink: 0;">
             <h3 style="font-size: 1.1rem; display: flex; align-items: center; gap: 8px;"><i class="ri-robot-line" style="color: var(--primary-color);"></i> 星语助手</h3>
             <p style="color: var(--text-light); font-size: 0.85rem;">AI智能助手，24小时陪伴支持</p>
@@ -2973,7 +2967,7 @@
           <div class="assistant-iframe-container" style="width: 100%; flex: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 12px;">
             <iframe
               src="https://udify.app/chatbot/EmUprlFna2N9LIv7"
-              style="width: 100%; height: 100%;"
+              style="width: 100%; height: 100%; min-height: 700px"
               frameborder="0"
               allow="microphone">
             </iframe>
@@ -3000,7 +2994,7 @@
         </section>
 
         <!-- 个人中心模块 -->
-        <section id="user-center" class="content-section" style="max-width: 1200px; margin: 0 auto; display: none; flex: 1; display: flex; flex-direction: column;">
+        <section id="user-center" class="content-section" data-display="flex" style="max-width: 1200px; margin: 0 auto; display: none; flex: 1; flex-direction: column;">
           <div class="section-header" style="margin-bottom: 16px; flex-shrink: 0;">
             <h3 style="font-size: 1.1rem; display: flex; align-items: center; gap: 8px;"><i class="ri-user-settings-line" style="color: var(--primary-color);"></i> 个人中心</h3>
             <p style="color: var(--text-light); font-size: 0.85rem;">管理您的账号信息与康复档案</p>
@@ -3049,263 +3043,119 @@
 
       <!-- 保留单一聊天气泡（Dify） -->
       
-      <!-- 星语助手悬浮交互组件 -->
-      <div class="star-assistant-float" id="starAssistantFloat">
-        <!-- 悬浮菜单项 -->
-        <div class="star-menu-items" id="starMenuItems">
-          <div class="star-menu-item" onclick="handleAssistantClick('qa')">
-            <span class="star-menu-icon"><i class="ri-question-line"></i></span>
-            <span class="star-menu-label">智能问答</span>
-          </div>
-          <div class="star-menu-item" onclick="handleAssistantClick('consult')">
-            <span class="star-menu-icon"><i class="ri-chat-3-line"></i></span>
-            <span class="star-menu-label">快捷咨询</span>
-          </div>
-          <div class="star-menu-item" onclick="handleAssistantClick('plan')">
-            <span class="star-menu-icon"><i class="ri-calendar-todo-line"></i></span>
-            <span class="star-menu-label">训练计划</span>
-          </div>
-        </div>
-        
-        <!-- 主悬浮按钮 -->
-        <button class="star-btn-main" id="starBtn">
-          <div class="star-btn-icon">
-            <i class="ri-robot-fill"></i>
-          </div>
-          <div class="star-btn-text">星语助手</div>
-        </button>
-      </div>
-
-      <!-- 增强版对话弹窗容器 -->
-      <div class="chat-popup-overlay" id="chatPopupOverlay">
-        <div class="chat-dialog-container">
-          <!-- 头部 -->
-          <div class="chat-dialog-header">
-            <div class="chat-dialog-title">
-              <i class="ri-robot-line"></i>
-              <span>星语助手 - 专业康复咨询</span>
-            </div>
-            <div class="chat-dialog-actions">
-              <button class="chat-action-btn" title="最小化" onclick="toggleChatPopup()">
-                <i class="ri-subtract-line"></i>
-              </button>
-              <button class="chat-action-btn close" title="关闭" onclick="toggleChatPopup()">
-                <i class="ri-close-line"></i>
-              </button>
-            </div>
-          </div>
-          
-          <!-- 消息内容区域 -->
-          <div class="chat-dialog-body" id="chatMessages">
-            <div class="message-item system">
-              <div class="message-content">
-                您好！我是星语助手。我可以为您提供自闭症科普知识、训练建议以及各类康复咨询。有什么我可以帮您的吗？
-              </div>
-            </div>
-          </div>
-
-          <!-- 输入区域 -->
-          <div class="chat-dialog-footer">
-            <div class="chat-input-tools">
-              <button class="tool-btn" id="emojiBtn"><i class="ri-emotion-line"></i></button>
-              <button class="tool-btn" id="fileBtn"><i class="ri-attachment-line"></i></button>
-              <button class="tool-btn" id="voiceBtn"><i class="ri-mic-line"></i></button>
-            </div>
-            <div class="chat-input-wrapper">
-              <textarea id="chatInput" placeholder="输入您的问题..." rows="1"></textarea>
-              <button id="sendBtn" class="send-btn">
-                <i class="ri-send-plane-2-fill"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <script>
       window.difyChatbotConfig = {
         token: 'EmUprlFna2N9LIv7',
         inputs: {},
-        systemVariables: {},
+        systemVariables: {
+          logo: 'assets/people.jpg'
+        },
         userVariables: {},
       };
     </script>
-    <script src="https://udify.app/embed.min.js" id="EmUprlFna2N9LIv7" defer></script>
+    <script
+      src="https://udify.app/embed.min.js"
+      id="EmUprlFna2N9LIv7"
+      defer
+    ></script>
+
     <style>
+      /* Dify 悬浮按钮样式优化 - 外部 UI */
       #dify-chatbot-bubble-button {
         background-color: transparent !important;
-        background-image: url('assets/people.jpg') !important;
-        background-size: cover !important;
-        background-position: center !important;
+        background-image: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+        box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4), 0 8px 10px -6px rgba(99, 102, 241, 0.4) !important;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        border: 2px solid rgba(255, 255, 255, 0.2) !important;
         width: 60px !important;
         height: 60px !important;
-        border-radius: 50% !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-        border: 2px solid #fff !important;
+        bottom: 30px !important;
+        right: 30px !important;
       }
-      #dify-chatbot-bubble-button svg {
+
+      #dify-chatbot-bubble-button:hover {
+        transform: scale(1.1) rotate(5deg) !important;
+        box-shadow: 0 20px 35px -10px rgba(99, 102, 241, 0.5), 0 12px 15px -8px rgba(99, 102, 241, 0.3) !important;
+      }
+
+      /* Dify 聊天窗口样式优化 - 内部 UI */
+      #dify-chatbot-bubble-window {
+        width: 420px !important;
+        height: 700px !important;
+        max-height: 85vh !important;
+        border-radius: 24px !important;
+        overflow: hidden !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        bottom: 100px !important;
+        right: 30px !important;
+        background: #ffffff !important;
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+      }
+
+      /* 针对移动端的适配优化 */
+      @media (max-width: 640px) {
+        #dify-chatbot-bubble-window {
+          width: calc(100vw - 40px) !important;
+          right: 20px !important;
+          bottom: 90px !important;
+          height: 60vh !important;
+        }
+        #dify-chatbot-bubble-button {
+          width: 54px !important;
+          height: 54px !important;
+          bottom: 20px !important;
+          right: 20px !important;
+        }
+      }
+
+      /* 隐藏旧悬浮助手容器 */
+      #starAssistantFloat,
+      #chatPopupOverlay {
         display: none !important;
       }
-      #dify-chatbot-bubble-window {
-        width: 24rem !important;
-        height: 40rem !important;
+
+      /* 针对 iframe 内部 UI 的精细样式覆盖 (尝试性) */
+      /* 注意：如果 Dify 发送的是跨域 iframe，以下样式可能无效，需在 Dify 配置端调整 */
+      /* 但如果使用了 embed.js 的 DOM 节点，可以应用过渡和修饰 */
+      #dify-chatbot-bubble-window iframe {
+        border-radius: 20px !important;
+        background: transparent !important;
       }
-      
-      /* 增强版对话弹窗样式 */
-      .chat-popup-overlay {
-        position: fixed;
-        bottom: 100px;
-        right: 30px;
-        width: 400px;
-        height: 600px;
-        z-index: 10000;
-        display: none; /* 默认隐藏 */
-        flex-direction: column;
-        transition: all 0.3s ease;
+
+      /* 自定义加载骨架或遮罩装饰 */
+      #dify-chatbot-bubble-window::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+        background: linear-gradient(90deg, #6366F1, #A855F7, #6366F1);
+        background-size: 200% 100%;
+        animation: gradient-flow 3s linear infinite;
+        z-index: 10;
       }
-      .chat-popup-overlay.active {
-        display: flex;
-        animation: slideUp 0.3s ease;
+
+      @keyframes gradient-flow {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
       }
-      @keyframes slideUp {
-        from { transform: translateY(20px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
+
+      /* 增加呼吸灯效果给气泡按钮 */
+      #dify-chatbot-bubble-button {
+        animation: float-pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes float-pulse {
+        0% { transform: translateY(0); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); }
+        50% { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(99, 102, 241, 0.6); }
+        100% { transform: translateY(0); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); }
       }
     </style>
-    
-    <!-- 全局模块路由脚本 -->
-    <script>
-      /**
-       * 全局模块路由处理系统
-       * 支持显示/隐藏不同模块 (SPA 体验)
-       */
-      const router = {
-        // 模块映射表
-        routes: [
-          'starlight-overview', 'trend-insights',
-          'growth-guidance', 'daily-training',
-          'science-class', 'recovery-notes', 'parent-station', 'resources-download',
-          'appointment-companion', 'guardian-team',
-          'about-intro', 'about-contact', 'about-join',
-          'assistant', 'user-center' // 增加 user-center
-        ],
-
-        init() {
-          // 初始化时先隐藏所有 content-section
-          document.querySelectorAll('.content-section').forEach(sec => sec.style.display = 'none');
-          
-          // 监听 hash 变化
-          window.addEventListener('hashchange', () => this.handleRoute());
-          
-          // 初始加载触发一次
-          this.handleRoute();
-          
-          // 侧边栏子菜单点击不触发跳转修复
-          this.fixMenuClicks();
-        },
-
-        handleRoute() {
-          let hash = window.location.hash.replace('#', '');
-          if (!hash || !this.routes.includes(hash)) {
-            hash = 'starlight-overview'; // 默认路由
-          }
-
-          console.log('Routing to section:', hash);
-          this.showSection(hash);
-          this.syncSidebar(hash);
-        },
-
-        showSection(id) {
-          const sections = document.querySelectorAll('.content-section');
-          let found = false;
-          sections.forEach(sec => {
-            if (sec.id === id) {
-              sec.classList.remove('inactive');
-              sec.classList.add('active');
-              sec.style.display = 'block';
-              found = true;
-            } else {
-              sec.classList.remove('active');
-              sec.classList.add('inactive');
-              sec.style.display = 'none';
-            }
-          });
-          
-          if (!found && sections.length > 0) {
-             sections[0].style.display = 'block';
-          }
-          
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        },
-
-        syncSidebar(id) {
-          const navLinks = document.querySelectorAll('.sidebar-menu a, .submenu-item a');
-          navLinks.forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === '#' + id) {
-              link.classList.add('active');
-              
-              // 自动展开父级菜单
-              const parentMenuItem = link.closest('.menu-item');
-              if (parentMenuItem && !parentMenuItem.classList.contains('open')) {
-                 const menuLink = parentMenuItem.querySelector('.menu-link');
-                 if (menuLink && typeof window.toggleSubmenu === 'function') {
-                    window.toggleSubmenu(menuLink);
-                 }
-              }
-            } else {
-              link.classList.remove('active');
-            }
-          });
-        },
-
-        fixMenuClicks() {
-          // 确保所有带 href 的链接即使没有 onclick 也能正常激活
-          document.querySelectorAll('.sidebar-menu a[href^="#"]').forEach(link => {
-            link.addEventListener('click', (e) => {
-              const id = link.getAttribute('href').replace('#', '');
-              if (this.routes.includes(id)) {
-                // hashchange 会处理显示逻辑
-              }
-            });
-          });
-        }
-      };
-
-      // 覆盖原有的 setActive 以适配 router
-      window.setActive = function(element) {
-        if (!element) return;
-        const href = element.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          const id = href.substring(1);
-          window.location.hash = id;
-        }
-        
-        // 移动端收起侧边栏
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.querySelector('.mobile-overlay');
-        if (sidebar && sidebar.classList.contains('active')) {
-          sidebar.classList.remove('active');
-          overlay.classList.remove('active');
-        }
-      };
-
-      // 星语助手弹窗切换
-      window.toggleChatPopup = function() {
-        const overlay = document.getElementById('chatPopupOverlay');
-        if (overlay) {
-          overlay.classList.toggle('active');
-        }
-      };
-
-      // 启动路由
-      window.addEventListener('DOMContentLoaded', () => {
-        router.init();
-        if (typeof initTrainingModule === 'function') {
-           initTrainingModule(); // 初始化日常训练模块
-        }
-      });
-    </script>
 
     <!-- 业务逻辑脚本 -->
     <script>
@@ -3534,9 +3384,8 @@
 
     <!-- Core Scripts -->
     <script src="JS/scripts.js"></script>
-    <script src="JS/floating-assistant.js"></script>
     <script src="JS/login.js"></script>
     <script src="JS/sidebar.js"></script>
-    <script src="JS/ai-assistant-dialog-enhanced.js"></script>
+    <script src="JS/release-fixes.js"></script>
   </body>
 </html>
