@@ -35,11 +35,12 @@
     starMenuItems = document.getElementById('starMenuItems');
     starAssistantFloat = document.getElementById('starAssistantFloat');
 
-    if (!starBtn || !starMenuItems) {
+    if (!starBtn || !starAssistantFloat) {
       console.warn('星语助手悬浮按钮元素未找到');
       return;
     }
 
+    window.__floatingAssistantInitialized = true;
     bindEvents();
     initIframeHandler();
   }
@@ -51,20 +52,27 @@
     // 主按钮点击事件
     starBtn.addEventListener('click', function(e) {
       e.stopPropagation();
+      if (!starMenuItems) {
+        handleAssistantClick('qa');
+        return;
+      }
       toggleMenu();
     });
 
     // 菜单项点击事件
-    const menuItems = starMenuItems.querySelectorAll('.star-menu-item');
-    menuItems.forEach(item => {
-      item.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const type = this.getAttribute('onclick').match(/handleAssistantClick\('([^']+)'\)/)?.[1];
-        if (type) {
+    if (starMenuItems) {
+      const menuItems = starMenuItems.querySelectorAll('.star-menu-item');
+      menuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const dataType = this.getAttribute('data-assistant-type');
+          const onclick = this.getAttribute('onclick') || '';
+          const inlineMatch = onclick.match(/handleAssistantClick\('([^']+)'\)/);
+          const type = dataType || (inlineMatch ? inlineMatch[1] : 'qa');
           handleAssistantClick(type);
-        }
+        });
       });
-    });
+    }
 
     // 点击外部关闭菜单
     document.addEventListener('click', function(e) {
@@ -108,7 +116,9 @@
    * 展开菜单
    */
   function openMenu() {
-    if (!starMenuItems) return;
+    if (!starMenuItems) {
+      return;
+    }
     
     isMenuOpen = true;
     starMenuItems.classList.add('active');
@@ -134,7 +144,9 @@
    * 收起菜单
    */
   function closeMenu() {
-    if (!starMenuItems) return;
+    if (!starMenuItems) {
+      return;
+    }
     
     isMenuOpen = false;
     starMenuItems.classList.remove('active');
@@ -149,9 +161,25 @@
     // 关闭菜单
     closeMenu();
 
+    if (type === 'full') {
+      if (window.useRouteStore && window.useRouteStore.getState) {
+        window.useRouteStore.getState().setRoute('assistant');
+      } else {
+        const assistantSection = document.getElementById('assistant');
+        if (assistantSection) {
+          assistantSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+      return;
+    }
+
+    if (typeof window.updateChatPopupAnchor === 'function') {
+      window.updateChatPopupAnchor();
+    }
+
     // 打开聊天弹窗
     if (typeof toggleChatPopup === 'function') {
-      toggleChatPopup();
+      toggleChatPopup(true);
       return;
     }
 

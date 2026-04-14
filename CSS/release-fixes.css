@@ -1,0 +1,54 @@
+/* Release stabilization and compact layout */
+
+.main-content {
+  padding: 14px !important;
+}
+
+.main-header {
+  margin-bottom: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.content-section {
+  width: 100% !important;
+  max-width: 1160px !important;
+  max-height: calc(100vh - 170px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.section-header {
+  margin-bottom: 14px !important;
+}
+
+#assistant .assistant-features {
+  margin-top: 6px;
+}
+
+#assistant .feature-card {
+  min-height: 0;
+}
+
+.star-menu-item {
+  border: 0;
+  font: inherit;
+  text-align: left;
+}
+
+#chatPopupOverlay {
+  transform-origin: bottom right;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 10px !important;
+  }
+
+  .content-section {
+    max-height: calc(100vh - 140px);
+  }
+
+  #assistant .assistant-features {
+    grid-template-columns: 1fr !important;
+  }
+}
