@@ -2965,16 +2965,16 @@
           </div>
 
           <!-- Dify 聊天对话框 -->
-          <div class="assistant-iframe-container" style="width: 100%; flex: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 20px; position: relative; display: flex; flex-direction: column;">
-            <div id="assistant-chat-messages" style="flex: 1; overflow-y: auto; padding: 20px; background: #f9fafb;">
-               <div style="text-align: center; color: #999; margin-top: 50px;">
-                 <i class="ri-robot-line" style="font-size: 3rem; opacity: 0.2;"></i>
-                 <p>请在下方输入您想咨询的问题</p>
-               </div>
-            </div>
+          <div class="assistant-iframe-container" style="width: 100%; flex: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 20px; position: relative;">
+            <iframe
+              src="https://udify.app/chatbot/EmUprlFna2N9LIv7"
+              style="width: 100%; height: 100%; min-height: 700px"
+              frameborder="0"
+              allow="microphone">
+            </iframe>
             
-            <!-- 独立输入框 -->
-            <div class="assistant-input-wrapper" style="padding: 15px; background: white; border-top: 1px solid #eee; display: flex; gap: 10px; align-items: flex-end;">
+            <!-- 独立输入层 (悬浮在 iframe 底部) -->
+            <div class="assistant-input-wrapper" style="position: absolute; bottom: 0; left: 0; right: 0; padding: 15px; background: rgba(255, 255, 255, 0.95); border-top: 1px solid #eee; display: flex; gap: 10px; align-items: flex-end; backdrop-filter: blur(5px); z-index: 10;">
               <div style="flex: 1; position: relative;">
                 <textarea id="assistant-input" placeholder="输入您对“智启星芒”或自闭症康复的疑问..." style="width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 12px; padding-right: 40px; resize: none; min-height: 45px; max-height: 150px; font-family: inherit; font-size: 0.95rem; line-height: 1.5; transition: border-color 0.3s;"></textarea>
                 <i class="ri-mic-line" style="position: absolute; right: 12px; bottom: 14px; color: #999; cursor: pointer; font-size: 1.2rem;"></i>
