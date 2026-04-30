@@ -3097,7 +3097,7 @@
     </script>
 
     <style>
-      /* 隐藏 Dify 气泡按钮 */
+      /* 隐藏 Dify 气泡按钮和窗口 - 默认关闭 */
       #dify-chatbot-bubble-button, #dify-chatbot-bubble-window {
         display: none !important;
         opacity: 0 !important;
@@ -3105,7 +3105,7 @@
         visibility: hidden !important;
       }
       
-      /* 当 body 包含 logged-in 类时显示的样式 */
+      /* 当 body 包含 logged-in 类时显示按钮 */
       body.logged-in #dify-chatbot-bubble-button {
         display: flex !important;
         opacity: 1 !important;
@@ -3121,44 +3121,23 @@
         visibility: visible !important;
       }
 
-      /* 隐藏 Dify 气泡按钮 */
-      #dify-chatbot-bubble-button, #dify-chatbot-bubble-window {
-        display: none !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
-        visibility: hidden !important;
-      }
-      
-      /* 当 body 包含 logged-in 类时显示的样式 */
-      body.logged-in #dify-chatbot-bubble-button {
-        display: flex !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        visibility: visible !important;
-      }
-      
-      /* 当 dify-open 类存在时显示窗口 */
-      body.logged-in.dify-open #dify-chatbot-bubble-window {
-        display: block !important;
-        opacity: 1 !important;
-        pointer-events: auto !important;
-        visibility: visible !important;
-      }
-
-      /* Dify 悬浮按钮样式 */
+      /* Dify 悬浮按钮样式 - 使用图片作为背景 */
       #dify-chatbot-bubble-button {
-        background-color: #1C64F2 !important;
-        box-shadow: 0 10px 25px -5px rgba(28, 100, 242, 0.4), 0 8px 10px -6px rgba(28, 100, 242, 0.4) !important;
-        background-color: #1C64F2 !important;
-        box-shadow: 0 10px 25px -5px rgba(28, 100, 242, 0.4), 0 8px 10px -6px rgba(28, 100, 242, 0.4) !important;
+        background-image: url('assets/people.jpg') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-color: transparent !important;
+        border: 3px solid white !important;
+        border-radius: 50% !important;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2) !important;
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-        border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        width: 60px !important;
+        height: 60px !important;
       }
 
       #dify-chatbot-bubble-button:hover {
-        transform: scale(1.1) rotate(5deg) !important;
-        box-shadow: 0 20px 35px -10px rgba(28, 100, 242, 0.5), 0 12px 15px -8px rgba(28, 100, 242, 0.3) !important;
-        box-shadow: 0 20px 35px -10px rgba(28, 100, 242, 0.5), 0 12px 15px -8px rgba(28, 100, 242, 0.3) !important;
+        transform: scale(1.1) !important;
+        box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.4), 0 12px 15px -8px rgba(0, 0, 0, 0.3) !important;
       }
 
       /* Dify 聊天窗口样式 */
@@ -3435,6 +3414,23 @@
       // Dify 聊天窗口手动开关逻辑
       // Dify 聊天窗口手动开关逻辑
       let isDifyOpen = false;
+      
+      // 绑定气泡按钮点击事件
+      document.addEventListener('DOMContentLoaded', function() {
+        const bubbleButton = document.getElementById('dify-chatbot-bubble-button');
+        if (bubbleButton) {
+          bubbleButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            isDifyOpen = !isDifyOpen;
+            const body = document.body;
+            if (isDifyOpen) {
+              body.classList.add('dify-open');
+            } else {
+              body.classList.remove('dify-open');
+            }
+          });
+        }
+      });
       
       window.toggleDifyChat = function() {
         const body = document.body;
