@@ -3046,6 +3046,22 @@
     </div>
 
     <script>
+      const smartHeartDifyUserId = (() => {
+        const storageKey = 'smartheart-dify-user-id';
+        try {
+          const savedId = localStorage.getItem(storageKey);
+          if (savedId) return savedId;
+
+          const nextId = crypto.randomUUID
+            ? crypto.randomUUID()
+            : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+          localStorage.setItem(storageKey, nextId);
+          return nextId;
+        } catch (_) {
+          return `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        }
+      })();
+
       window.difyChatbotConfig = {
         token: 'EmUprlFna2N9LIv7',
         inputs: {
@@ -3055,7 +3071,7 @@
           // name: "NAME"
         },
         systemVariables: {
-          // user_id: 'YOU CAN DEFINE USER ID HERE',
+          user_id: `${smartHeartDifyUserId}-floating`,
           // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
         },
         userVariables: {
