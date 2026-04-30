@@ -3059,18 +3059,27 @@
     <script>
       window.difyChatbotConfig = {
         token: 'EmUprlFna2N9LIv7',
-        inputs: {},
-        systemVariables: {
-          logo: 'assets/people.jpg'
+        inputs: {
+          // You can define the inputs from the Start node here
+          // key is the variable name
+          // e.g.
+          // name: "NAME"
         },
-        userVariables: {},
-      };
+        systemVariables: {
+          // user_id: 'YOU CAN DEFINE USER ID HERE',
+          // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+        },
+        userVariables: {
+          // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
+          // name: 'YOU CAN DEFINE USER NAME HERE',
+        },
+      }
     </script>
     <script
       src="https://udify.app/embed.min.js"
       id="EmUprlFna2N9LIv7"
-      defer
-    ></script>
+      defer>
+    </script>
 
     <style>
       /* 隐藏 Dify 气泡按钮 */
@@ -3078,6 +3087,7 @@
         display: none !important;
         opacity: 0 !important;
         pointer-events: none !important;
+        visibility: hidden !important;
       }
       
       /* 当 body 包含 logged-in 类时显示的样式 */
@@ -3085,42 +3095,39 @@
         display: flex !important;
         opacity: 1 !important;
         pointer-events: auto !important;
+        visibility: visible !important;
       }
-      body.logged-in #dify-chatbot-bubble-window {
+      
+      /* 当 dify-open 类存在时显示窗口 */
+      body.logged-in.dify-open #dify-chatbot-bubble-window {
         display: block !important;
         opacity: 1 !important;
         pointer-events: auto !important;
+        visibility: visible !important;
       }
 
-      /* Dify 悬浮按钮样式优化 - 外部 UI */
+      /* Dify 悬浮按钮样式 */
       #dify-chatbot-bubble-button {
-        background-color: transparent !important;
-        background-image: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
-        box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4), 0 8px 10px -6px rgba(99, 102, 241, 0.4) !important;
+        background-color: #1C64F2 !important;
+        box-shadow: 0 10px 25px -5px rgba(28, 100, 242, 0.4), 0 8px 10px -6px rgba(28, 100, 242, 0.4) !important;
         transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         border: 2px solid rgba(255, 255, 255, 0.2) !important;
-        width: 60px !important;
-        height: 60px !important;
-        bottom: 30px !important;
-        right: 30px !important;
       }
 
       #dify-chatbot-bubble-button:hover {
         transform: scale(1.1) rotate(5deg) !important;
-        box-shadow: 0 20px 35px -10px rgba(99, 102, 241, 0.5), 0 12px 15px -8px rgba(99, 102, 241, 0.3) !important;
+        box-shadow: 0 20px 35px -10px rgba(28, 100, 242, 0.5), 0 12px 15px -8px rgba(28, 100, 242, 0.3) !important;
       }
 
-      /* Dify 聊天窗口样式优化 - 内部 UI */
+      /* Dify 聊天窗口样式 */
       #dify-chatbot-bubble-window {
-        width: 420px !important;
-        height: 700px !important;
+        width: 24rem !important;
+        height: 40rem !important;
         max-height: 85vh !important;
         border-radius: 24px !important;
         overflow: hidden !important;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
         border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        bottom: 100px !important;
-        right: 30px !important;
         background: #ffffff !important;
         backdrop-filter: blur(10px) !important;
         transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
@@ -3146,44 +3153,6 @@
       #starAssistantFloat,
       #chatPopupOverlay {
         display: none !important;
-      }
-
-      /* 针对 iframe 内部 UI 的精细样式覆盖 (尝试性) */
-      /* 注意：如果 Dify 发送的是跨域 iframe，以下样式可能无效，需在 Dify 配置端调整 */
-      /* 但如果使用了 embed.js 的 DOM 节点，可以应用过渡和修饰 */
-      #dify-chatbot-bubble-window iframe {
-        border-radius: 20px !important;
-        background: transparent !important;
-      }
-
-      /* 自定义加载骨架或遮罩装饰 */
-      #dify-chatbot-bubble-window::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 6px;
-        background: linear-gradient(90deg, #6366F1, #A855F7, #6366F1);
-        background-size: 200% 100%;
-        animation: gradient-flow 3s linear infinite;
-        z-index: 10;
-      }
-
-      @keyframes gradient-flow {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 100% 50%; }
-      }
-
-      /* 增加呼吸灯效果给气泡按钮 */
-      #dify-chatbot-bubble-button {
-        animation: float-pulse 2s ease-in-out infinite;
-      }
-
-      @keyframes float-pulse {
-        0% { transform: translateY(0); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); }
-        50% { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(99, 102, 241, 0.6); }
-        100% { transform: translateY(0); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); }
       }
     </style>
 
@@ -3418,74 +3387,20 @@
     <script src="JS/sidebar.js"></script>
     <script src="JS/release-fixes.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const assistantInput = document.getElementById('assistant-input');
-        const sendBtn = document.getElementById('send-btn');
-        const chatMessages = document.getElementById('assistant-chat-messages');
-
-        if (assistantInput && sendBtn && chatMessages) {
-          // 自动根据内容调整高度
-          assistantInput.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-          });
-
-          const addMessage = (text, isUser = true) => {
-            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const messageDiv = document.createElement('div');
-            messageDiv.style.marginBottom = '20px';
-            messageDiv.style.display = 'flex';
-            messageDiv.style.flexDirection = 'column';
-            messageDiv.style.alignItems = isUser ? 'flex-end' : 'flex-start';
-
-            const nameTimeHeader = `
-              <div style="font-size: 0.75rem; color: #888; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
-                ${isUser ? `<span>${time}</span><strong>您</strong>` : `<strong>星语助手</strong><span>${time}</span>`}
-              </div>
-            `;
-
-            messageDiv.innerHTML = `
-              ${nameTimeHeader}
-              <div style="max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; ${
-                isUser 
-                ? 'background: var(--primary-color, #6366f1); color: white; border-bottom-right-radius: 2px;' 
-                : 'background: white; color: #333; border: 1px solid #eee; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.02);'
-              }">
-                ${text}
-              </div>
-            `;
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-          };
-
-          const handleSend = () => {
-            const text = assistantInput.value.trim();
-            if (!text) return;
-
-            // 如果是第一条消息，清除提示
-            if (chatMessages.querySelector('.ri-robot-line')) {
-              chatMessages.innerHTML = '';
-            }
-
-            addMessage(text, true);
-            assistantInput.value = '';
-            assistantInput.style.height = 'auto';
-
-            // 模拟 AI 回复
-            setTimeout(() => {
-              addMessage("您好！我是星语助手。由于当前为演示界面，我已收到关于“" + text + "”的咨询。在正式版本中，我将为您提供专业的自闭症康复指导与数据分析建议。", false);
-            }, 800);
-          };
-
-          sendBtn.addEventListener('click', handleSend);
-          assistantInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-              e.preventDefault();
-              handleSend();
-            }
-          });
+      // Dify 聊天窗口手动开关逻辑
+      // Dify 聊天窗口手动开关逻辑
+      let isDifyOpen = false;
+      
+      window.toggleDifyChat = function() {
+        const body = document.body;
+        isDifyOpen = !isDifyOpen;
+        
+        if (isDifyOpen) {
+          body.classList.add('dify-open');
+        } else {
+          body.classList.remove('dify-open');
         }
-      });
+      };
     </script>
   </body>
 </html>
