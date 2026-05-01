@@ -1,5 +1,13 @@
 {
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
   "dependencies": {
+    "@ai-sdk/openai": "^3.0.55",
+    "ai": "^6.0.172",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "zustand": "^5.0.12"
   }
 }
