@@ -21,18 +21,10 @@
   margin-bottom: 14px !important;
 }
 
-#assistant .assistant-features {
-  display: none !important;
-}
-
-#assistant .feature-card {
-  min-height: 0;
-}
-
 #assistant.content-section {
   height: calc(100vh - 170px) !important;
   max-height: calc(100vh - 170px) !important;
-  overflow: hidden !important;
+  overflow: visible !important;
   display: flex !important;
   flex-direction: column !important;
 }
@@ -51,7 +43,7 @@
 }
 
 #assistant .assistant-iframe-container {
-  min-height: 0 !important;
+  min-height: 620px !important;
   flex: 1 1 0px !important;
   height: auto !important;
   margin-bottom: 0 !important;
@@ -89,6 +81,6 @@
   }
 
   #assistant .assistant-iframe-container iframe {
-    min-height: 480px;
+    min-height: 560px;
   }
 }
