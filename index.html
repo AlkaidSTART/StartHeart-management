@@ -6,7 +6,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://udify.app; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data: https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net data:; connect-src 'self' https://udify.app; frame-src https://udify.app; object-src 'none'; base-uri 'self'; form-action 'self';"
     />
     <title>智启星芒 - 面向自闭症诊疗的AI智能筛查一体化系统</title>
 
@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="CSS/about.css" />
     <link rel="stylesheet" href="CSS/floating-assistant.css" />
     <link rel="stylesheet" href="CSS/ai-assistant-dialog-enhanced.css" />
-    <link rel="stylesheet" href="CSS/ai-chat.css" />
     <link rel="stylesheet" href="CSS/login.css" />
     <link rel="stylesheet" href="CSS/chat.css" />
     <link rel="stylesheet" href="CSS/release-fixes.css" />
@@ -2964,29 +2963,14 @@
             <p style="color: var(--text-light); font-size: 0.85rem;">AI智能助手，24小时陪伴支持</p>
           </div>
 
-          <!-- 侧边栏星语助手：与悬浮 AI 助手共用同一份对话记录 -->
-          <div class="assistant-iframe-container ai-chat-shell sidebar-ai-chat" style="width: 100%; flex: 1; margin-bottom: 20px; position: relative;">
-            <div class="ai-chat-panel" data-ai-chat="sidebar">
-              <div class="ai-chat-header">
-                <div class="ai-chat-title-block">
-                  <span class="ai-chat-avatar"><i class="ri-robot-line"></i></span>
-                  <div>
-                    <h4>星语助手</h4>
-                    <p>同一助手，同步对话记录</p>
-                  </div>
-                </div>
-                <button type="button" class="ai-chat-icon-btn" data-ai-action="clear" title="清空对话">
-                  <i class="ri-delete-bin-6-line"></i>
-                </button>
-              </div>
-              <div class="ai-chat-messages" data-ai-messages></div>
-              <form class="ai-chat-input-row" data-ai-form>
-                <textarea data-ai-input rows="1" placeholder="请输入想咨询的问题..." aria-label="星语助手输入框"></textarea>
-                <button type="submit" class="ai-chat-send" title="发送">
-                  <i class="ri-send-plane-2-line"></i>
-                </button>
-              </form>
-            </div>
+          <!-- Dify 侧边栏聊天助手 -->
+          <div class="assistant-iframe-container" style="width: 100%; flex: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 20px; position: relative;">
+            <iframe
+              src="https://udify.app/chatbot/jq09ZgVNSewOksU2"
+              style="width: 100%; height: 100%; min-height: 700px"
+              frameborder="0"
+              allow="microphone">
+            </iframe>
           </div>
 
           <!-- 功能介绍 -->
@@ -3057,38 +3041,64 @@
         </footer>
       </main>
 
-      <div class="ai-chat-float" id="aiChatFloat">
-        <section class="ai-chat-panel ai-chat-floating-panel" data-ai-chat="floating" aria-label="悬浮 AI 助手">
-          <div class="ai-chat-header">
-            <div class="ai-chat-title-block">
-              <span class="ai-chat-avatar"><i class="ri-robot-line"></i></span>
-              <div>
-                <h4>星语助手</h4>
-                <p>与侧边栏同步</p>
-              </div>
-            </div>
-            <div class="ai-chat-actions">
-              <button type="button" class="ai-chat-icon-btn" data-ai-action="clear" title="清空对话">
-                <i class="ri-delete-bin-6-line"></i>
-              </button>
-              <button type="button" class="ai-chat-icon-btn" data-ai-action="close" title="关闭">
-                <i class="ri-close-line"></i>
-              </button>
-            </div>
-          </div>
-          <div class="ai-chat-messages" data-ai-messages></div>
-          <form class="ai-chat-input-row" data-ai-form>
-            <textarea data-ai-input rows="1" placeholder="请输入想咨询的问题..." aria-label="悬浮 AI 助手输入框"></textarea>
-            <button type="submit" class="ai-chat-send" title="发送">
-              <i class="ri-send-plane-2-line"></i>
-            </button>
-          </form>
-        </section>
-        <button type="button" class="ai-chat-float-button" id="aiChatFloatButton" title="星语助手">
-          <i class="ri-robot-line"></i>
-        </button>
-      </div>
+      <!-- Dify 悬浮框 AI 助手 -->
     </div>
+
+    <script>
+      window.difyChatbotConfig = {
+        token: 'jq09ZgVNSewOksU2',
+        inputs: {
+          // You can define the inputs from the Start node here
+          // key is the variable name
+          // e.g.
+          // name: "NAME"
+        },
+        systemVariables: {
+          // user_id: 'YOU CAN DEFINE USER ID HERE',
+          // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+        },
+        userVariables: {
+          // avatar_url: 'YOU CAN DEFINE USER AVATAR URL HERE',
+          // name: 'YOU CAN DEFINE USER NAME HERE',
+        },
+      }
+    </script>
+    <script
+      src="https://udify.app/embed.min.js"
+      id="jq09ZgVNSewOksU2"
+      defer>
+    </script>
+    <style>
+      body:not(.logged-in) #dify-chatbot-bubble-button,
+      body:not(.logged-in) #dify-chatbot-bubble-window {
+        display: none !important;
+      }
+
+      #dify-chatbot-bubble-button {
+        background-color: #1C64F2 !important;
+      }
+
+      #dify-chatbot-bubble-window {
+        width: 24rem !important;
+        height: 40rem !important;
+      }
+
+      @media (max-width: 640px) {
+        #dify-chatbot-bubble-window {
+          width: calc(100vw - 40px) !important;
+          right: 20px !important;
+          bottom: 90px !important;
+          height: 60vh !important;
+        }
+
+        #dify-chatbot-bubble-button {
+          width: 54px !important;
+          height: 54px !important;
+          bottom: 20px !important;
+          right: 20px !important;
+        }
+      }
+    </style>
 
     <!-- 业务逻辑脚本 -->
     <script>
@@ -3320,6 +3330,5 @@
     <script src="JS/login.js"></script>
     <script src="JS/sidebar.js"></script>
     <script src="JS/release-fixes.js"></script>
-    <script src="JS/ai-chat.js"></script>
   </body>
 </html>
