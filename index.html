@@ -234,7 +234,7 @@
 
           <!-- 6. 星语助手 -->
           <li class="menu-item">
-            <a class="menu-link" href="#assistant" onclick="setActive(this)">
+            <a class="menu-link" href="#assistant" onclick="setActive(this); setTimeout(() => window.openPrimaryDifyAssistant && window.openPrimaryDifyAssistant(), 0);">
               <span class="menu-icon"><i class="ri-robot-line"></i></span>
               <span class="menu-text">星语助手</span>
             </a>
@@ -2963,14 +2963,21 @@
             <p style="color: var(--text-light); font-size: 0.85rem;">AI智能助手，24小时陪伴支持</p>
           </div>
 
-          <!-- Dify 侧边栏聊天助手 -->
-          <div class="assistant-iframe-container" style="width: 100%; flex: 1; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #fff; margin-bottom: 20px; position: relative;">
-            <iframe
-              src="https://udify.app/chatbot/EmUprlFna2N9LIv7"
-              style="width: 100%; height: 100%; min-height: 700px"
-              frameborder="0"
-              allow="microphone">
-            </iframe>
+          <!-- 侧边栏复用右下角 Dify 悬浮助手，避免生成第二段会话 -->
+          <div class="assistant-iframe-container" style="width: 100%; flex: 1; min-height: 520px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: linear-gradient(135deg, #f7fbff 0%, #ffffff 52%, #f5fff9 100%); margin-bottom: 20px; position: relative; display: flex; align-items: center; justify-content: center; padding: 28px;">
+            <div style="max-width: 520px; text-align: center;">
+              <div style="width: 72px; height: 72px; border-radius: 50%; background: rgba(28, 100, 242, 0.1); color: #1C64F2; display: inline-flex; align-items: center; justify-content: center; font-size: 34px; margin-bottom: 18px;">
+                <i class="ri-robot-line"></i>
+              </div>
+              <h4 style="font-size: 1.25rem; margin: 0 0 10px; color: var(--text-color);">继续使用同一个星语助手</h4>
+              <p style="font-size: 0.9rem; line-height: 1.7; color: var(--text-light); margin: 0 0 22px;">
+                侧边栏与右下角悬浮 AI 助手已接入同一套对话。以悬浮框为主，历史上下文会保持一致。
+              </p>
+              <button type="button" onclick="window.openPrimaryDifyAssistant && window.openPrimaryDifyAssistant()" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 168px; height: 44px; border: 0; border-radius: 8px; background: #1C64F2; color: #fff; font-weight: 600; cursor: pointer; box-shadow: 0 8px 18px rgba(28, 100, 242, 0.24);">
+                <i class="ri-chat-3-line"></i>
+                打开星语助手
+              </button>
+            </div>
           </div>
 
           <!-- 功能介绍 -->
@@ -3071,7 +3078,7 @@
           // name: "NAME"
         },
         systemVariables: {
-          user_id: `${smartHeartDifyUserId}-floating`,
+          user_id: smartHeartDifyUserId,
           // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
         },
         userVariables: {
@@ -3079,6 +3086,28 @@
           // name: 'YOU CAN DEFINE USER NAME HERE',
         },
       }
+
+      window.openPrimaryDifyAssistant = function () {
+        const openBubble = () => {
+          const bubbleWindow = document.getElementById('dify-chatbot-bubble-window');
+          const bubbleButton = document.getElementById('dify-chatbot-bubble-button');
+          if (!bubbleButton) return false;
+
+          const windowVisible = bubbleWindow && getComputedStyle(bubbleWindow).display !== 'none';
+          if (!windowVisible) {
+            bubbleButton.click();
+          }
+          return true;
+        };
+
+        if (openBubble()) return;
+
+        setTimeout(() => {
+          if (!openBubble() && typeof window.showToast === 'function') {
+            window.showToast('星语助手正在加载，请稍后再试', 'info', 2200);
+          }
+        }, 350);
+      };
     </script>
     <script
       src="https://udify.app/embed.min.js"
