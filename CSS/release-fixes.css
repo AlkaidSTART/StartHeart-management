@@ -23,10 +23,25 @@
 
 #assistant .assistant-features {
   margin-top: 6px;
+  flex-shrink: 0;
 }
 
 #assistant .feature-card {
   min-height: 0;
+}
+
+#assistant.content-section {
+  height: calc(100vh - 170px) !important;
+  max-height: calc(100vh - 170px) !important;
+  overflow: hidden !important;
+}
+
+#assistant .assistant-iframe-container {
+  min-height: 0;
+}
+
+#assistant .assistant-iframe-container iframe {
+  display: block;
 }
 
 .star-menu-item {
@@ -50,5 +65,10 @@
 
   #assistant .assistant-features {
     grid-template-columns: 1fr !important;
+  }
+
+  #assistant.content-section {
+    height: calc(100vh - 140px) !important;
+    max-height: calc(100vh - 140px) !important;
   }
 }
